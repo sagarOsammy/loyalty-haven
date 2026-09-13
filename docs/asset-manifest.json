@@ -1,0 +1,210 @@
+{
+  "assets": [
+    {
+      "path": "public/assets/airline-air-canada.glb",
+      "bytes": 1320456,
+      "sha256": "b0bac9b13e41d0e0c00d0fc6daaa3bb7c4952fb5312fd0652447ab5ce0a59c73",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 27180
+    },
+    {
+      "path": "public/assets/airline-avianca.glb",
+      "bytes": 1700996,
+      "sha256": "0cd069cf2e8b3a92cecd4d9c3b5524767fb3c3aed9cc11e6540bc528e5501cd8",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 14,
+      "materials": 14,
+      "embeddedImages": 0,
+      "triangles": 40988
+    },
+    {
+      "path": "public/assets/airline-united.glb",
+      "bytes": 1201268,
+      "sha256": "2f25d9a491d6e2081cec505ddec9c2cba4fc43c94a78262392c8f11abe359524",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 22748
+    },
+    {
+      "path": "public/assets/baggage-belt.glb",
+      "bytes": 3370580,
+      "sha256": "d6c955b04ac61ce5a93f73d8578201b7dbe9ababd0cee799a5e561f69ae9184e",
+      "nodes": 8,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 0,
+      "triangles": 84120
+    },
+    {
+      "path": "public/assets/belfast-sunset-2k.hdr",
+      "bytes": 4563204,
+      "sha256": "273003109ca1cfb798ce6b96e09ac8440f763d0ef0c376bbe77492613540b4a3"
+    },
+    {
+      "path": "public/assets/coast_sand_01_diff.jpg",
+      "bytes": 960614,
+      "sha256": "58af2e40100f7f405703a86d593af64379f822c4786850def23ecfc921450d54"
+    },
+    {
+      "path": "public/assets/coast_sand_01_nor_gl.jpg",
+      "bytes": 1146826,
+      "sha256": "fe4d045aec99e71e80f682fcf0ad958d2dff1fe614b73178b304d1bac047b54a"
+    },
+    {
+      "path": "public/assets/coast_sand_01_rough.jpg",
+      "bytes": 383892,
+      "sha256": "cbc3e0bf2214e04318a643c9dc81f50f33cc5f7b935a20016c5d9efd9a6d1696"
+    },
+    {
+      "path": "public/assets/concrete_pavement_02_diff.jpg",
+      "bytes": 1052909,
+      "sha256": "e129ee6b59b6ed7f65b4c4c5ba9eb583d13d040ec26bef5d5d4e0080fe342e7a"
+    },
+    {
+      "path": "public/assets/concrete_pavement_02_nor_gl.jpg",
+      "bytes": 1212387,
+      "sha256": "26c09320b3373da7f55edb8165562f16d36c07161c9c715787a09daf5910450c"
+    },
+    {
+      "path": "public/assets/concrete_pavement_02_rough.jpg",
+      "bytes": 541803,
+      "sha256": "966ee3d1a6d343e5e72d5536fde7c04ecd32e6e95efc879a102effc527f5b679"
+    },
+    {
+      "path": "public/assets/cruise-ship.glb",
+      "bytes": 3797624,
+      "sha256": "182d0757910d7e68a67b9dcb56c2329072a2e588aa0a4ec00e445d3f348d1959",
+      "nodes": 11,
+      "meshes": 10,
+      "primitives": 11,
+      "materials": 10,
+      "embeddedImages": 0,
+      "triangles": 155495
+    },
+    {
+      "path": "public/assets/forum.glb",
+      "bytes": 2382400,
+      "sha256": "aca80f635a318464a1be3c06cdb78799129d9880fbc3b96154979bafd68d3c90",
+      "nodes": 8,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 2,
+      "triangles": 37312
+    },
+    {
+      "path": "public/assets/hangar.glb",
+      "bytes": 1460228,
+      "sha256": "9f47b7e3ce580be1455bd434895e9f5433c0317cf6b56200c779fe220ded8d2f",
+      "nodes": 6,
+      "meshes": 6,
+      "primitives": 6,
+      "materials": 6,
+      "embeddedImages": 2,
+      "triangles": 19680
+    },
+    {
+      "path": "public/assets/hotel-base.glb",
+      "bytes": 1344088,
+      "sha256": "0f8385d149ed9272c762254bd94a4bca7fc4ef627864605eef90abd1be8af292",
+      "nodes": 11,
+      "meshes": 11,
+      "primitives": 11,
+      "materials": 11,
+      "embeddedImages": 3,
+      "triangles": 16424
+    },
+    {
+      "path": "public/assets/hotel-level.glb",
+      "bytes": 1195644,
+      "sha256": "30d21e1a19c00c26b84d8be0ecb92136c746f03f2f48bb196c8ba84a4167bbde",
+      "nodes": 10,
+      "meshes": 10,
+      "primitives": 10,
+      "materials": 10,
+      "embeddedImages": 2,
+      "triangles": 15296
+    },
+    {
+      "path": "public/assets/hotel-roof.glb",
+      "bytes": 826716,
+      "sha256": "9666736f7cb7b06e3007f7df6fcbd887e8fdc2fb54f2d9d08031bb2d9503955f",
+      "nodes": 7,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 2,
+      "triangles": 10932
+    },
+    {
+      "path": "public/assets/luggage-duffel.glb",
+      "bytes": 281276,
+      "sha256": "39e93c802b2e30205e32b23004086c6760080f016d179b4b94e2bb05f175e15b",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 3,
+      "materials": 3,
+      "embeddedImages": 0,
+      "triangles": 6180
+    },
+    {
+      "path": "public/assets/luggage-hardcase.glb",
+      "bytes": 734004,
+      "sha256": "fcff4c6105f22b5cc84d6949bcf5b252e816a589d3806f8bda5879cce8c8b1c4",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 6,
+      "materials": 6,
+      "embeddedImages": 0,
+      "triangles": 11764
+    },
+    {
+      "path": "public/assets/luggage-vintage.glb",
+      "bytes": 570292,
+      "sha256": "e54fcfd9b775819323c4fd81976080c2073f2e627ab2ae9a3c76607e961b3a8d",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "materials": 1,
+      "embeddedImages": 3,
+      "triangles": 8237
+    },
+    {
+      "path": "public/assets/palm.glb",
+      "bytes": 1910300,
+      "sha256": "2d1434bb338616ef4419861a5f3dd06619bdbbbc5fd9ca9151f461831fdae3d4",
+      "nodes": 8,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 0,
+      "triangles": 81264
+    },
+    {
+      "path": "public/assets/planter.glb",
+      "bytes": 564984,
+      "sha256": "ac8ed73f0f77d27876d13e96529c50c97e5e976fb651bd9318c04e5ea4ff86ab",
+      "nodes": 8,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 0,
+      "triangles": 31400
+    },
+    {
+      "path": "public/assets/water-normal.jpg",
+      "bytes": 248813,
+      "sha256": "add9912b158a4fe9c12421745babe68c44c8af75631ac4837236cb2a03bc373f"
+    }
+  ],
+  "totalBytes": 32771304
+}
