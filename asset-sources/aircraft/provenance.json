@@ -1,0 +1,281 @@
+{
+  "build": {
+    "script": "/private/tmp/loyalty-v2-aircraft-assets/build_assets.py",
+    "blender": "Blender 5.2.1 LTS",
+    "generated_at": "2026-09-12",
+    "scope": "New clean aircraft and luggage asset build, no Site checkout touched"
+  },
+  "aircraft": {
+    "asset": "airline-united.glb",
+    "method": "Procedural Blender authoring after bounded free-source search found no directly downloadable, license-clear, photoreal passenger aircraft without an add-on/account gate",
+    "geometry": "Smoothed surface-of-revolution fuselage, swept airfoil wings, winglets, horizontal and vertical tails, modeled nacelles, intake rings, fan blades, cockpit and cabin windows, doors, landing gear, tires, hubs, lights, antennas",
+    "livery": "White aluminum, navy tail, blue belly region, clear editable UNITED wordmark based on the sourced United Airlines 1998 SVG reference, trademark remains subject to owner rights",
+    "source_logo": "https://commons.wikimedia.org/wiki/File:United_Airlines_logo_1998.svg",
+    "mark_rendering": "Native editable text mesh is exported for reliable GLB visibility, official SVG is retained under sources/united_logo as the source reference"
+  },
+  "aircraft_variants": {
+    "airline-avianca.glb": {
+      "asset": "airline-avianca.glb",
+      "method": "Copied validated aircraft mesh with named livery materials replaced, clear editable avianca wordmark based on sourced Avianca 2013 SVG reference",
+      "source_logo": "https://commons.wikimedia.org/wiki/File:Avianca_2013_wordmark.svg",
+      "license_note": "Wikimedia Commons lists the file as public domain, trademark rights remain with Avianca",
+      "livery_roles": "Avianca Red tail and wordmark, Avianca Wine Belly, white aluminum airframe",
+      "mark_rendering": "Native editable text mesh is exported for reliable GLB visibility, official SVG is retained under sources/airline_logos"
+    },
+    "airline-aircanada.glb": {
+      "asset": "airline-aircanada.glb",
+      "method": "Copied validated aircraft mesh with named livery materials replaced, clear editable AIR CANADA wordmark based on sourced Air Canada SVG reference",
+      "source_logo": "https://commons.wikimedia.org/wiki/File:Air_Canada_logo.svg",
+      "license_note": "Wikimedia Commons lists the file as public domain, trademark rights remain with Air Canada",
+      "livery_roles": "Air Canada Red tail and logo, Air Canada Grey Belly, white aluminum airframe",
+      "mark_rendering": "Native editable text mesh is exported for reliable GLB visibility, official SVG is retained under sources/airline_logos"
+    }
+  },
+  "luggage-black-ribbed": {
+    "asset": "luggage-black-ribbed.glb",
+    "method": "Procedural Blender authoring",
+    "geometry": "Beveled shell, six raised ribs per face, edge seals, corner guards, telescopic rails and handle, four wheels, hubs, sticker"
+  },
+  "luggage-cognac-duffel": {
+    "asset": "luggage-cognac-duffel.glb",
+    "method": "Procedural Blender authoring",
+    "geometry": "Rounded leather body, end seams, zipper, carry handles, shoulder strap, brass feet and luggage tag"
+  },
+  "luggage-vintage-suitcase": {
+    "asset": "luggage-vintage-suitcase.glb",
+    "method": "Imported suitcase 01 only from a derived 1K glTF copy of the Poly Haven source",
+    "source": "https://polyhaven.com/a/vintage_suitcase",
+    "license": "CC0, https://polyhaven.com/license",
+      "transformation": "Isolated plain suitcase 01, normalized to 1.0 m height, centered X/Y, base translated to z=0, derived 1K PBR maps embedded in the export",
+    "source_preserved": "Original 2K glTF and maps remain under sources/polyhaven_vintage_suitcase"
+  },
+  "outputs": {
+    "exports": "/private/tmp/loyalty-v2-aircraft-assets/exports",
+    "renders": "/private/tmp/loyalty-v2-aircraft-assets/renders",
+    "blend": "/private/tmp/loyalty-v2-aircraft-assets/loyalty-v2-aircraft-luggage.blend"
+  },
+  "asset_metrics": {
+    "airline-united": {
+      "asset": "airline-united",
+      "object_count": 146,
+      "triangle_count": 22116,
+      "material_count": 15,
+      "materials": [
+        "Aged Brass",
+        "Aircraft Glass",
+        "Airframe Shadow Aluminum",
+        "Airframe White Aluminum",
+        "Engine Fan Blades",
+        "Engine Intake Dark",
+        "Green Navigation Light",
+        "Red Navigation Light",
+        "Tire Rubber",
+        "United Blue Belly",
+        "United Navy",
+        "United Wordmark Navy",
+        "Wheel Hub",
+        "White Strobe",
+        "Window Highlight"
+      ],
+      "bounds_m": {
+        "min": [
+          -5.78,
+          -6.02,
+          -0.065
+        ],
+        "max": [
+          5.78,
+          6.02,
+          4.12
+        ],
+        "size": [
+          11.56,
+          12.04,
+          4.185
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 15
+    },
+    "airline-avianca": {
+      "asset": "airline-avianca",
+      "object_count": 146,
+      "triangle_count": 40356,
+      "material_count": 14,
+      "materials": [
+        "Aged Brass",
+        "Aircraft Glass",
+        "Airframe Shadow Aluminum",
+        "Airframe White Aluminum",
+        "Avianca Red",
+        "Avianca Wine Belly",
+        "Engine Fan Blades",
+        "Engine Intake Dark",
+        "Green Navigation Light",
+        "Red Navigation Light",
+        "Tire Rubber",
+        "Wheel Hub",
+        "White Strobe",
+        "Window Highlight"
+      ],
+      "bounds_m": {
+        "min": [
+          -5.78,
+          -6.02,
+          -0.065
+        ],
+        "max": [
+          5.78,
+          6.02,
+          4.12
+        ],
+        "size": [
+          11.56,
+          12.04,
+          4.185
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 14
+    },
+    "airline-aircanada": {
+      "asset": "airline-aircanada",
+      "object_count": 146,
+      "triangle_count": 26548,
+      "material_count": 15,
+      "materials": [
+        "Aged Brass",
+        "Air Canada Grey Belly",
+        "Air Canada Red",
+        "Air Canada Wordmark",
+        "Aircraft Glass",
+        "Airframe Shadow Aluminum",
+        "Airframe White Aluminum",
+        "Engine Fan Blades",
+        "Engine Intake Dark",
+        "Green Navigation Light",
+        "Red Navigation Light",
+        "Tire Rubber",
+        "Wheel Hub",
+        "White Strobe",
+        "Window Highlight"
+      ],
+      "bounds_m": {
+        "min": [
+          -5.78,
+          -6.02,
+          -0.065
+        ],
+        "max": [
+          5.78,
+          6.02,
+          4.12
+        ],
+        "size": [
+          11.56,
+          12.04,
+          4.185
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 15
+    },
+    "luggage-black-ribbed": {
+      "asset": "luggage-black-ribbed",
+      "object_count": 29,
+      "triangle_count": 4372,
+      "material_count": 6,
+      "materials": [
+        "Hard Case Black Polymer",
+        "Hard Case Edge Seal",
+        "Hard Case Rib Highlights",
+        "Tire Rubber",
+        "Travel Sticker",
+        "Wheel Hub"
+      ],
+      "bounds_m": {
+        "min": [
+          -0.34989,
+          -0.32352,
+          -0.028
+        ],
+        "max": [
+          0.34989,
+          0.32352,
+          1.1975
+        ],
+        "size": [
+          0.69978,
+          0.64705,
+          1.2255
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 6
+    },
+    "luggage-cognac-duffel": {
+      "asset": "luggage-cognac-duffel",
+      "object_count": 10,
+      "triangle_count": 2436,
+      "material_count": 3,
+      "materials": [
+        "Aged Brass",
+        "Cognac Leather",
+        "Leather Dark Trim"
+      ],
+      "bounds_m": {
+        "min": [
+          -0.57438,
+          -0.42093,
+          0.1025
+        ],
+        "max": [
+          0.57537,
+          0.4,
+          1.24054
+        ],
+        "size": [
+          1.14974,
+          0.82093,
+          1.13804
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 3
+    },
+    "luggage-vintage-suitcase": {
+      "asset": "luggage-vintage-suitcase",
+      "object_count": 4,
+      "triangle_count": 8237,
+      "material_count": 1,
+      "materials": [
+        "vintage_suitcase_01"
+      ],
+      "bounds_m": {
+        "min": [
+          -0.61083,
+          -0.21058,
+          -0.0
+        ],
+        "max": [
+          0.61083,
+          0.21058,
+          1.0
+        ],
+        "size": [
+          1.22165,
+          0.42115,
+          1.0
+        ]
+      },
+      "coordinate_contract": "Blender Z-up, aircraft longitudinal axis is Y, nose toward negative Y, wheels and luggage bases at z=0",
+      "glb_nodes": 1,
+      "glb_materials": 1
+    }
+  }
+}

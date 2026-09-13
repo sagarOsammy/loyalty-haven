@@ -1,0 +1,169 @@
+{
+  "schema": "loyalty-v2-architecture-1",
+  "created_by": "create_assets.py",
+  "source": "Procedural Blender geometry authored for My Loyalty Haven v2",
+  "external_assets": [],
+  "brand_assets": [],
+  "reference_images": [
+    "docs/reference-images/Gemini-4.png",
+    "docs/reference-images/GPT-2.png"
+  ],
+  "coordinate_system": "Blender Z-up, metres, glTF Y-up export",
+  "assets": {
+    "hangar.glb": {
+      "object_count": 6,
+      "triangle_count": 19680,
+      "bounds_min_m": [
+        -12.5,
+        -7.5,
+        0.0
+      ],
+      "bounds_max_m": [
+        12.5,
+        7.5,
+        9.205
+      ],
+      "dimensions_m": [
+        25.0,
+        15.0,
+        9.205
+      ],
+      "materials": [
+        "AgedChampagneBrass",
+        "ArchitecturalGlass",
+        "DeepInterior",
+        "PaleTravertine",
+        "WarmEmissive",
+        "WarmStoneFloor"
+      ]
+    },
+    "hotel-base.glb": {
+      "object_count": 11,
+      "triangle_count": 16424,
+      "bounds_min_m": [
+        -8.5,
+        -5.5,
+        0.0
+      ],
+      "bounds_max_m": [
+        8.5,
+        5.5,
+        3.1554
+      ],
+      "dimensions_m": [
+        17.0,
+        11.0,
+        3.1554
+      ],
+      "materials": [
+        "AgedChampagneBrass",
+        "ArchitecturalGlass",
+        "DarkTeak",
+        "DeepInterior",
+        "HotelPlant",
+        "HotelPoolWater",
+        "PaleTravertine",
+        "ResortLoungeFabric",
+        "SuiteCurtain",
+        "WarmEmissive",
+        "WarmStoneFloor"
+      ]
+    },
+    "hotel-level.glb": {
+      "object_count": 10,
+      "triangle_count": 15296,
+      "bounds_min_m": [
+        -8.475,
+        -5.475,
+        0.0
+      ],
+      "bounds_max_m": [
+        8.475,
+        5.475,
+        3.48
+      ],
+      "dimensions_m": [
+        16.95,
+        10.95,
+        3.48
+      ],
+      "materials": [
+        "AgedChampagneBrass",
+        "ArchitecturalGlass",
+        "DarkTeak",
+        "DeepInterior",
+        "HotelPlant",
+        "HotelPoolWater",
+        "PaleTravertine",
+        "ResortLoungeFabric",
+        "SuiteCurtain",
+        "WarmEmissive"
+      ]
+    },
+    "hotel-roof.glb": {
+      "object_count": 7,
+      "triangle_count": 10932,
+      "bounds_min_m": [
+        -8.5,
+        -5.5,
+        0.0
+      ],
+      "bounds_max_m": [
+        8.5,
+        5.5,
+        2.905
+      ],
+      "dimensions_m": [
+        17.0,
+        11.0,
+        2.905
+      ],
+      "materials": [
+        "AgedChampagneBrass",
+        "DarkTeak",
+        "PaleTravertine",
+        "ResortLoungeFabric",
+        "RoofPlant",
+        "RooftopPool",
+        "WarmEmissive"
+      ]
+    },
+    "forum.glb": {
+      "object_count": 8,
+      "triangle_count": 37312,
+      "bounds_min_m": [
+        -4.8,
+        -5.06,
+        0.0
+      ],
+      "bounds_max_m": [
+        4.8,
+        4.8,
+        5.035
+      ],
+      "dimensions_m": [
+        9.6,
+        9.86,
+        5.035
+      ],
+      "materials": [
+        "AgedChampagneBrass",
+        "DarkTeak",
+        "DeepInterior",
+        "ForumChampagne",
+        "ForumRecess",
+        "ForumWarmStone",
+        "PaleTravertine"
+      ]
+    }
+  },
+  "notes": {
+    "hangar": "25m X by 15m Y footprint, front opening at Y=-7.5, base Z=0, no aircraft or branded signage",
+    "hotel_base": "17m X by 11m Y footprint, structural lobby top exactly Z=3.0m, broad lower pool terrace, foliage and furniture may extend above the datum",
+    "hotel_level": "repeatable 3.5m segment, suite core in Y=0..5.5 behind glazing at Y=0, broad continuous infinity pool on Y=-5.5..0",
+    "hotel_roof": "modest rounded pool cap with compact cabana and pergola, source base Z=0",
+    "forum": "4.8m radius stage with 10 full-height limestone pillars, continuous masonry arches, broad entablature, and an empty runtime center socket",
+    "materials": "PBR materials include packed warm travertine, stone-floor, and dark-teak image maps plus procedural bump nodes"
+  },
+  "license": "Original procedural geometry and script, no third-party asset files embedded"
+}
