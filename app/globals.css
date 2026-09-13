@@ -512,6 +512,9 @@ a {
 .ledger-dialog {
   width: min(690px, calc(100% - 30px));
 }
+.private-dialog {
+  width: min(720px, calc(100% - 30px));
+}
 .dialog-top {
   display: flex;
   align-items: center;
@@ -682,6 +685,88 @@ a {
   font-size: 11px;
   color: #94836b;
   line-height: 1.8;
+}
+.private-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+}
+.auth-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 11px 15px;
+  border: 1px solid #bfae8d;
+  font-size: 13px;
+}
+.primary-auth {
+  background: #2a4038;
+  color: #f6efdf;
+}
+.details-auth {
+  background: #eadebf;
+}
+.private-status {
+  margin: 14px 0 0;
+  color: #756748;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.private-status p {
+  margin: 0;
+}
+.private-status .text-button {
+  width: fit-content;
+}
+.private-viewer {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 8px;
+  padding: 15px 0;
+  border-block: 1px solid #dcccac;
+}
+.private-viewer .source-pip {
+  grid-row: span 2;
+}
+.private-viewer strong {
+  font-size: 14px;
+}
+.private-viewer small {
+  color: #8c806b;
+  font-size: 12px;
+}
+.private-account-list {
+  margin-top: 8px;
+}
+.private-account-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #e6dbc7;
+  font-size: 13px;
+}
+.private-account-row > span:last-child {
+  text-align: right;
+}
+.private-account-row strong,
+.private-account-row small {
+  display: block;
+}
+.private-account-row small {
+  color: #8c806b;
+  font-size: 11px;
+  margin-top: 4px;
+}
+.private-footnote {
+  color: #8c806b;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 16px 0 0;
 }
 .about-steps {
   padding-left: 20px;

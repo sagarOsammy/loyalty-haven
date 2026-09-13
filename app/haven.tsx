@@ -71,6 +71,27 @@ const alliances: {
   },
 ];
 
+type PrivateMembership = {
+  id: string;
+  partner: string;
+  program: string;
+  alliance: string;
+  points: number;
+  redeemed: number | null;
+  expiry: "Soft" | "Hard" | "NA";
+  memberId: string | null;
+  balanceStatus: "positive" | "zero";
+};
+
+type PrivateResponse = {
+  memberships?: PrivateMembership[];
+  directoryOnlyHotelAccounts?: PrivateMembership[];
+  viewer?: { displayName: string; email: string };
+  error?: string;
+  message?: string;
+  signInPath?: string;
+};
+
 export default function Haven() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const worldRef = useRef<HavenWorld | null>(null);
@@ -82,11 +103,15 @@ export default function Haven() {
   );
   const [progress, setProgress] = useState(0);
   const [notice, setNotice] = useState("");
-  const [panel, setPanel] = useState<"ledger" | "settings" | "about" | null>(
-    null,
-  );
+  const [panel, setPanel] = useState<
+    "ledger" | "settings" | "private" | "about" | null
+  >(null);
   const [detailId, setDetailId] = useState<string | null>(null);
   const [fixture, setFixture] = useState(false);
+  const [privateState, setPrivateState] = useState<
+    "idle" | "loading" | "ready" | "anonymous" | "forbidden" | "unconfigured" | "error"
+  >("idle");
+  const [privateData, setPrivateData] = useState<PrivateResponse | null>(null);
   const stateRef = useRef({ selection, motion, quality, fixture });
   const snapshot = useMemo(
     () => (fixture ? constructionFixture(publicSnapshot) : publicSnapshot),
@@ -226,6 +251,33 @@ export default function Haven() {
       hotels: ["accor", "review-terrace-2", "review-terrace-3"],
     }));
     setPanel(null);
+  }
+
+  function openPrivatePanel() {
+    setPrivateState("idle");
+    setPrivateData(null);
+    setPanel("private");
+  }
+
+  async function loadPrivateDetails() {
+    setPrivateState("loading");
+    try {
+      const response = await fetch("/api/loyalty/private", {
+        cache: "no-store",
+      });
+      const payload = (await response.json()) as PrivateResponse;
+      setPrivateData(payload);
+      if (response.status === 401) setPrivateState("anonymous");
+      else if (response.status === 403) setPrivateState("forbidden");
+      else if (response.status === 503) setPrivateState("unconfigured");
+      else if (!response.ok) setPrivateState("error");
+      else setPrivateState("ready");
+    } catch {
+      setPrivateData({
+        message: "The private details request could not be completed.",
+      });
+      setPrivateState("error");
+    }
   }
 
   return (
@@ -465,7 +517,7 @@ export default function Haven() {
         }}
       >
         <DialogContent
-          className={`haven-dialog ${panel === "ledger" ? "ledger-dialog" : ""}`}
+          className={`haven-dialog ${panel === "ledger" ? "ledger-dialog" : ""} ${panel === "private" ? "private-dialog" : ""}`}
           showCloseButton={false}
         >
           <div className="dialog-top">
@@ -605,6 +657,102 @@ export default function Haven() {
                 Adds two clearly marked sample terraces for this design review.
                 Your saved balance stays unchanged.
               </p>
+              <button
+                className="review-button private-review-button"
+                onClick={openPrivatePanel}
+              >
+                Open private account details <ArrowUpRight size={16} />
+              </button>
+              <p className="setting-note">
+                Membership IDs and expiry notes require owner-authorized ChatGPT
+                sign-in.
+              </p>
+            </>
+          )}
+          {panel === "private" && (
+            <>
+              <DialogTitle>Private account details.</DialogTitle>
+              <DialogDescription className="dialog-intro">
+                Membership IDs and expiry notes are kept outside the public
+                resort scene and returned only to the authorized owner.
+              </DialogDescription>
+              {privateState === "idle" && (
+                <div className="private-actions">
+                  {/* SIWC must be a top-level navigation, not a client-side route. */}
+                  <a
+                    className="auth-button primary-auth"
+                    href="/signin-with-chatgpt?return_to=%2F"
+                    target="_top"
+                  >
+                    Sign in with ChatGPT
+                  </a>
+                  <button
+                    className="auth-button details-auth"
+                    onClick={loadPrivateDetails}
+                  >
+                    Load private details
+                  </button>
+                </div>
+              )}
+              {privateState === "loading" && (
+                <p className="private-status" role="status">
+                  Checking owner access…
+                </p>
+              )}
+              {privateState !== "idle" &&
+                privateState !== "loading" &&
+                privateState !== "ready" && (
+                  <div className="private-status status-warning" role="status">
+                    <p>
+                      {privateData?.message ??
+                        "The private account details could not be loaded."}
+                    </p>
+                    {privateState === "anonymous" && (
+                      // SIWC must be a top-level navigation, not a client-side route.
+                      <a
+                        className="text-button"
+                        href={
+                          privateData?.signInPath ??
+                          "/signin-with-chatgpt?return_to=%2F"
+                        }
+                        target="_top"
+                      >
+                        Sign in with ChatGPT <ArrowUpRight size={15} />
+                      </a>
+                    )}
+                  </div>
+                )}
+              {privateState === "ready" && privateData?.viewer && (
+                <div className="private-ready">
+                  <div className="private-viewer">
+                    <span className="source-pip" />
+                    <strong>{privateData.viewer.displayName}</strong>
+                    <small>{privateData.viewer.email}</small>
+                  </div>
+                  <div className="private-account-list">
+                    {privateData.memberships?.map((membership) => (
+                      <div className="private-account-row" key={membership.id}>
+                        <span>
+                          <strong>{membership.partner}</strong>
+                          <small>
+                            {membership.program} · {membership.alliance}
+                          </small>
+                        </span>
+                        <span>
+                          <strong>{membership.memberId ?? "No ID recorded"}</strong>
+                          <small>Expiry {membership.expiry}</small>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  {!!privateData.directoryOnlyHotelAccounts?.length && (
+                    <p className="private-footnote">
+                      {privateData.directoryOnlyHotelAccounts.length} directory-only
+                      hotel accounts are retained privately for future refreshes.
+                    </p>
+                  )}
+                </div>
+              )}
             </>
           )}
           {panel === "about" && (
@@ -622,7 +770,7 @@ export default function Haven() {
               </ol>
               <p className="setting-note">
                 Balances are a saved snapshot, refreshed 10 September 2026. This
-                preview is local and has not been published.
+                private build is intended for ChatGPT Sites.
               </p>
             </>
           )}
