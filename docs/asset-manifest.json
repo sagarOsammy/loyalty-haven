@@ -1,6 +1,28 @@
 {
   "assets": [
     {
+      "path": "public/assets/airline-air-canada-detail.glb",
+      "bytes": 1316184,
+      "sha256": "eb7ad90ff1ac8f31a0bd90873c7eaad7e2ab2e7df2f1ad5c328cc020f0afd119",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 27292
+    },
+    {
+      "path": "public/assets/airline-air-canada-realism.glb",
+      "bytes": 1943080,
+      "sha256": "0c54ae15b58f15b1486af62bbac663471a88a117135c838f735a0ca105e2c929",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 13,
+      "materials": 13,
+      "embeddedImages": 0,
+      "triangles": 45400
+    },
+    {
       "path": "public/assets/airline-air-canada.glb",
       "bytes": 1320456,
       "sha256": "b0bac9b13e41d0e0c00d0fc6daaa3bb7c4952fb5312fd0652447ab5ce0a59c73",
@@ -10,6 +32,28 @@
       "materials": 15,
       "embeddedImages": 0,
       "triangles": 27180
+    },
+    {
+      "path": "public/assets/airline-avianca-detail.glb",
+      "bytes": 1696724,
+      "sha256": "63999104bab06a3b9e32a117eaf30a75cc1d1ad9331257fb99d100cab0f830cc",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 14,
+      "materials": 14,
+      "embeddedImages": 0,
+      "triangles": 41100
+    },
+    {
+      "path": "public/assets/airline-avianca-realism.glb",
+      "bytes": 1974776,
+      "sha256": "ea51056e8a8d7018d33795e22163b87f0c285becadbda11649cd15ca7b072a60",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 12,
+      "materials": 12,
+      "embeddedImages": 0,
+      "triangles": 46256
     },
     {
       "path": "public/assets/airline-avianca.glb",
@@ -23,6 +67,61 @@
       "triangles": 40988
     },
     {
+      "path": "public/assets/airline-british-airways-realism.glb",
+      "bytes": 1977616,
+      "sha256": "e81818a7daf11f2e1f7b18a8154f8cbd10ffd3161bb11d29f64d9a878f121985",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 46238
+    },
+    {
+      "path": "public/assets/airline-finnair-realism.glb",
+      "bytes": 1933644,
+      "sha256": "e2d475e00b1c5fc0e0fee9101be85d7881c59e2396f3849ec083e1495d6ab74b",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 45086
+    },
+    {
+      "path": "public/assets/airline-qatar-airways-realism.glb",
+      "bytes": 1950480,
+      "sha256": "dfccc5d7d525ed314180d7c2d5c0c23ff1edf77174b01460d66162d4326a5f19",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 45548
+    },
+    {
+      "path": "public/assets/airline-united-detail.glb",
+      "bytes": 1196992,
+      "sha256": "f5c5b598842c47cb695aed2df7c81920b33866a1f4039655dfb20a1f359ecea6",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 22860
+    },
+    {
+      "path": "public/assets/airline-united-realism.glb",
+      "bytes": 1932548,
+      "sha256": "ededab2a301ddcb7f29753f4439a1566081b53571f5d5064c5aa7d52cc9e7e1a",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 13,
+      "materials": 13,
+      "embeddedImages": 0,
+      "triangles": 45116
+    },
+    {
       "path": "public/assets/airline-united.glb",
       "bytes": 1201268,
       "sha256": "2f25d9a491d6e2081cec505ddec9c2cba4fc43c94a78262392c8f11abe359524",
@@ -32,6 +131,28 @@
       "materials": 15,
       "embeddedImages": 0,
       "triangles": 22748
+    },
+    {
+      "path": "public/assets/airline-vietnam-airlines-realism.glb",
+      "bytes": 2000480,
+      "sha256": "9d34321b868a46fa25bc8eaac85613e5e25ac5d555fbfa5b73352e5d829cdd32",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 46810
+    },
+    {
+      "path": "public/assets/airline-virgin-atlantic-realism.glb",
+      "bytes": 2010124,
+      "sha256": "03fb467a8447dd9e2be13225d6895281a13f268841801a19b5f7bf0611f88647",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 15,
+      "materials": 15,
+      "embeddedImages": 0,
+      "triangles": 47070
     },
     {
       "path": "public/assets/baggage-belt.glb",
@@ -113,6 +234,17 @@
       "triangles": 19680
     },
     {
+      "path": "public/assets/hotel-base-detail.glb",
+      "bytes": 1970924,
+      "sha256": "4938b62a575057135c55890690356d95810f0c2dccc0681566759ff6b6a9cec2",
+      "nodes": 11,
+      "meshes": 11,
+      "primitives": 11,
+      "materials": 11,
+      "embeddedImages": 33,
+      "triangles": 16424
+    },
+    {
       "path": "public/assets/hotel-base.glb",
       "bytes": 1344088,
       "sha256": "0f8385d149ed9272c762254bd94a4bca7fc4ef627864605eef90abd1be8af292",
@@ -122,6 +254,17 @@
       "materials": 11,
       "embeddedImages": 3,
       "triangles": 16424
+    },
+    {
+      "path": "public/assets/hotel-level-detail.glb",
+      "bytes": 1821472,
+      "sha256": "aebcb8daee501ff349bcc453bba63537e7843c9824d0c14d3bc283bde63a86fa",
+      "nodes": 10,
+      "meshes": 10,
+      "primitives": 10,
+      "materials": 10,
+      "embeddedImages": 30,
+      "triangles": 15296
     },
     {
       "path": "public/assets/hotel-level.glb",
@@ -135,6 +278,17 @@
       "triangles": 15296
     },
     {
+      "path": "public/assets/hotel-roof-detail.glb",
+      "bytes": 1259624,
+      "sha256": "9533cd05210673f405411c76e0cd5ec924e70fd103fbf1e9201f121f73b62838",
+      "nodes": 7,
+      "meshes": 7,
+      "primitives": 7,
+      "materials": 7,
+      "embeddedImages": 21,
+      "triangles": 10932
+    },
+    {
       "path": "public/assets/hotel-roof.glb",
       "bytes": 826716,
       "sha256": "9666736f7cb7b06e3007f7df6fcbd887e8fdc2fb54f2d9d08031bb2d9503955f",
@@ -144,6 +298,17 @@
       "materials": 7,
       "embeddedImages": 2,
       "triangles": 10932
+    },
+    {
+      "path": "public/assets/loyalty-brass-telescope.glb",
+      "bytes": 1556720,
+      "sha256": "6b1e0806150c64b31009799009eeab1eaaeb5abe41050df700019d2d737b8b45",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "materials": 1,
+      "embeddedImages": 3,
+      "triangles": 33810
     },
     {
       "path": "public/assets/luggage-duffel.glb",
@@ -206,5 +371,5 @@
       "sha256": "add9912b158a4fe9c12421745babe68c44c8af75631ac4837236cb2a03bc373f"
     }
   ],
-  "totalBytes": 32771304
+  "totalBytes": 59312692
 }

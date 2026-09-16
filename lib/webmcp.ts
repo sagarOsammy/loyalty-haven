@@ -1,5 +1,5 @@
 type ResortConfiguration = {
-  alliance?: "star-alliance" | null;
+  alliance?: "star-alliance" | "skyteam" | "oneworld" | null;
   accor?: boolean;
   motion?: boolean;
   quality?: "cinematic" | "balanced";
@@ -24,7 +24,13 @@ export function validateConfiguration(input: unknown): ResortConfiguration {
     throw new Error("Expected a configuration object");
   const values = input as Record<string, unknown>;
   for (const [key, value] of Object.entries(values)) {
-    if (key === "alliance" && (value === null || value === "star-alliance"))
+    if (
+      key === "alliance" &&
+      (value === null ||
+        value === "star-alliance" ||
+        value === "skyteam" ||
+        value === "oneworld")
+    )
       continue;
     if ((key === "accor" || key === "motion") && typeof value === "boolean")
       continue;
@@ -71,12 +77,12 @@ export function registerResortTools(actions: {
     {
       name: "configure_loyalty_resort",
       description:
-        "Update visible resort controls. Select Star Alliance arrivals, toggle the Accor terrace, pause motion or change detail. Animations may continue after this returns. No saved balances are changed.",
+        "Update visible resort controls. Select Star Alliance, SkyTeam or oneworld arrivals, toggle the Accor terrace, pause motion or change detail. Animations may continue after this returns. No saved balances are changed.",
       inputSchema: {
         type: "object",
         additionalProperties: false,
         properties: {
-          alliance: { enum: ["star-alliance", null] },
+          alliance: { enum: ["star-alliance", "skyteam", "oneworld", null] },
           accor: { type: "boolean" },
           motion: { type: "boolean" },
           quality: { enum: ["cinematic", "balanced"] },

@@ -1,8 +1,8 @@
-# Setup review, 13 September 2026
+# Setup review, updated 16 September 2026
 
 ## Recommendation
 
-Continue in the isolated rebuild and approve the working 3D slice before expanding it. The basic architecture is feasible on this Mac, but matching the reference requires better authored models and browser inspection, not additional prompt libraries.
+Continue the approved composition in the repository root and improve aircraft shapes and hotel materials. Sammy approved retaining the composition on 14 September 2026. The rebuild was promoted to the root and published in a later session, so the original 13 September review no longer describes the deployment state.
 
 ## Findings and disposition
 
@@ -13,7 +13,7 @@ Continue in the isolated rebuild and approve the working 3D slice before expandi
 | P1 | Old scene recreation could lose selections when motion or snapshot options changed | The renderer instance retains options and reads the latest pending selection. Async asset staging commits only the newest generation. |
 | P1 | Pausing mid-arrival jumped to the destination and could jump back when resumed | Scene clock now freezes without changing progress. New selections made while paused settle immediately. |
 | P1 | Saved constant balances were described as live | Footer and ledger now show the saved date. All 11 original records and totals reconcile. No live refresh is claimed. |
-| P1 | No verified owner access configuration for deployment | Local-only review continues. Owner-only hosted access and application data visibility must be verified before publishing. |
+| P1 | Hosting and private membership access | Later session 01a09b13-578a-79f2-ac02-e6f888efe161 implemented owner-gated membership details and published version 7. Sites readback on 14 September confirms public site access, matching the user request. Private endpoint rejects anonymous access and checks an explicit owner allowlist. Live signed-in owner/non-owner testing is deferred at Sammy’s request on 16 September 2026. |
 | P2 | Aircraft ranking relied on source array order | Explicit positive-balance sorting, deterministic tie handling and a three-aircraft cap are tested. SkyTeam correctly has two positive partners in data. |
 | P2 | Multiple hotel ordering and re-creation were inconsistent | Hotel levels retain selection order, deduplicate, cap at three and preserve existing levels. The review fixture is separate from saved totals. |
 | P2 | Shared model resources and labels could accumulate across changes | Shared assets are owned by one pool. Retired labels and cloned clipping materials are released immediately. Late fetches are canceled on teardown. |
@@ -27,31 +27,36 @@ Continue in the isolated rebuild and approve the working 3D slice before expandi
 | P3 | Native custom modal and select behavior duplicated supplied UI infrastructure | Shared Dialog and Select primitives now provide keyboard behavior and focus handling. |
 | P3 | Preview directions depended on a cached plugin version | The new README names the active directory and stable project commands, referring to the current installed Sites skill for packaging. |
 
-## Remaining limitations and decisions
+## Current state and remaining work
 
-1. The visual result still needs the user's review against Gemini-4 and GPT-2. Procedural model detail alone does not establish photorealism.
-2. SkyTeam and oneworld aircraft, a live Notion refresh path, hosted owner access and final publication remain outside this working slice.
-3. Only Accor exists in the saved hotel data. Two labeled sample terraces exercise construction without inventing hotel balances.
-4. The Tripo experiment generated one generic telescope using free text-to-3D, not image-to-3D. The download was blocked by the browser. No personal reference was uploaded and no purchase was made.
-5. WebMCP is optional. Both tools were exercised in the Codex browser with valid and invalid inputs. Brave currently lacks that optional capability.
-6. The supplied framework contains optional database, authentication and component scaffolding. It is retained separately. Dependency pruning would add maintenance risk during the visual review and is deferred.
+| Order | Work | Status and next action |
+| --- | --- | --- |
+| 1 | Composition | Approved on 14 September, retain camera, spacing and building layout. |
+| 2 | Visual detailing | Hotel materials and the supplied telescope are integrated. On 15 September, Sammy selected a further aircraft realism pass before alliance expansion. All three existing aircraft now use smoother, narrower airframes, swept airfoils, recessed engine fans, fine glazing and flush wordmarks. Editable derivatives and review renders are preserved. Scene composition and transforms are retained. Photorealism remains an open acceptance target. |
+| 3 | SkyTeam and oneworld | Implemented locally after Sammy approved extending the aircraft style on 15 September. SkyTeam brings in Virgin Atlantic and Vietnam Airlines, oneworld brings in Finnair, Qatar Airways and British Airways. Controls, forum selection and optional browser tools select arrivals. All five aircraft open their exact saved balances, replay and repeated switching pass. Editable derivatives and renders are retained under asset-sources/alliance-expansion. |
+| 4 | Membership details | Implemented and deployed in the later session. Public scene access is intentional. Keep membership IDs and expiry notes server-only behind ChatGPT authentication and an owner check. |
+| 5 | Data refresh | Sammy selected manual refresh on request on 15 September in session 01a0a578-f3b5-7f22-b7fd-7013c41801d1. Retain the 10 September snapshot until explicitly asked to refresh. No scheduled refresh is authorized. Each requested refresh must read the source, reconcile identity, totals and blank values, and preserve the owner-only boundary for private details. |
+| 6 | Publication of this pass | Sammy approved this pass for publication and Git push on 16 September 2026. Publish the validated aircraft, alliance, hotel, telescope and dependency changes to the existing public site while retaining the owner-only membership boundary. Version 7 was live at the pre-publication readback. |
+| 7 | Dependency alerts | React/RSC, Vite, Vinext and Cloudflare updates are verified locally. Current audit has zero high or critical findings, with four moderate entries inherited from one Drizzle tooling advisory. The latest stable Drizzle release still retains that dependency. Production serving, five existing tests and nine built-Worker access checks pass. See `docs/dependency-review.md`. Local changes await publication. |
+| 8 | Further validation | Deferred low priority by Sammy on 16 September: phone performance, all further responsive/device testing, and live signed-in owner/non-owner access checks. Resume only when requested. Complete graphics-context recovery and broader network failure coverage remain backlog items. Nine synthetic built-Worker access checks pass. |
 
-## Highest-priority work addressable today
+Only Accor exists in the saved hotel data. The two labeled sample terraces remain a construction fixture and never alter saved totals. WebMCP remains optional. Framework scaffolding and existing dependencies stay in place.
 
-The asset corrections, interaction checks, source preservation and local packaging are complete for the working slice. The next practical priorities after visual review are:
+## Telescope received
 
-- Improve the aircraft shapes and hotel material finish against the supplied references, using the current browser composition as the review target.
-- Extend the approved aircraft approach to SkyTeam and oneworld, preserving the verified positive-balance ranking.
-- Verify hosted owner access and agree on the saved-data refresh path before publication.
+The source file `loyalty-brass-telescope.glb` is now present in the repository root. It came from the prior Tripo text-to-3D experiment, not an image-to-3D workflow. The root source is preserved unchanged. A reduced runtime derivative, reproducible preparation script and compact provenance are retained for the current review.
 
-## Optional Tripo unblock
+- Source: 9,891,392 bytes, 281,758 triangles.
+- Runtime copy: 1,556,720 bytes, 33,810 triangles, embedded 1K texture maps.
+- Placement: a small observation prop beside the forum, without changing building positions or balances.
+- Source SHA-256: `801414c2d3389a2baa84c7f5d2ec44ca5e9553c58eb7531b9fc3c2c2cdfecf6d`.
+- Tripo pricing checked on 14 September describes the free plan as public models for noncommercial use. The help center reserves commercial use for paid plans. Preserve that usage scope. Sources: [pricing](https://www.tripo3d.ai/pricing), [commercial-use guidance](https://www.tripo3d.ai/help/privacy-policy/how-to-use-tripo-models-commercially), [terms](https://www.tripo3d.ai/terms).
 
-The generated asset is at https://studio.tripo3d.ai/workspace/generate/c7fe6c5a-fd82-4eef-9f8f-a07173e0804f.
+## Review provenance
 
-1. Open the telescope in Tripo Studio while signed in.
-2. Choose Export, GLB, 2K. Stay within the displayed free allowance.
-3. If the current browser blocks the download, use a browser that permits the download. Do not disable security protections for this project.
-4. Save `loyalty-brass-telescope.glb` in the parent `personal-loyalty` folder.
-5. Reply that the file is saved. I can then inspect, optimize and integrate it.
-
-This optional prop does not block the core scene. Its current plan restrictions must be respected before any public or commercial use.
+- Original rebuild and visual checkpoint: session `01a094e0-bbd6-7192-b6ba-9fe50e50b3d3`.
+- Root promotion, GitHub publication, private membership flow and public Sites access: session `01a09b13-578a-79f2-ac02-e6f888efe161`.
+- Aircraft realism continuation: session `01a0a075-453b-7dd1-b77f-ce75f3484f0d`.
+- Alliance expansion and manual refresh decision: session `01a0a578-f3b5-7f22-b7fd-7013c41801d1`.
+- Active app: repository root. Historical references to `rebuild/` refer to the pre-promotion layout.
+- Live site: [My Loyalty Haven](https://my-loyalty-haven.solar-rhea-5542.chatgpt.site), version 7 reported by Sites on 14 September. Current local refinements are separate from that published version.

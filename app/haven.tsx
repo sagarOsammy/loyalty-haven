@@ -153,11 +153,9 @@ export default function Haven() {
         setNotice(event.message ?? "The scene needs to reload.");
       }
       if (event.type === "detail" && event.id) {
-        if (event.id === "star-alliance")
-          setSelection((s) => ({ ...s, alliance: "star-alliance" }));
-        else if (alliances.some((a) => a.id === event.id)) {
-          setDetailId(null);
-          setPanel("ledger");
+        const alliance = alliances.find((a) => a.id === event.id);
+        if (alliance) {
+          setSelection((s) => ({ ...s, alliance: alliance.id }));
         } else {
           setDetailId(event.id);
           setPanel("ledger");
@@ -229,11 +227,6 @@ export default function Haven() {
   );
 
   function chooseAlliance(id: AirlineAlliance) {
-    if (id !== "star-alliance") {
-      setDetailId(null);
-      setPanel("ledger");
-      return;
-    }
     setSelection((current) => ({
       ...current,
       alliance: current.alliance === id ? null : id,
@@ -400,11 +393,7 @@ export default function Haven() {
                 className={`alliance-option ${selection.alliance === alliance.id ? "selected" : ""}`}
                 aria-pressed={selection.alliance === alliance.id}
                 onClick={() => chooseAlliance(alliance.id)}
-                aria-label={
-                  alliance.id === "star-alliance"
-                    ? "Star Alliance arrivals"
-                    : `${alliance.name} balances, aircraft models pending`
-                }
+                aria-label={`${alliance.name} arrivals`}
               >
                 <span className={`alliance-symbol ${alliance.id}`}>
                   {alliance.mark === "✦" ? (
@@ -435,7 +424,7 @@ export default function Haven() {
           <p className="control-caption">
             {activeAlliance
               ? `${planes.length} arrivals · ${formatPoints(publicSnapshot.alliances.find((a) => a.id === activeAlliance.id)!.totalPoints)} points`
-              : "Star Alliance arrivals ready. Other alliance balances available."}
+              : "Choose an alliance to bring your airlines into the Haven."}
           </p>
         </div>
         <div className="resort-divider" />
@@ -759,9 +748,9 @@ export default function Haven() {
             <>
               <DialogTitle>Welcome to your Haven.</DialogTitle>
               <DialogDescription className="dialog-intro">
-                A working design preview with Star Alliance aircraft and an
-                Accor terrace. SkyTeam and oneworld balances are available in
-                the ledger, their aircraft models are pending.
+                Explore Star Alliance, SkyTeam and oneworld arrivals alongside
+                your Accor terrace. Each alliance brings in up to three airlines,
+                ranked by your saved points.
               </DialogDescription>
               <ol className="about-steps">
                 <li>Select an aircraft or a suitcase to see its program.</li>
@@ -769,8 +758,9 @@ export default function Haven() {
                 <li>Pause the world whenever you prefer a still view.</li>
               </ol>
               <p className="setting-note">
-                Balances are a saved snapshot, refreshed 10 September 2026. This
-                private build is intended for ChatGPT Sites.
+                Balances are a saved snapshot, refreshed 10 September 2026.
+                Membership details are available only to the owner after
+                ChatGPT sign-in.
               </p>
             </>
           )}

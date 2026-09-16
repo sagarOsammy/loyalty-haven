@@ -50,4 +50,5 @@ next-env.d.ts
 /docs/inventory-summary.json
 
 *.tsbuildinfo
+__pycache__/
 !.env.example

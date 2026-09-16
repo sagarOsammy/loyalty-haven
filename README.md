@@ -4,17 +4,18 @@ The active application is this repository. The former project is not part of thi
 
 ## Current review
 
-Open http://localhost:5174 while the local preview is running. This is the active working slice for the private ChatGPT Sites publication.
+Open http://localhost:5174 while the local preview is running. The existing Sites version 7 is public, with membership details restricted to the owner. The aircraft, alliance, hotel, telescope and dependency pass was approved for publication on 16 September 2026.
 
-- Star Alliance brings the three largest positive balances into the hangar.
+- Each alliance brings up to three positive balances into the hangar, ranked by saved points.
 - Accor builds the saved hotel terrace.
 - Scene settings include a clearly marked three-terrace construction fixture.
 - Moving luggage and aircraft open their original program balances.
 - Pause, replay, quality controls and the complete saved ledger are available.
-- SkyTeam and oneworld show their balances. Their aircraft models remain pending.
+- SkyTeam selects Virgin Atlantic and Vietnam Airlines. oneworld selects Finnair, Qatar Airways and British Airways.
 - Private account details open from Scene settings after owner-authorized ChatGPT sign-in.
+- The supplied telescope has an optimized runtime copy beside the forum. Its original GLB remains in the repository root.
 
-The public snapshot is dated 10 September 2026. It is not a live Notion connection. Unknown redeemed values remain null. The construction fixture never changes the saved balance total.
+The public snapshot is dated 10 September 2026. Sammy selected manual refresh on explicit request, with no scheduled synchronization. Unknown redeemed values remain null. The construction fixture never changes the saved balance total.
 
 ## Run and verify
 
@@ -67,3 +68,7 @@ not certified aircraft replicas.
 The preserved visual references are source material only, not a second application. `npm run inventory` creates local source-coverage reports, which are excluded from source control alongside generated dependency/runtime folders.
 
 See `docs/setup-review.md` for the current findings and `docs/asset-provenance.md` for asset origins and limitations.
+
+## Deferred validation
+
+Phone performance, further responsive/device testing, and live signed-in owner/non-owner access checks are deferred as low priority at Sammy’s request on 16 September 2026. Resume these only when requested.

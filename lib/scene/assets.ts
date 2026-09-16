@@ -3,20 +3,26 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 export const ASSETS = {
   hangar: "/assets/hangar.glb",
-  hotelBase: "/assets/hotel-base.glb",
-  hotelLevel: "/assets/hotel-level.glb",
-  hotelRoof: "/assets/hotel-roof.glb",
+  hotelBase: "/assets/hotel-base-detail.glb",
+  hotelLevel: "/assets/hotel-level-detail.glb",
+  hotelRoof: "/assets/hotel-roof-detail.glb",
   forum: "/assets/forum.glb",
   palm: "/assets/palm.glb",
   planter: "/assets/planter.glb",
   ship: "/assets/cruise-ship.glb",
   belt: "/assets/baggage-belt.glb",
-  united: "/assets/airline-united.glb",
-  avianca: "/assets/airline-avianca.glb",
-  airCanada: "/assets/airline-air-canada.glb",
+  united: "/assets/airline-united-realism.glb",
+  avianca: "/assets/airline-avianca-realism.glb",
+  airCanada: "/assets/airline-air-canada-realism.glb",
+  virginAtlantic: "/assets/airline-virgin-atlantic-realism.glb",
+  vietnamAirlines: "/assets/airline-vietnam-airlines-realism.glb",
+  finnair: "/assets/airline-finnair-realism.glb",
+  qatarAirways: "/assets/airline-qatar-airways-realism.glb",
+  britishAirways: "/assets/airline-british-airways-realism.glb",
   hardcase: "/assets/luggage-hardcase.glb",
   duffel: "/assets/luggage-duffel.glb",
   vintage: "/assets/luggage-vintage.glb",
+  telescope: "/assets/loyalty-brass-telescope.glb",
 } as const;
 
 export type AssetKey = keyof typeof ASSETS;
@@ -24,6 +30,11 @@ export const AIRCRAFT_ASSET: Record<string, AssetKey | undefined> = {
   "united-airlines": "united",
   "avianca-lifemiles": "avianca",
   "air-canada": "airCanada",
+  "virgin-atlantic": "virginAtlantic",
+  "vietnam-airlines": "vietnamAirlines",
+  finnair: "finnair",
+  "qatar-airways": "qatarAirways",
+  "british-airways": "britishAirways",
 };
 
 /** All shared geometry, maps and original materials live until the pool is disposed. */
@@ -90,8 +101,10 @@ export class AssetPool {
                     }
                     material.normalMap = this.poolRipples;
                     material.normalScale.set(0.16, 0.16);
-                    material.roughness = 0.18;
-                    material.metalness = 0.2;
+                    if (!material.name.startsWith("HotelDetail_")) {
+                      material.roughness = 0.18;
+                      material.metalness = 0.2;
+                    }
                   }
                   const greens: Record<string, string> = {
                     "Palm leaf emerald": "#345129",
@@ -113,13 +126,16 @@ export class AssetPool {
                 ) {
                   material.transmission = 0;
                   if (/glass/i.test(material.name)) {
-                    material.color.set("#adbbb0");
+                    if (!material.name.startsWith("HotelDetail_"))
+                      material.color.set("#adbbb0");
                     material.opacity = 0.19;
                     material.transparent = true;
                     material.depthWrite = false;
                   }
-                  material.roughness = 0.16;
-                  material.metalness = 0.15;
+                  if (!material.name.startsWith("HotelDetail_")) {
+                    material.roughness = 0.16;
+                    material.metalness = 0.15;
+                  }
                 }
               }
             }

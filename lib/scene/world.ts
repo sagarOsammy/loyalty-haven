@@ -278,6 +278,7 @@ export class HavenWorld {
     const settled = await Promise.allSettled([
       this.asset("hangar", this.staticRoot, [-18, 0, -4]),
       this.asset("forum", this.staticRoot, [0, 0.08, 13]),
+      this.asset("telescope", this.staticRoot, [9, 0.02, 21], 2.6, -0.65),
       this.asset("hotelBase", this.hotelRoot, [17, 0, -2]).then((o) => {
         this.hotelBase = o;
         if (o) o.visible = false;
@@ -606,6 +607,9 @@ export class HavenWorld {
       .map((p) => p.partner.id)
       .join(",");
     this.canvas.dataset.floorIds = this.floors.map((f) => f.hotel.id).join(",");
+    // Selection can fetch an alliance for the first time after initial loading.
+    // Keep the visible notice and diagnostic state aligned with those requests.
+    if (!this.contextLost) this.reportStatus();
     this.shadowDirty = true;
     this.invalidate();
   }

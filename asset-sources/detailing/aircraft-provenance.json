@@ -1,0 +1,35 @@
+{
+  "sourceGenerator": "asset-sources/aircraft/build_assets.py",
+  "sourceGeneratorSha256": "ef3d7c60404648c231e152058ba23af3e8fb0ec4f194be0b42d4a6df8642c188",
+  "changes": [
+    "Slimmer tapered fuselage, unchanged 12.04 m length",
+    "More swept and tapered main wings",
+    "Raised forward wraparound cockpit glazing with opaque reflective treatment",
+    "Lower-contrast passenger door panels",
+    "Original engines, gear, wordmarks and airline colors retained"
+  ],
+  "outputs": [
+    {
+      "source": "public/assets/airline-united.glb",
+      "sourceSha256": "2f25d9a491d6e2081cec505ddec9c2cba4fc43c94a78262392c8f11abe359524",
+      "runtime": "public/assets/airline-united-detail.glb",
+      "sha256": "f5c5b598842c47cb695aed2df7c81920b33866a1f4039655dfb20a1f359ecea6",
+      "bytes": 1196992
+    },
+    {
+      "source": "public/assets/airline-avianca.glb",
+      "sourceSha256": "0cd069cf2e8b3a92cecd4d9c3b5524767fb3c3aed9cc11e6540bc528e5501cd8",
+      "runtime": "public/assets/airline-avianca-detail.glb",
+      "sha256": "63999104bab06a3b9e32a117eaf30a75cc1d1ad9331257fb99d100cab0f830cc",
+      "bytes": 1696724
+    },
+    {
+      "source": "public/assets/airline-air-canada.glb",
+      "sourceSha256": "b0bac9b13e41d0e0c00d0fc6daaa3bb7c4952fb5312fd0652447ab5ce0a59c73",
+      "runtime": "public/assets/airline-air-canada-detail.glb",
+      "sha256": "eb7ad90ff1ac8f31a0bd90873c7eaad7e2ab2e7df2f1ad5c328cc020f0afd119",
+      "bytes": 1316184
+    }
+  ],
+  "limitations": "Authored approximations, not aircraft scans or exact liveries"
+}

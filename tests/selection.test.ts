@@ -25,7 +25,14 @@ test("aircraft rank by points independent of input order, zero balances excluded
     visibleAircraft(reordered, "star-alliance").map((p) => p.id),
     ["avianca-lifemiles", "united-airlines", "air-canada"],
   );
-  assert.equal(visibleAircraft(reordered, "skyteam").length, 2);
+  assert.deepEqual(
+    visibleAircraft(reordered, "skyteam").map((p) => p.id),
+    ["virgin-atlantic", "vietnam-airlines"],
+  );
+  assert.deepEqual(
+    visibleAircraft(reordered, "oneworld").map((p) => p.id),
+    ["finnair", "qatar-airways", "british-airways"],
+  );
   assert.equal(visibleAircraft(reordered, null).length, 0);
 });
 test("floor labels preserve selected order, deduplicate and cap three floors", () => {
@@ -65,6 +72,9 @@ test("belt has continuous positions and correct direction around both corners", 
 });
 
 test("browser tools reject unsupported settings before changing visible state", () => {
+  for (const alliance of ["star-alliance", "skyteam", "oneworld"]) {
+    assert.deepEqual(validateConfiguration({ alliance }), { alliance });
+  }
   assert.deepEqual(
     validateConfiguration({
       alliance: null,
@@ -78,7 +88,7 @@ test("browser tools reject unsupported settings before changing visible state", 
     null,
     [],
     { points: 1 },
-    { alliance: "skyteam" },
+    { alliance: "unknown" },
     { motion: "false" },
   ]) {
     assert.throws(() => validateConfiguration(input));

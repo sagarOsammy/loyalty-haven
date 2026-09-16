@@ -1,0 +1,40 @@
+{
+  "source": "asset-sources/aircraft-realism/prepare_aircraft.py",
+  "sourceSha256": "4f737c7e2d0f38c76124b4113b7b9d39bae733ce78c4edb655db3af7b44f2c07",
+  "originalGenerator": "asset-sources/aircraft/build_assets.py",
+  "originalGeneratorSha256": "ef3d7c60404648c231e152058ba23af3e8fb0ec4f194be0b42d4a6df8642c188",
+  "transformations": [
+    "Approved component geometry reused",
+    "Airline-specific paint and projected text",
+    "Simple tail initials",
+    "Static geometry batched by material"
+  ],
+  "limitations": "Generic airframes with approximate paint and text. Tail initials are authored identifiers, not official airline logos. No exact aircraft type or current livery claim.",
+  "outputs": [
+    {
+      "runtime": "public/assets/airline-virgin-atlantic-realism.glb",
+      "sha256": "03fb467a8447dd9e2be13225d6895281a13f268841801a19b5f7bf0611f88647",
+      "bytes": 2010124
+    },
+    {
+      "runtime": "public/assets/airline-vietnam-airlines-realism.glb",
+      "sha256": "9d34321b868a46fa25bc8eaac85613e5e25ac5d555fbfa5b73352e5d829cdd32",
+      "bytes": 2000480
+    },
+    {
+      "runtime": "public/assets/airline-finnair-realism.glb",
+      "sha256": "e2d475e00b1c5fc0e0fee9101be85d7881c59e2396f3849ec083e1495d6ab74b",
+      "bytes": 1933644
+    },
+    {
+      "runtime": "public/assets/airline-qatar-airways-realism.glb",
+      "sha256": "dfccc5d7d525ed314180d7c2d5c0c23ff1edf77174b01460d66162d4326a5f19",
+      "bytes": 1950480
+    },
+    {
+      "runtime": "public/assets/airline-british-airways-realism.glb",
+      "sha256": "e81818a7daf11f2e1f7b18a8154f8cbd10ffd3161bb11d29f64d9a878f121985",
+      "bytes": 1977616
+    }
+  ]
+}

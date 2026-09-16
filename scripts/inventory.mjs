@@ -11,7 +11,7 @@ function classify(parts, name) {
   if (parts.includes("node_modules")) return "installed dependency";
   if (
     parts.some((p) =>
-      [".next", "dist", ".wrangler", ".sites-runtime", ".vinext"].includes(p),
+      [".next", "dist", ".wrangler", ".sites-runtime", ".vinext", "__pycache__"].includes(p),
     )
   )
     return "generated runtime or build artifact";

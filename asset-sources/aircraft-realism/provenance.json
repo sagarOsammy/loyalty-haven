@@ -1,0 +1,35 @@
+{
+  "sourceGenerator": "asset-sources/aircraft/build_assets.py",
+  "sourceGeneratorSha256": "ef3d7c60404648c231e152058ba23af3e8fb0ec4f194be0b42d4a6df8642c188",
+  "changes": [
+    "Narrower smoothly interpolated cabin and rounded radome",
+    "Swept thin airfoils, slat and flap joints, swept stabilizers",
+    "Recessed intake throat with 24 swept fan blades, spinner and tapered exhaust",
+    "Flush projected upright airline wordmarks and fine door outlines",
+    "Oval cabin windows, six cockpit panes and paired landing wheels"
+  ],
+  "outputs": [
+    {
+      "source": "public/assets/airline-united-detail.glb",
+      "sourceSha256": "f5c5b598842c47cb695aed2df7c81920b33866a1f4039655dfb20a1f359ecea6",
+      "runtime": "public/assets/airline-united-realism.glb",
+      "sha256": "ededab2a301ddcb7f29753f4439a1566081b53571f5d5064c5aa7d52cc9e7e1a",
+      "bytes": 1932548
+    },
+    {
+      "source": "public/assets/airline-avianca-detail.glb",
+      "sourceSha256": "63999104bab06a3b9e32a117eaf30a75cc1d1ad9331257fb99d100cab0f830cc",
+      "runtime": "public/assets/airline-avianca-realism.glb",
+      "sha256": "ea51056e8a8d7018d33795e22163b87f0c285becadbda11649cd15ca7b072a60",
+      "bytes": 1974776
+    },
+    {
+      "source": "public/assets/airline-air-canada-detail.glb",
+      "sourceSha256": "eb7ad90ff1ac8f31a0bd90873c7eaad7e2ab2e7df2f1ad5c328cc020f0afd119",
+      "runtime": "public/assets/airline-air-canada-realism.glb",
+      "sha256": "0c54ae15b58f15b1486af62bbac663471a88a117135c838f735a0ca105e2c929",
+      "bytes": 1943080
+    }
+  ],
+  "limitations": "Authored generic airliner approximations with retained airline colors and wordmark references, not exact aircraft types or certified liveries"
+}

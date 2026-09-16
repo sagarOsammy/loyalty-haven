@@ -1,0 +1,24 @@
+{
+  "source": "loyalty-brass-telescope.glb",
+  "sourceSha256": "801414c2d3389a2baa84c7f5d2ec44ca5e9553c58eb7531b9fc3c2c2cdfecf6d",
+  "sourceBytes": 9891392,
+  "sourceTriangles": 281758,
+  "runtime": "public/assets/loyalty-brass-telescope.glb",
+  "runtimeSha256": "6b1e0806150c64b31009799009eeab1eaaeb5abe41050df700019d2d737b8b45",
+  "runtimeBytes": 1556720,
+  "runtimeTriangles": 33810,
+  "transformations": [
+    "Blender decimation ratio 0.12",
+    "Embedded textures reduced to 1024 square where needed",
+    "JPEG quality 88",
+    "Original placement, UVs and PBR maps retained"
+  ],
+  "origin": "User-supplied Tripo text-to-3D export",
+  "usage": "Noncommercial personal review, Tripo free-plan restrictions checked 2026-09-14",
+  "rightsSources": [
+    "https://www.tripo3d.ai/pricing",
+    "https://www.tripo3d.ai/help/privacy-policy/how-to-use-tripo-models-commercially",
+    "https://www.tripo3d.ai/terms"
+  ],
+  "verification": "Optimized GLB rendered in Blender and loaded in the local browser scene with no asset failures"
+}

@@ -1,0 +1,123 @@
+{
+  "created_by": "asset-sources/detailing/prepare_hotel.py",
+  "outputs": [
+    {
+      "source": "public/assets/hotel-base.glb",
+      "sourceSha256": "0f8385d149ed9272c762254bd94a4bca7fc4ef627864605eef90abd1be8af292",
+      "runtime": "public/assets/hotel-base-detail.glb",
+      "runtimeSha256": "4938b62a575057135c55890690356d95810f0c2dccc0681566759ff6b6a9cec2",
+      "dimensions_m": [
+        17.0,
+        11.0,
+        3.1553507
+      ],
+      "triangles": 16424,
+      "verification": {
+        "object_count_equal": true,
+        "triangle_count_equal": true,
+        "dimensions_equal_within_1e-4m": true
+      }
+    },
+    {
+      "source": "public/assets/hotel-level.glb",
+      "sourceSha256": "30d21e1a19c00c26b84d8be0ecb92136c746f03f2f48bb196c8ba84a4167bbde",
+      "runtime": "public/assets/hotel-level-detail.glb",
+      "runtimeSha256": "aebcb8daee501ff349bcc453bba63537e7843c9824d0c14d3bc283bde63a86fa",
+      "dimensions_m": [
+        16.9500008,
+        10.9500008,
+        3.48
+      ],
+      "triangles": 15296,
+      "verification": {
+        "object_count_equal": true,
+        "triangle_count_equal": true,
+        "dimensions_equal_within_1e-4m": true
+      }
+    },
+    {
+      "source": "public/assets/hotel-roof.glb",
+      "sourceSha256": "9666736f7cb7b06e3007f7df6fcbd887e8fdc2fb54f2d9d08031bb2d9503955f",
+      "runtime": "public/assets/hotel-roof-detail.glb",
+      "runtimeSha256": "9533cd05210673f405411c76e0cd5ec924e70fd103fbf1e9201f121f73b62838",
+      "dimensions_m": [
+        17.0,
+        11.0,
+        2.905
+      ],
+      "triangles": 10932,
+      "verification": {
+        "object_count_equal": true,
+        "triangle_count_equal": true,
+        "dimensions_equal_within_1e-4m": true
+      }
+    }
+  ],
+  "material_method": {
+    "geometry_changes": false,
+    "transform_changes": false,
+    "module_stack_preview": [
+      {
+        "asset": "hotel-base.glb",
+        "translation_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "asset": "hotel-level.glb",
+        "translation_m": [
+          0.0,
+          0.0,
+          3.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "asset": "hotel-level.glb",
+        "translation_m": [
+          0.0,
+          2.7,
+          6.5
+        ],
+        "scale": [
+          0.86,
+          1.0,
+          0.86
+        ]
+      },
+      {
+        "asset": "hotel-roof.glb",
+        "translation_m": [
+          0.0,
+          5.4,
+          10.0
+        ],
+        "scale": [
+          0.74,
+          1.0,
+          0.74
+        ]
+      }
+    ],
+    "embedded_maps": [
+      "stone base color, roughness, tangent normal",
+      "wood base color, roughness, tangent normal",
+      "glazing base color, roughness, tangent normal",
+      "water, brass, fabric, foliage, interior, curtain, and practical light maps"
+    ],
+    "design_direction": "Warm luxurious resort materials with restrained tonal variation, soft travertine mineral mottling, low-contrast teak grain, smoky teal glazing, and practical PBR roughness/normal response.",
+    "dependencies": "Blender built-in Python API only, no external assets or network fetches",
+    "browser_treatment": "Screen-space transmission disabled, architectural glass uses alpha 0.19 and shared pool ripples replace static pool normals. Authored roughness maps retained."
+  }
+}
