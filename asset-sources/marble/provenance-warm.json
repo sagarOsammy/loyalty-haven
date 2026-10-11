@@ -1,0 +1,24 @@
+{
+  "source": "Original procedural output, visual direction from user reference supplied 11 October 2026",
+  "seed": 20261011,
+  "resolution": 2048,
+  "atlas": "8 by 8 slabs, 1.5 metres per slab, 12 metre repeat",
+  "transformation": "Warm beige and taupe marble, cloudy mineral deposits, irregular veins, shallow joints, honed roughness and tangent-space normals. First marble maps and provenance remain preserved.",
+  "outputs": [
+    {
+      "path": "public/assets/marble-resort-warm-color.jpg",
+      "bytes": 545333,
+      "sha256": "f9e8be751485fd1c9dd206a9bc4656cf309e763e9313e00839ed2e1632fa509b"
+    },
+    {
+      "path": "public/assets/marble-resort-warm-roughness.jpg",
+      "bytes": 351457,
+      "sha256": "6561d6270dfcd1d0e6afa5050fa24cbc7119feaf807951f1e1d5ee28d5ab17e6"
+    },
+    {
+      "path": "public/assets/marble-resort-warm-normal.jpg",
+      "bytes": 385728,
+      "sha256": "4981773277b58b1ce311b47b83281ff58ba918d1dd7c7b443357a9b3f55d0d27"
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+import * as THREE from "three";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
+import { ownMaterials } from "./assets";
+import { LEAF_BEDS, PALM_PLACEMENTS } from "./landscape";
+import { BOARDWALK_LAYOUT, onBoardwalk } from "./boardwalk-layout";
+
+function palmUplightPosition(x: number, z: number) {
+  const px = x + 0.48;
+  const pz = z + 0.48;
+  const planted = LEAF_BEDS.some(([bx, bz, w, d]) => Math.abs(px - bx) <= w / 2 && Math.abs(pz - bz) <= d / 2);
+  const y = onBoardwalk(px, pz) && !planted ? BOARDWALK_LAYOUT.surfaceY + 0.17 : 0.39;
+  return new THREE.Vector3(px, y, pz);
+}
+
+/** Fixtures stay beside the paths, outside building and baggage footprints. */
+export const PATH_LAMP_PLACEMENTS: readonly [number, number][] = [
+  [-2.3, -13], [5.3, -13], [-2.3, -6], [5.3, -6],
+  [-2.3, 1], [5.3, 1], [-2.3, 10], [5.3, 10],
+  [-35, -11], [-35, 0], [-35, 14], [28.6, -11], [28.6, 0], [28.6, 14],
+  [-8.2, 19.4], [11.2, 19.4], [-8.2, 30.6], [11.2, 30.6],
+  [-23.2, 40.7], [-12.6, 40.7], [21.6, 34.8], [32.2, 34.8],
+  [-47, -16], [38.5, -14.5],
+];
+
+export class ResortLighting {
+  readonly root = new THREE.Group();
+  private instances: THREE.InstancedMesh[] = [];
+  private lightMap: THREE.CanvasTexture;
+  private litMaterials = new WeakSet<THREE.Material>();
+
+  constructor() {
+    this.root.name = "Warm resort lighting, stage 3";
+    this.lightMap = this.bakePathIllumination();
+    this.makePathLamps();
+    this.makePlanterStrips();
+    this.makeUplightFixtures();
+  }
+
+  private batch(geometry: THREE.BufferGeometry, material: THREE.Material, count: number, name: string) {
+    const mesh = new THREE.InstancedMesh(geometry, material, count);
+    mesh.name = name;
+    this.instances.push(mesh);
+    this.root.add(mesh);
+    return mesh;
+  }
+
+  private makePathLamps() {
+    const parts: THREE.BufferGeometry[] = [];
+    const part = (w: number, h: number, d: number, x: number, y: number, z: number) =>
+      parts.push(new THREE.BoxGeometry(w, h, d).translate(x, y, z));
+    part(0.38, 0.09, 0.38, 0, 0.045, 0);
+    part(0.25, 0.18, 0.25, 0, 0.18, 0);
+    part(0.37, 0.08, 0.37, 0, 1.13, 0);
+    for (const x of [-0.145, 0.145]) for (const z of [-0.145, 0.145])
+      part(0.045, 0.87, 0.045, x, 0.69, z);
+    const frameGeometry = mergeGeometries(parts)!;
+    parts.forEach(geometry => geometry.dispose());
+    const frames = this.batch(frameGeometry, new THREE.MeshStandardMaterial({
+      color: "#433321", roughness: 0.3, metalness: 0.75,
+    }), PATH_LAMP_PLACEMENTS.length, "Bronze lantern frames");
+    frames.castShadow = frames.receiveShadow = true;
+    const glass = this.batch(new THREE.BoxGeometry(0.25, 0.77, 0.25).translate(0, 0.68, 0),
+      new THREE.MeshStandardMaterial({
+        color: "#e9c388", emissive: "#ffcf7d", emissiveIntensity: 5,
+        roughness: 0.36, metalness: 0,
+      }), PATH_LAMP_PLACEMENTS.length, "Warm frosted lantern panels");
+    const transform = new THREE.Object3D();
+    PATH_LAMP_PLACEMENTS.forEach(([x, z], index) => {
+      const groundY = onBoardwalk(x, z) ? BOARDWALK_LAYOUT.surfaceY : 0;
+      transform.position.set(x, groundY, z);
+      transform.updateMatrix();
+      frames.setMatrixAt(index, transform.matrix);
+      glass.setMatrixAt(index, transform.matrix);
+      // Four live lights provide local specular response beside the forum and belts.
+      // All 24 fixtures contribute diffuse illumination through the static light atlas.
+      if (index >= 14 && index <= 17) {
+        const light = new THREE.PointLight("#ffb85e", 14, 6.5, 2);
+        light.name = `Path lamp ${index + 1}`;
+        light.position.set(x, groundY + 0.7, z);
+        this.root.add(light);
+      }
+    });
+  }
+
+  private bakePathIllumination() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1024;
+    canvas.height = 544;
+    const context = canvas.getContext("2d")!;
+    context.fillStyle = "black";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.globalCompositeOperation = "lighter";
+    // A 160 by 85 metre world atlas, independent of the repeating marble UVs.
+    // Texture rows are arranged for the normal CanvasTexture vertical flip.
+    PATH_LAMP_PLACEMENTS.forEach(([x, z]) => {
+      const px = (x + 80) * 6.4;
+      const py = (65 - z) * 6.4;
+      const gradient = context.createRadialGradient(px, py, 0, px, py, 6.5 * 6.4);
+      gradient.addColorStop(0, "rgb(255,255,255)");
+      gradient.addColorStop(0.1, "rgb(205,205,205)");
+      gradient.addColorStop(0.24, "rgb(95,95,95)");
+      gradient.addColorStop(0.5, "rgb(25,25,25)");
+      gradient.addColorStop(1, "rgb(0,0,0)");
+      context.fillStyle = gradient;
+      context.fillRect(px - 42, py - 42, 84, 84);
+    });
+    const map = new THREE.CanvasTexture(canvas);
+    map.name = "24 path lamp diffuse illumination atlas";
+    map.generateMipmaps = true;
+    return map;
+  }
+
+  /** Shade actual surfaces with the lamp atlas, preserving their marble/wood/leaf textures. */
+  lightStaticSurfaces(root: THREE.Object3D) {
+    root.traverse(object => {
+      if (!(object instanceof THREE.Mesh)) return;
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      materials.forEach(material => {
+        if (!(material instanceof THREE.MeshStandardMaterial) || material.transparent || this.litMaterials.has(material)) return;
+        this.litMaterials.add(material);
+        const prior = material.onBeforeCompile;
+        const priorKey = material.customProgramCacheKey();
+        material.onBeforeCompile = (shader, renderer) => {
+          prior.call(material, shader, renderer);
+          shader.uniforms.resortPathMap = {value: this.lightMap};
+          shader.vertexShader = shader.vertexShader.replace("#include <common>",
+            "#include <common>\nvarying vec3 resortSurfaceWorld;")
+            .replace("#include <project_vertex>", `#include <project_vertex>
+              vec4 resortLocalPosition = vec4(transformed, 1.0);
+              #ifdef USE_INSTANCING
+                resortLocalPosition = instanceMatrix * resortLocalPosition;
+              #endif
+              resortSurfaceWorld = (modelMatrix * resortLocalPosition).xyz;`);
+          shader.fragmentShader = shader.fragmentShader.replace("#include <common>",
+            "#include <common>\nuniform sampler2D resortPathMap;\nvarying vec3 resortSurfaceWorld;")
+            .replace("#include <aomap_fragment>", `
+              vec2 resortMapUV = (resortSurfaceWorld.xz + vec2(80.0, 20.0)) / vec2(160.0, 85.0);
+              float resortLight = texture2D(resortPathMap, resortMapUV).r;
+              float resortHeight = max(0.0, resortSurfaceWorld.y - 0.35);
+              float resortFalloff = 1.0 / (1.0 + resortHeight * resortHeight * 1.3);
+              reflectedLight.indirectDiffuse += material.diffuseColor * vec3(1.0, 0.48, 0.13) * resortLight * resortFalloff * 4.0;
+              #include <aomap_fragment>`);
+        };
+        material.customProgramCacheKey = () => `${priorKey}|resort-path-atlas-v1`;
+        material.needsUpdate = true;
+      });
+    });
+  }
+
+  private makePlanterStrips() {
+    const strips = this.batch(new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshBasicMaterial({color: new THREE.Color(3.2, 1.55, 0.42)}),
+      LEAF_BEDS.length, "Recessed planter edge strips");
+    const transform = new THREE.Object3D();
+    LEAF_BEDS.forEach(([x, z, width, depth], index) => {
+      const sideBed = depth > width;
+      transform.position.set(sideBed ? x + (x < 0 ? 1 : -1) * (width / 2 + 0.13) : x,
+        0.12, sideBed ? z : z + depth / 2 + 0.13);
+      transform.scale.set(sideBed ? 0.035 : width - 0.15, 0.035, sideBed ? depth - 0.15 : 0.035);
+      transform.updateMatrix();
+      strips.setMatrixAt(index, transform.matrix);
+    });
+    // A soft apron sits under the recessed strip, fading before the walking route.
+    const apron = this.batch(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2),
+      new THREE.ShaderMaterial({
+        transparent: true, depthWrite: false, polygonOffset: true,
+        polygonOffsetFactor: -1, polygonOffsetUnits: -1,
+        vertexShader: `varying vec2 stripUV;
+          void main() { stripUV = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * instanceMatrix * vec4(position, 1.0); }`,
+        fragmentShader: `varying vec2 stripUV;
+          void main() {
+            float across = exp(-pow((stripUV.y - 0.5) * 5.0, 2.0));
+            float endFade = smoothstep(0.0, 0.05, stripUV.x) * smoothstep(0.0, 0.05, 1.0 - stripUV.x);
+            gl_FragColor = vec4(1.0, 0.48, 0.12, across * endFade * 0.2);
+            #include <tonemapping_fragment>
+            #include <colorspace_fragment>
+          }`,
+      }), LEAF_BEDS.length, "Soft planter strip spill");
+    LEAF_BEDS.forEach(([x, z, width, depth], index) => {
+      const sideBed = depth > width;
+      transform.rotation.y = sideBed ? Math.PI / 2 : 0;
+      transform.position.set(sideBed ? x + (x < 0 ? 1 : -1) * (width / 2 + 0.4) : x,
+        -0.05, sideBed ? z : z + depth / 2 + 0.4);
+      transform.scale.set(sideBed ? depth : width, 1, 1.2);
+      transform.updateMatrix();
+      apron.setMatrixAt(index, transform.matrix);
+    });
+  }
+
+  private makeUplightFixtures() {
+    const housings = this.batch(new THREE.CylinderGeometry(0.13, 0.16, 0.16, 12),
+      new THREE.MeshStandardMaterial({color: "#534129", metalness: 0.65, roughness: 0.45}),
+      PALM_PLACEMENTS.length, "Discrete palm uplight housings");
+    const lenses = this.batch(new THREE.CircleGeometry(0.11, 12).rotateX(-Math.PI / 2),
+      new THREE.MeshBasicMaterial({color: new THREE.Color(4, 1.6, 0.4)}),
+      PALM_PLACEMENTS.length, "Amber uplight lenses");
+    const transform = new THREE.Object3D();
+    PALM_PLACEMENTS.forEach(([x, z], index) => {
+      const lightPosition = palmUplightPosition(x, z);
+      transform.position.copy(lightPosition);
+      transform.position.y -= 0.09;
+      transform.updateMatrix();
+      housings.setMatrixAt(index, transform.matrix);
+      transform.position.y = lightPosition.y;
+      transform.updateMatrix();
+      lenses.setMatrixAt(index, transform.matrix);
+    });
+  }
+
+  /** Local vertex illumination keeps twelve palm uplights out of every scene fragment shader. */
+  uplightPalm(palm: THREE.Group, x: number, z: number) {
+    ownMaterials(palm);
+    palm.traverse(object => {
+      if (!(object instanceof THREE.Mesh)) return;
+      const materials = Array.isArray(object.material) ? object.material : [object.material];
+      materials.forEach(material => {
+        if (!(material instanceof THREE.MeshStandardMaterial)) return;
+        const prior = material.onBeforeCompile;
+        material.onBeforeCompile = (shader, renderer) => {
+          prior.call(material, shader, renderer);
+          shader.uniforms.resortUplightPosition = {value: palmUplightPosition(x, z)};
+          shader.vertexShader = shader.vertexShader.replace("#include <common>",
+            `#include <common>
+             uniform vec3 resortUplightPosition;
+             varying float resortPalmIrradiance;`)
+            .replace("#include <project_vertex>", `#include <project_vertex>
+              vec3 uplightWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;
+              vec3 fromUplight = uplightWorld - resortUplightPosition;
+              float h = max(fromUplight.y, 0.0);
+              float coneRadius = 0.75 + h * 0.55;
+              float beam = 1.0 - smoothstep(coneRadius * 0.55, coneRadius, length(fromUplight.xz));
+              vec3 uplightNormal = normalize(mat3(modelMatrix) * objectNormal);
+              float facing = 0.25 + 0.75 * abs(dot(uplightNormal, normalize(-fromUplight)));
+              resortPalmIrradiance = beam * facing * 5.5 / (1.0 + 0.065 * h * h);`);
+          shader.fragmentShader = shader.fragmentShader.replace("#include <common>",
+            "#include <common>\nvarying float resortPalmIrradiance;")
+            .replace("#include <aomap_fragment>",
+              `reflectedLight.directDiffuse += material.diffuseColor * vec3(1.0, 0.43, 0.09) * resortPalmIrradiance;
+               #include <aomap_fragment>`);
+        };
+        material.customProgramCacheKey = () => "resort-palm-uplight-v1";
+        material.needsUpdate = true;
+      });
+    });
+  }
+
+  dispose() {
+    this.instances.forEach(mesh => mesh.dispose());
+    this.lightMap.dispose();
+    // Geometry, maps and materials are disposed with the parent scene's resources.
+  }
+}

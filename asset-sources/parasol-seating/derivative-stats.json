@@ -1,0 +1,252 @@
+{
+  "schema": "loyalty-haven-parasol-seating-derivative-1",
+  "source": {
+    "path": "asset-sources/parasol-seating/source/patio.glb",
+    "bytes": 6771952,
+    "sha256": "754ec45908ac2528680800ee61a0fba561fa905f942ad73f00c65a6af07b8f88",
+    "glbMeshStats": {
+      "objects": 1,
+      "vertices": 524195,
+      "polygons": 985436,
+      "triangles": 985436,
+      "boundsBlender": {
+        "min": [
+          -0.347137451171875,
+          -0.349395751953125,
+          -0.5
+        ],
+        "max": [
+          0.347137451171875,
+          0.349395751953125,
+          0.5
+        ]
+      },
+      "dimensionsBlender": [
+        0.69427490234375,
+        0.69879150390625,
+        1.0
+      ],
+      "meshes": [
+        {
+          "name": "tripo_node_ba5b38e3-ff59-415d-bdfd-cf74854e81bf",
+          "vertices": 524195,
+          "polygons": 985436,
+          "triangles": 985436,
+          "dimensions": [
+            0.69427490234375,
+            0.69879150390625,
+            1.0
+          ],
+          "materials": [
+            "tripo_material_ba5b38e3-ff59-415d-bdfd-cf74854e81bf"
+          ]
+        }
+      ]
+    },
+    "images": [
+      {
+        "name": "Color_ba5b38e3-ff59-415d-bdfd-cf74854e81bf",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "NormalGL_ba5b38e3-ff59-415d-bdfd-cf74854e81bf",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "ORM_ba5b38e3-ff59-415d-bdfd-cf74854e81bf",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      }
+    ]
+  },
+  "derivative": {
+    "path": "public/assets/patio-seating-tripo.glb",
+    "bytes": 5856340,
+    "sha256": "7afe44999db65056229875a10fd4cca816a157b566332a2532b862a23928cdc2",
+    "glbMeshStats": {
+      "objects": 1,
+      "vertices": 51346,
+      "polygons": 50000,
+      "triangles": 50000,
+      "boundsBlender": {
+        "min": [
+          -2.128448724746704,
+          -2.000248670578003,
+          -0.0022098443005234003
+        ],
+        "max": [
+          2.126452684402466,
+          1.999737024307251,
+          2.8494138717651367
+        ]
+      },
+      "dimensionsBlender": [
+        4.25490140914917,
+        3.999985694885254,
+        2.851623773574829
+      ],
+      "meshes": [
+        {
+          "name": "PatioSeatingOptimized",
+          "vertices": 51346,
+          "polygons": 50000,
+          "triangles": 50000,
+          "dimensions": [
+            4.25490140914917,
+            3.999985694885254,
+            2.851623773574829
+          ],
+          "materials": [
+            "tripo_material_ba5b38e3-ff59-415d-bdfd-cf74854e81bf"
+          ]
+        }
+      ]
+    },
+    "images": [
+      {
+        "name": "map-0",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "map-1",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "map-2",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      }
+    ],
+    "embeddedPixelChecks": [
+      {
+        "index": 0,
+        "mimeType": "image/png",
+        "width": 1024,
+        "height": 1024,
+        "byteLength": 1090793,
+        "pngSignature": true
+      },
+      {
+        "index": 1,
+        "mimeType": "image/png",
+        "width": 1024,
+        "height": 1024,
+        "byteLength": 1754183,
+        "pngSignature": true
+      },
+      {
+        "index": 2,
+        "mimeType": "image/png",
+        "width": 1024,
+        "height": 1024,
+        "byteLength": 1066545,
+        "pngSignature": true
+      }
+    ],
+    "preview": "asset-sources/parasol-seating/derivative-preview.png"
+  },
+  "runtimeStatsBeforeExport": {
+    "objects": 1,
+    "vertices": 42068,
+    "polygons": 50000,
+    "triangles": 50000,
+    "boundsBlender": {
+      "min": [
+        -2.128448724746704,
+        -2.000248670578003,
+        -0.0022098443005234003
+      ],
+      "max": [
+        2.126452684402466,
+        1.999737024307251,
+        2.8494138717651367
+      ]
+    },
+    "dimensionsBlender": [
+      4.25490140914917,
+      3.999985694885254,
+      2.851623773574829
+    ],
+    "meshes": [
+      {
+        "name": "PatioSeatingOptimized",
+        "vertices": 42068,
+        "polygons": 50000,
+        "triangles": 50000,
+        "dimensions": [
+          4.25490140914917,
+          3.999985694885254,
+          2.851623773574829
+        ],
+        "materials": [
+          "tripo_material_ba5b38e3-ff59-415d-bdfd-cf74854e81bf"
+        ]
+      }
+    ]
+  },
+  "normalization": {
+    "sourceBoundsBlender": {
+      "min": [
+        -0.347137451171875,
+        -0.349395751953125,
+        -0.5
+      ],
+      "max": [
+        0.347137451171875,
+        0.349395751953125,
+        0.5
+      ]
+    },
+    "sourceDimensionsBlender": [
+      0.69427490234375,
+      0.69879150390625,
+      1.0
+    ],
+    "axisScale": [
+      6.121494293212891,
+      5.724167823791504,
+      2.8499999046325684
+    ],
+    "targetDimensions": [
+      4.25,
+      4.0,
+      2.8499999046325684
+    ],
+    "grounding": "source bounds centered, lowest point moved to Blender Z=0",
+    "axis": "Blender Z-up, glTF exporter writes Y-up"
+  },
+  "decimation": {
+    "beforeTriangles": 985436,
+    "afterTriangles": 50000,
+    "ratioRequested": 0.05073896224615297
+  },
+  "texturePolicy": {
+    "maxDimension": 1024,
+    "embedded": true,
+    "colorSpace": "base color sRGB, metallic roughness and normal Non-Color"
+  },
+  "visualFeatures": {
+    "suppliedSet": "combined umbrella, table and four lounge chairs",
+    "chairCount": 4,
+    "runtimePlacementPolicy": "repeat complete supplied set; do not remove chair geometry without separable semantic components",
+    "materialStructure": "one merged mesh and one material with three embedded PBR maps"
+  },
+  "sourcePreserved": true,
+  "scope": "Local derivative for browser review, no publication"
+}

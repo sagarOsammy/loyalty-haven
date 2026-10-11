@@ -1,0 +1,252 @@
+{
+  "schema": "loyalty-haven-cabana-derivative-1",
+  "source": {
+    "path": "asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbx",
+    "bytes": 11401276,
+    "sha256": "ec2105a8841c322cb8c11f8b11406a06a2142621e3f5cdd8cf47480391d64456",
+    "fbxMeshStats": {
+      "objects": 1,
+      "vertices": 59619,
+      "polygons": 58450,
+      "triangles": 116598,
+      "boundsBlender": {
+        "min": [
+          -0.49287283420562744,
+          -0.49248406291007996,
+          -0.36208575963974
+        ],
+        "max": [
+          0.4982220530509949,
+          0.4906825125217438,
+          0.36186397075653076
+        ]
+      },
+      "dimensionsBlender": [
+        0.9910948872566223,
+        0.9831665754318237,
+        0.7239497303962708
+      ],
+      "meshes": [
+        {
+          "name": "tripo_node_4566ecd8",
+          "vertices": 59619,
+          "polygons": 58450,
+          "triangles": 116598,
+          "dimensions": [
+            0.9910948872566223,
+            0.983166515827179,
+            0.723949670791626
+          ],
+          "materials": [
+            "tripo_mat_4566ecd8"
+          ]
+        }
+      ]
+    },
+    "imagesBefore": [
+      {
+        "name": "tripo_image_4566ecd8_0",
+        "width": 8192,
+        "height": 8192,
+        "packed": true,
+        "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Color.jpg"
+      },
+      {
+        "name": "tripo_image_4566ecd8_1",
+        "width": 4096,
+        "height": 4096,
+        "packed": true,
+        "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Roughness.jpg"
+      },
+      {
+        "name": "tripo_image_4566ecd8_2",
+        "width": 4096,
+        "height": 4096,
+        "packed": true,
+        "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Metallic.jpg"
+      },
+      {
+        "name": "tripo_image_4566ecd8_3",
+        "width": 4096,
+        "height": 4096,
+        "packed": true,
+        "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Normal.jpg"
+      }
+    ]
+  },
+  "derivative": {
+    "path": "public/assets/cabana-tripo.glb",
+    "bytes": 3279056,
+    "sha256": "ab0c0bc8b1a111e7b4f95573861047106b650e6cb5980ac361d7a1c1da9fd257",
+    "glbMeshStats": {
+      "objects": 1,
+      "vertices": 43021,
+      "polygons": 34974,
+      "triangles": 34974,
+      "boundsBlender": {
+        "min": [
+          -2.398885488510132,
+          -1.3996632099151611,
+          0.0004084511601831764
+        ],
+        "max": [
+          2.3992385864257812,
+          1.3994873762130737,
+          3.549999952316284
+        ]
+      },
+      "dimensionsBlender": [
+        4.798124313354492,
+        2.7991504669189453,
+        3.549591541290283
+      ],
+      "meshes": [
+        {
+          "name": "CabanaTripoOptimized",
+          "vertices": 43021,
+          "polygons": 34974,
+          "triangles": 34974,
+          "dimensions": [
+            4.798124313354492,
+            2.7991504669189453,
+            3.549591541290283
+          ],
+          "materials": [
+            "tripo_mat_4566ecd8",
+            "CabanaWhiteCanopy"
+          ]
+        }
+      ]
+    },
+    "dimensionsWorldYUp": {
+      "width": 4.798124313354492,
+      "height": 3.549591541290283,
+      "depth": 2.7991504669189453
+    },
+    "imagesAfter": [
+      {
+        "name": "Color",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "Normal",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      },
+      {
+        "name": "tripo_image_4566ecd8_2-tripo_image_4566ecd8_1",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      }
+    ],
+    "preview": "asset-sources/cabanas/derivative-preview.png"
+  },
+  "runtimeStatsBeforeExport": {
+    "objects": 1,
+    "vertices": 18267,
+    "polygons": 27466,
+    "triangles": 34974,
+    "boundsBlender": {
+      "min": [
+        -2.398885488510132,
+        -1.3996632099151611,
+        0.0004084511601831764
+      ],
+      "max": [
+        2.3992385864257812,
+        1.3994873762130737,
+        3.549999952316284
+      ]
+    },
+    "dimensionsBlender": [
+      4.798124313354492,
+      2.7991504669189453,
+      3.549591541290283
+    ],
+    "meshes": [
+      {
+        "name": "CabanaTripoOptimized",
+        "vertices": 18267,
+        "polygons": 27466,
+        "triangles": 34974,
+        "dimensions": [
+          4.798124313354492,
+          2.7991504669189453,
+          3.549591541290283
+        ],
+        "materials": [
+          "tripo_mat_4566ecd8",
+          "CabanaWhiteCanopy"
+        ]
+      }
+    ]
+  },
+  "normalization": {
+    "sourceBoundsBlender": {
+      "min": [
+        -0.49287283420562744,
+        -0.49248406291007996,
+        -0.36208575963974
+      ],
+      "max": [
+        0.4982220530509949,
+        0.4906825125217438,
+        0.36186397075653076
+      ]
+    },
+    "sourceDimensionsBlender": [
+      0.9910948872566223,
+      0.9831665754318237,
+      0.7239497303962708
+    ],
+    "targetDimensionsBlender": [
+      4.800000190734863,
+      2.799999952316284,
+      3.549999952316284
+    ],
+    "axisScale": [
+      4.843128681182861,
+      2.847940444946289,
+      4.903655529022217
+    ],
+    "grounding": "source minimum Z moved to Blender Z=0; GLB exporter writes Y-up coordinates"
+  },
+  "orientation": {
+    "rotationBlenderZDegrees": 180,
+    "openingSourceDirectionBlender": "+Y",
+    "openingExportDirectionGlTF": "+Z",
+    "plazaDirectionScene": "+Z"
+  },
+  "decimation": {
+    "beforeTriangles": 116598,
+    "afterTriangles": 34974,
+    "ratioRequested": 0.3
+  },
+  "fabricOverride": {
+    "material": "CabanaWhiteCanopy",
+    "canopyPolygons": 29811
+  },
+  "texturePolicy": {
+    "baseColorMax": 2048,
+    "roughnessMetallicNormalMax": 1024,
+    "embedded": true,
+    "colorSpace": "base color sRGB, roughness metallic normal Non-Color"
+  },
+  "visualFeatures": {
+    "fullWhiteSquareCanopy": "present in source preview",
+    "tiedCornerCurtains": "present as draped tied curtain panels",
+    "woodPosts": "present, sculpted brown timber-like posts",
+    "creamDaybed": "present beneath canopy, partly occluded by curtains in source preview",
+    "semanticComponents": "source is one merged mesh and one material, so roles are recorded but not independently addressable"
+  },
+  "blendDerivative": "asset-sources/cabanas/cabana-tripo.blend",
+  "sourcePreserved": true,
+  "scope": "Local derivative for browser review, no publication"
+}

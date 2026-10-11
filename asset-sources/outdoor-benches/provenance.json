@@ -1,0 +1,107 @@
+{
+  "stage": 8,
+  "family": "outdoor-benches",
+  "status": "derivative-prepared-pending-parent-browser-review",
+  "referenceImage": {
+    "path": "/var/folders/7t/0_hkzn095vqbj1pj6m0vqs5w0000gn/T/codex-clipboard-3b0c0bc6-9a68-445f-bf19-2b880641ed7f.png",
+    "sha256": "39143e86bce8cef3ead01394367f0f616758521257f4dc2a4467b87fa20d6795"
+  },
+  "selectedSource": {
+    "label": "Tripo Option A, wooden bench with beige upholstered cushion and solid wood frame",
+    "url": "https://studio.tripo3d.ai/3d-model/wooden-bench-with-beige-upholstered-cushion-and-solid-wood-frame-6a88819d-bbd3-4333-af71-f7aafb1fee7b",
+    "localPath": "asset-sources/outdoor-benches/source/bench.glb",
+    "sourceSha256": "c70555b312b041ad52ea3aaa50530aa63e488d8f6f7dd977813f1847cf0a5007",
+    "sourceBytes": 2881820,
+    "sourceVertices": 306371,
+    "sourceTriangles": 594374,
+    "sourceFaces": 594374,
+    "sourceBoundsYUp": {
+      "min": [
+        -0.139114,
+        -0.5,
+        -0.162704
+      ],
+      "max": [
+        0.138672,
+        0.5,
+        0.16124
+      ],
+      "dimensions": [
+        0.277786,
+        1.0,
+        0.323944
+      ]
+    },
+    "embeddedImages": [
+      {
+        "name": "Color_afac9f19-a820-4476-bd10-b646a69cd023",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      }
+    ],
+    "remotePageReported": {
+      "checkedAt": "2026-10-11",
+      "reportedFaces": 594374,
+      "reportedVertices": 306371,
+      "status": "confirmed-by-local-export"
+    }
+  },
+  "runtimeDerivative": {
+    "localPath": "public/assets/outdoor-bench-tripo.glb",
+    "sha256": "7c1864810f629a81532f400f85d8e39e238badee000e7b868e2b3901cf7e3791",
+    "bytes": 1295480,
+    "vertices": 33544,
+    "triangles": 19999,
+    "boundsYUp": {
+      "min": [
+        -1.525044,
+        0.000136,
+        -0.423957
+      ],
+      "max": [
+        1.525337,
+        0.988069,
+        0.423563
+      ],
+      "dimensions": [
+        3.050381,
+        0.987933,
+        0.84752
+      ]
+    },
+    "embeddedImages": [
+      {
+        "name": "Color_afac9f19-a820-4476-bd10-b646a69cd023_runtime",
+        "width": 1024,
+        "height": 1024,
+        "packed": true,
+        "filepath": ""
+      }
+    ],
+    "imageFormat": "JPEG",
+    "imageQuality": 90,
+    "frontDirection": "final glTF +Z",
+    "targetEnvelope": [
+      3.05,
+      1.25,
+      1.12
+    ]
+  },
+  "transforms": {
+    "blenderExportMapping": "Blender X=source Y, Blender Y=-source X, Blender Z=source Z",
+    "finalGltfMapping": "glTF X=source Y, glTF Y=source Z, glTF Z=source X",
+    "uniformScale": 3.05,
+    "grounded": true,
+    "preservedUVs": true,
+    "materialHandling": "single source material and embedded color map retained"
+  },
+  "verification": {
+    "sourcePreserved": true,
+    "derivativePrepared": true,
+    "offlineRender": true,
+    "browserPlacement": false,
+    "parentIntegration": false
+  }
+}

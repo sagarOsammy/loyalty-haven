@@ -1,0 +1,82 @@
+{
+  "family": "outdoor-benches",
+  "selected": {
+    "label": "Option A",
+    "url": "https://studio.tripo3d.ai/3d-model/wooden-bench-with-beige-upholstered-cushion-and-solid-wood-frame-6a88819d-bbd3-4333-af71-f7aafb1fee7b",
+    "status": "selected-local-export-preserved-and-optimized"
+  },
+  "candidates": [
+    {
+      "label": "Option A",
+      "url": "https://studio.tripo3d.ai/3d-model/wooden-bench-with-beige-upholstered-cushion-and-solid-wood-frame-6a88819d-bbd3-4333-af71-f7aafb1fee7b",
+      "selection": "selected",
+      "fit": "solid timber frame and beige upholstered cushion",
+      "sourceMetrics": {
+        "remotePageReportedAt": "2026-10-11",
+        "reportedFaces": 594374,
+        "faceOrTriangleTopology": 594374,
+        "vertices": 306371,
+        "status": "confirmed-by-local-export",
+        "localPath": "asset-sources/outdoor-benches/source/bench.glb",
+        "bytes": 2881820,
+        "sha256": "c70555b312b041ad52ea3aaa50530aa63e488d8f6f7dd977813f1847cf0a5007",
+        "embeddedColorMap": "2048x2048"
+      },
+      "runtimeMetrics": {
+        "localPath": "public/assets/outdoor-bench-tripo.glb",
+        "bytes": 1295480,
+        "sha256": "7c1864810f629a81532f400f85d8e39e238badee000e7b868e2b3901cf7e3791",
+        "triangles": 19999,
+        "meshVerticesBeforeExport": 15328,
+        "verticesAfterGlbReimport": 33544,
+        "embeddedColorMap": "1024x1024 JPEG quality 90",
+        "dimensionsYUp": [3.050381, 0.987933, 0.84752],
+        "frontDirection": "final glTF +Z",
+        "grounded": true
+      }
+    },
+    {
+      "label": "Option B",
+      "url": "https://studio.tripo3d.ai/3d-model/wooden-framed-outdoor-sofa-with-woven-side-panels-and-beige-cushions-a291a95d-d0fe-4ffe-b5e0-7ee9ea8e12e0",
+      "selection": "historical-alternative",
+      "fit": "wider compact sofa with woven side panels",
+      "sourceMetrics": null,
+      "runtimeMetrics": null
+    }
+  ],
+  "measurementPolicy": {
+    "compareVertices": true,
+    "compareTriangles": true,
+    "includeUvSeamExpansion": true,
+    "includeRepeatedInstanceCost": true,
+    "sourcePreservation": "byte-for-byte original under source/"
+  },
+  "artifactInventory": {
+    "content": [
+      "source/bench.glb",
+      "bench-decoded.glb",
+      "public/assets/outdoor-bench-tripo.glb",
+      "derivative-preview.png",
+      "source-preview-minus-z.png",
+      "source-preview-plus-z.png",
+      "source-view-front-yup.png",
+      "source-view-side-yup.png",
+      "source-view-top-yup.png",
+      "source-stats.json",
+      "derivative-stats.json",
+      "provenance.json",
+      "README.md"
+    ],
+    "authoringAndInspection": [
+      "inspect_bench.py",
+      "inspect_transform.py",
+      "prepare_bench.py",
+      "render_bench_source.py",
+      "render_bench_views.py"
+    ],
+    "systemBackup": [
+      "bench-tripo.blend1"
+    ],
+    "note": "Temporary texture diagnostics were used during preparation and are excluded from the retained artifact inventory."
+  }
+}

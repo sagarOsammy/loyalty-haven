@@ -1,0 +1,92 @@
+{
+  "folder": "asset-sources/parasol-seating",
+  "inventoryStatus": "complete-for-supplied-combined-export",
+  "entries": [
+    {
+      "path": "source/patio.glb",
+      "classification": "preserved supplied source",
+      "bytes": 6771952,
+      "sha256": "754ec45908ac2528680800ee61a0fba561fa905f942ad73f00c65a6af07b8f88",
+      "geometry": "one mesh, 524195 vertices, 985436 polygons and 985436 triangles",
+      "maps": "three embedded 2048x2048 PBR images"
+    },
+    {
+      "path": "patio-decoded.glb",
+      "classification": "parent-created meshopt-decoded intermediate, preserved",
+      "bytes": 31177108,
+      "sha256": "413d5470a48aedefe8df61c14d99667e0b369310aadf039d6b617e0464368778"
+    },
+    {
+      "path": "prepare_patio.py",
+      "classification": "reproducible Blender conversion and GLB byte inspection script"
+    },
+    {
+      "path": "patio-seating-tripo.blend",
+      "classification": "generated working artifact",
+      "bytes": 3219307,
+      "sha256": "2fbb99ef27d19abd91fa937f17d6d663545809efe62ccaa781cc008fdfaab776"
+    },
+    {
+      "path": "patio-seating-tripo.blend1",
+      "classification": "generated Blender backup artifact",
+      "bytes": 3219340,
+      "sha256": "2add85744867ef1755279dd5cd0aa393ed391db4d2ea15f083a2c205cf7b4061"
+    },
+    {
+      "path": "source-preview.png",
+      "classification": "generated source inspection preview",
+      "bytes": 634433,
+      "sha256": "7056ae83f666f0cd7fef72bed60b0e0dc5d486c2737adace79527bd6684bea43"
+    },
+    {
+      "path": "derivative-preview.png",
+      "classification": "generated optimized derivative preview",
+      "bytes": 927932,
+      "sha256": "dfec480b41ace2e55490fc14c7314688fddf32bfbdc53c746759656d3c6e5080"
+    },
+    {
+      "path": "textures/map-0.png",
+      "classification": "generated resized embedded base-color map, 1024x1024",
+      "bytes": 378803,
+      "sha256": "55b79c39d37b378af78f2517f3f919e334caf9b626ee428389b0720390ddd738"
+    },
+    {
+      "path": "textures/map-1.png",
+      "classification": "generated resized embedded normal map, 1024x1024",
+      "bytes": 186673,
+      "sha256": "591c2a18792efa6632422565347c985ee28caaa9fd1c84e4b74b0ad7120048f3"
+    },
+    {
+      "path": "textures/map-2.png",
+      "classification": "generated resized embedded ORM map, 1024x1024",
+      "bytes": 127545,
+      "sha256": "b2e3fd1fe4250f23d536b09c67974b96a8013aefb88dde497480a7983f0f2bfc"
+    },
+    {
+      "path": "public/assets/patio-seating-tripo.glb",
+      "classification": "runtime derivative copied for local browser review",
+      "bytes": 5856340,
+      "sha256": "7afe44999db65056229875a10fd4cca816a157b566332a2532b862a23928cdc2",
+      "geometry": "one mesh, 51346 vertices and 50000 triangles",
+      "maps": "three embedded 1024x1024 PNG images"
+    }
+  ],
+  "hiddenAndSystemArtifacts": {
+    "status": "checked",
+    "entries": [
+      {
+        "path": "__pycache__/prepare_patio.cpython-314.pyc",
+        "classification": "generated Python validation cache",
+        "bytes": 23782,
+        "sha256": "259fbbcac5e43191f0d93381407e5924d9fd0694a6b3c826eed8313ca1dfe9bf"
+      }
+    ],
+    "note": "The Blender .blend1 backup and Python cache are classified as generated system artifacts."
+  },
+  "notes": [
+    "The supplied patio.glb is the preserved source used for the combined runtime derivative.",
+    "The source mesh is merged, so the four-chair arrangement remains intact.",
+    "Derivative embedded map dimensions were verified from GLB buffer bytes, not only from Blender metadata.",
+    "Original source links and viewer counts remain recorded in provenance.json."
+  ]
+}

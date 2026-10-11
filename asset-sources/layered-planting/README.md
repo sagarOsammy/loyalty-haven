@@ -1,0 +1,11 @@
+# Layered planting preparation, 11 October 2026
+
+This folder records the stage 6 planting preparation and selected Tripo export conversion. The user-provided FBX is preserved byte-for-byte under `source/`, and the runtime derivatives are built with embedded PBR textures. Runtime activation still uses explicit import callbacks, and the scene has no procedural foliage fallback.
+
+The existing `public/assets/planter.glb` remains the preserved container source. It is a self-contained original Blender cluster with seven mesh objects and 31,400 triangles. Its decoded bounds are approximately 5.8553 metres wide, 4.8653 metres high and 3.8520 metres deep, with a ground minimum of Y 0. The new `accent-planter-tripo.glb` retains the largest ivory pot, its matching soil and low brass rims from that source, then adds both selected Tripo foliage components, so the original leaf meshes and empty secondary pots are excluded.
+
+The selected FBX contains one mesh with two major disconnected components, a broad split-leaf cluster and a finer fern cluster, 13,668 vertices, 13,344 polygons and 26,483 triangles, with four embedded 4K source maps. The derivative partitions the components, repositions them side by side, grounds them, and reduces the foliage runtime to 11,796 triangles. The four maps are reduced to 1024 pixels maximum for the runtime GLBs, while the original FBX remains unchanged.
+
+`public/assets/tropical-foliage-tripo.glb` is a 2 metre high foliage-only derivative for ten bed accents. `public/assets/accent-planter-tripo.glb` is a 2.00959 metre high single-container-and-foliage derivative for twelve accent planters. The per-placement scales in `lib/scene/planting-layout.ts` now target those normalized assets, with fuller bed envelopes for the broad leaf depth.
+
+`lib/scene/planting-layout.ts` provides twelve collision-safe accent-planter placements, ten optional bed-accent placements, reserved footprints and validation against shared baggage, lamp, palm and cabana keepouts. `lib/scene/layered-planting.ts` accepts fresh imported-object callbacks, fits them below wrapper transforms that preserve GLB root transforms, grounds and bounds them, marks shadows, guards late async callbacks after disposal, and leaves shared AssetPool resources owned by the caller.

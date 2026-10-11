@@ -1,0 +1,567 @@
+{
+  "source": "public/assets/forum.glb",
+  "source_sha256": "aca80f635a318464a1be3c06cdb78799129d9880fbc3b96154979bafd68d3c90",
+  "destination": "public/assets/forum-fountain.glb",
+  "destination_sha256": "44fd53fd075dc15af2fc6b7413ebd807ca6e100e5bfcb1a06953a5cb0ab0f50e",
+  "transformation": "Separate merged components, remove only stage, seating, turntable, obsolete plaque and entry steps. Retain original columns, plinths, arches, entablature and portable materials. Merge retained geometry by material.",
+  "removed_parts": [
+    {
+      "name": "ASSET_FORUM_DarkTeak",
+      "mat": "DarkTeak",
+      "lo": [
+        -3.176,
+        -2.063,
+        1.11
+      ],
+      "hi": [
+        -2.505,
+        -1.217,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumChampagne",
+      "mat": "ForumChampagne",
+      "lo": [
+        -4.42,
+        -4.42,
+        0.58
+      ],
+      "hi": [
+        4.42,
+        4.42,
+        0.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -4.8,
+        -4.8,
+        0.0
+      ],
+      "hi": [
+        4.8,
+        4.8,
+        0.48
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine",
+      "mat": "PaleTravertine",
+      "lo": [
+        -4.48,
+        -4.48,
+        0.48
+      ],
+      "hi": [
+        4.48,
+        4.48,
+        0.66
+      ]
+    },
+    {
+      "name": "ForumInnerTrim",
+      "mat": "AgedChampagneBrass",
+      "lo": [
+        -3.555,
+        -3.555,
+        1.148
+      ],
+      "hi": [
+        3.555,
+        3.555,
+        1.252
+      ]
+    },
+    {
+      "name": "ForumRecessedStage",
+      "mat": "ForumRecess",
+      "lo": [
+        -3.88,
+        -3.88,
+        0.66
+      ],
+      "hi": [
+        3.88,
+        3.88,
+        1.2
+      ]
+    },
+    {
+      "name": "ForumRuntimePlaque",
+      "mat": "DeepInterior",
+      "lo": [
+        -1.425,
+        -4.47,
+        1.21
+      ],
+      "hi": [
+        1.425,
+        -4.37,
+        1.63
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.001",
+      "mat": "DarkTeak",
+      "lo": [
+        -2.704,
+        -2.704,
+        1.11
+      ],
+      "hi": [
+        -1.935,
+        -1.935,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.002",
+      "mat": "DarkTeak",
+      "lo": [
+        -2.063,
+        -3.176,
+        1.11
+      ],
+      "hi": [
+        -1.217,
+        -2.505,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.003",
+      "mat": "DarkTeak",
+      "lo": [
+        -1.282,
+        -3.432,
+        1.11
+      ],
+      "hi": [
+        -0.415,
+        -2.904,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.004",
+      "mat": "DarkTeak",
+      "lo": [
+        -0.43,
+        -3.47,
+        1.11
+      ],
+      "hi": [
+        0.43,
+        -3.09,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.005",
+      "mat": "DarkTeak",
+      "lo": [
+        0.415,
+        -3.432,
+        1.11
+      ],
+      "hi": [
+        1.282,
+        -2.904,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.006",
+      "mat": "DarkTeak",
+      "lo": [
+        1.217,
+        -3.176,
+        1.11
+      ],
+      "hi": [
+        2.063,
+        -2.505,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.007",
+      "mat": "DarkTeak",
+      "lo": [
+        1.935,
+        -2.704,
+        1.11
+      ],
+      "hi": [
+        2.704,
+        -1.935,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_DarkTeak.008",
+      "mat": "DarkTeak",
+      "lo": [
+        2.505,
+        -2.063,
+        1.11
+      ],
+      "hi": [
+        3.176,
+        -1.217,
+        1.45
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumChampagne.012",
+      "mat": "ForumChampagne",
+      "lo": [
+        -1.6,
+        -1.6,
+        1.21
+      ],
+      "hi": [
+        1.6,
+        1.6,
+        1.37
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.001",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -2.915,
+        -1.904,
+        1.32
+      ],
+      "hi": [
+        -2.455,
+        -1.196,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.002",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -2.49,
+        -2.49,
+        1.32
+      ],
+      "hi": [
+        -1.894,
+        -1.894,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.003",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -1.904,
+        -2.915,
+        1.32
+      ],
+      "hi": [
+        -1.196,
+        -2.455,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.004",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -1.189,
+        -3.14,
+        1.32
+      ],
+      "hi": [
+        -0.416,
+        -2.848,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.005",
+      "mat": "ForumWarmStone",
+      "lo": [
+        -0.4,
+        -3.16,
+        1.32
+      ],
+      "hi": [
+        0.4,
+        -3.04,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.006",
+      "mat": "ForumWarmStone",
+      "lo": [
+        0.416,
+        -3.14,
+        1.32
+      ],
+      "hi": [
+        1.189,
+        -2.848,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.007",
+      "mat": "ForumWarmStone",
+      "lo": [
+        1.196,
+        -2.915,
+        1.32
+      ],
+      "hi": [
+        1.904,
+        -2.455,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.008",
+      "mat": "ForumWarmStone",
+      "lo": [
+        1.894,
+        -2.49,
+        1.32
+      ],
+      "hi": [
+        2.49,
+        -1.894,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_ForumWarmStone.009",
+      "mat": "ForumWarmStone",
+      "lo": [
+        2.455,
+        -1.904,
+        1.32
+      ],
+      "hi": [
+        2.915,
+        -1.196,
+        1.8
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.013",
+      "mat": "PaleTravertine",
+      "lo": [
+        -1.1,
+        -5.06,
+        0.025
+      ],
+      "hi": [
+        1.1,
+        -4.64,
+        0.275
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.014",
+      "mat": "PaleTravertine",
+      "lo": [
+        -1.3,
+        -4.68,
+        0.155
+      ],
+      "hi": [
+        1.3,
+        -4.26,
+        0.405
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.015",
+      "mat": "PaleTravertine",
+      "lo": [
+        -1.5,
+        -4.3,
+        0.285
+      ],
+      "hi": [
+        1.5,
+        -3.88,
+        0.535
+      ]
+    }
+  ],
+  "retained_pillars": [
+    {
+      "name": "ASSET_FORUM_PaleTravertine.001",
+      "mat": "PaleTravertine",
+      "lo": [
+        -0.24,
+        -4.42,
+        0.0
+      ],
+      "hi": [
+        0.24,
+        -3.94,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.002",
+      "mat": "PaleTravertine",
+      "lo": [
+        2.217,
+        -3.622,
+        0.0
+      ],
+      "hi": [
+        2.697,
+        -3.142,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.003",
+      "mat": "PaleTravertine",
+      "lo": [
+        3.735,
+        -1.532,
+        0.0
+      ],
+      "hi": [
+        4.215,
+        -1.052,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.004",
+      "mat": "PaleTravertine",
+      "lo": [
+        3.735,
+        1.052,
+        0.0
+      ],
+      "hi": [
+        4.215,
+        1.532,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.005",
+      "mat": "PaleTravertine",
+      "lo": [
+        2.217,
+        3.142,
+        0.0
+      ],
+      "hi": [
+        2.697,
+        3.622,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.006",
+      "mat": "PaleTravertine",
+      "lo": [
+        -0.24,
+        3.94,
+        0.0
+      ],
+      "hi": [
+        0.24,
+        4.42,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.007",
+      "mat": "PaleTravertine",
+      "lo": [
+        -2.697,
+        3.142,
+        0.0
+      ],
+      "hi": [
+        -2.217,
+        3.622,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.008",
+      "mat": "PaleTravertine",
+      "lo": [
+        -4.215,
+        1.052,
+        0.0
+      ],
+      "hi": [
+        -3.735,
+        1.532,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.009",
+      "mat": "PaleTravertine",
+      "lo": [
+        -4.215,
+        -1.532,
+        0.0
+      ],
+      "hi": [
+        -3.735,
+        -1.052,
+        4.0
+      ]
+    },
+    {
+      "name": "ASSET_FORUM_PaleTravertine.010",
+      "mat": "PaleTravertine",
+      "lo": [
+        -2.697,
+        -3.622,
+        0.0
+      ],
+      "hi": [
+        -2.217,
+        -3.142,
+        4.0
+      ]
+    }
+  ],
+  "metrics": {
+    "object_count": 3,
+    "triangle_count": 23316,
+    "bounds_min_m": [
+      -4.595,
+      -4.58,
+      0.0
+    ],
+    "bounds_max_m": [
+      4.595,
+      4.58,
+      5.035
+    ],
+    "dimensions_m": [
+      9.1901,
+      9.16,
+      5.035
+    ],
+    "materials": [
+      "ForumChampagne",
+      "ForumWarmStone",
+      "PaleTravertine"
+    ]
+  }
+}

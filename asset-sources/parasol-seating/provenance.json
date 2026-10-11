@@ -1,0 +1,117 @@
+{
+  "stage": 9,
+  "family": "parasol-seating",
+  "status": "converted-local-review-pending",
+  "referenceImage": "/var/folders/7t/0_hkzn095vqbj1pj6m0vqs5w0000gn/T/codex-clipboard-3b0c0bc6-9a68-445f-bf19-2b880641ed7f.png",
+  "selectedOptions": {
+    "umbrella": {
+      "label": "White canopy with timber pole",
+      "url": "https://studio.tripo3d.ai/3d-model/patio-umbrella-with-white-canopy-scalloped-edge-brown-pole-and-blac-c6ab6a18-2546-4604-959e-d1c139222300",
+      "pageStats": {
+        "vertices": 519999,
+        "triangles": 1000086,
+        "topology": "Triangle"
+      },
+      "optimizationRequired": true
+    },
+    "chair": {
+      "label": "Timber armchair with white cushions",
+      "url": "https://studio.tripo3d.ai/3d-model/wooden-lounge-chair-with-white-cushions-natural-wood-frame-and-woven-fba53c37-eea7-4c35-8ea7-c6e71b8aab31",
+      "observedViewerMetrics": {
+        "topology": "Triangle",
+        "vertices": 547067,
+        "triangleFaces": 1003774,
+        "observedDate": "2026-10-11",
+        "verification": "Read from selected Tripo page in the inbuilt browser, export counts pending"
+      }
+    },
+    "table": {
+      "label": "Round timber table with tripod legs",
+      "url": "https://studio.tripo3d.ai/3d-model/a-round-wooden-side-table-or-stool-with-a-solid-wood-slab-top-and-trip-baec6fec-d35b-43b6-a57e-9313ecace5df",
+      "observedViewerMetrics": {
+        "topology": "Triangle",
+        "vertices": 333636,
+        "triangleFaces": 633720,
+        "observedDate": "2026-10-11",
+        "verification": "Read from selected Tripo page in the inbuilt browser, export counts pending"
+      }
+    },
+    "suppliedCombinedExport": {
+      "label": "Supplied complete patio set selected for runtime",
+      "path": "asset-sources/parasol-seating/source/patio.glb",
+      "sha256": "754ec45908ac2528680800ee61a0fba561fa905f942ad73f00c65a6af07b8f88",
+      "bytes": 6771952,
+      "meshes": 1,
+      "vertices": 524195,
+      "polygons": 985436,
+      "triangles": 985436,
+      "embeddedMaps": 3,
+      "mapDimensions": "2048x2048",
+      "components": "one canopy, one round table and four lounge chairs",
+      "componentEditing": "merged mesh, chair-level removal not verified"
+    }
+  },
+  "runtimeDerivative": {
+    "path": "public/assets/patio-seating-tripo.glb",
+    "sha256": "7afe44999db65056229875a10fd4cca816a157b566332a2532b862a23928cdc2",
+    "bytes": 5856340,
+    "meshes": 1,
+    "vertices": 51346,
+    "triangles": 50000,
+    "embeddedMaps": 3,
+    "mapDimensions": "1024x1024",
+    "embeddedPixelCheck": "Three PNG signatures and three 1024x1024 IHDR dimensions read from GLB buffer bytes",
+    "preview": "asset-sources/parasol-seating/derivative-preview.png"
+  },
+  "counts": {
+    "groups": 4,
+    "umbrellas": 4,
+    "chairsPerGroup": 4,
+    "chairs": 16,
+    "tables": 4
+  },
+  "worldBounds": {
+    "groupWidth": 4.8,
+    "groupDepth": 4.4,
+    "clearance": 0.55,
+    "floorY": 0.06
+  },
+  "budgets": {
+    "maxTrianglesPerCombinedSource": 80000,
+    "maxVerticesPerCombinedSource": 100000
+  },
+  "transform": {
+    "fitMethod": "axis-aligned-envelope-normalization",
+    "targetDimensionsBlender": [4.25, 4.0, 2.85],
+    "axis": "Blender Z-up source preparation, glTF Y-up runtime output",
+    "grounding": "lowest source point moved to Blender Z=0, runtime anchor floorY=0.06",
+    "sharedResources": "owned-by-parent-asset-pool"
+  },
+  "intermediateFiles": {
+    "decoded": {
+      "path": "asset-sources/parasol-seating/patio-decoded.glb",
+      "sha256": "413d5470a48aedefe8df61c14d99667e0b369310aadf039d6b617e0464368778",
+      "classification": "parent-created meshopt-decoded intermediate, preserved"
+    },
+    "workingBlend": {
+      "path": "asset-sources/parasol-seating/patio-seating-tripo.blend",
+      "sha256": "2fbb99ef27d19abd91fa937f17d6d663545809efe62ccaa781cc008fdfaab776",
+      "classification": "generated Blender working artifact"
+    },
+    "backupBlend": {
+      "path": "asset-sources/parasol-seating/patio-seating-tripo.blend1",
+      "sha256": "2add85744867ef1755279dd5cd0aa393ed391db4d2ea15f083a2c205cf7b4061",
+      "classification": "generated Blender backup artifact"
+    }
+  },
+  "verification": {
+    "sourceFilesPreserved": true,
+    "derivativesBuilt": true,
+    "derivativeUnderBudget": true,
+    "embeddedTexturePixelsVerified": true,
+    "moduleTypecheck": true,
+    "moduleLint": true,
+    "browserReviewed": false,
+    "publication": false
+  }
+}

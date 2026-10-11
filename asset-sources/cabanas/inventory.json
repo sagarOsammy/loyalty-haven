@@ -1,0 +1,155 @@
+{
+  "schema": "loyalty-haven-cabana-inventory-1",
+  "status": "supplied-fbx-inspected-and-derivative-built",
+  "reference": {
+    "path": "/var/folders/7t/0_hkzn095vqbj1pj6m0vqs5w0000gn/T/codex-clipboard-3b0c0bc6-9a68-445f-bf19-2b880641ed7f.png",
+    "sha256": "39143e86bce8cef3ead01394367f0f616758521257f4dc2a4467b87fa20d6795",
+    "use": "visual source for the six waterfront cabanas, warm timber, white canopy, tied curtains and cream daybeds"
+  },
+  "planningCandidates": [
+    {
+      "label": "Timber daybed with white fabric and cushions",
+      "url": "https://studio.tripo3d.ai/3d-model/7c820c3e-0261-461c-ba71-61ee87313b97",
+      "userSelectedMethod": true,
+      "specificModelSelected": false,
+      "selectionStatus": "historical planning candidate, not the supplied source",
+      "observed": {
+        "triangles": 1000262,
+        "vertices": 538810,
+        "canopy": "draped loops with no complete square roof",
+        "requires": [
+          "canopy cleanup or replacement",
+          "component separation for frame, fabric and daybed",
+          "lighter derivative before six instances",
+          "textured GLB export"
+        ]
+      }
+    },
+    {
+      "label": "Generated cabana matching the reference",
+      "url": "https://studio.tripo3d.ai/workspace/generate",
+      "userSelectedMethod": true,
+      "specificModelSelected": false,
+      "selectionStatus": "historical planning candidate, not the supplied source",
+      "generationBrief": "One luxury seaside resort cabana, four slender teak posts, square white fabric canopy, tied white curtains at the corners, low cream upholstered daybed, natural proportions, separate frame and fabric components, isolated asset, PBR materials, optimized geometry.",
+      "requires": [
+        "user supplied export",
+        "textured GLB format",
+        "component separation check",
+        "triangle and texture audit"
+      ]
+    }
+  ],
+  "suppliedAsset": {
+    "origin": "user-supplied local FBX",
+    "url": null,
+    "sourcePath": "asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbx",
+    "bytes": 11401276,
+    "sha256": "ec2105a8841c322cb8c11f8b11406a06a2142621e3f5cdd8cf47480391d64456",
+    "meshes": 1,
+    "vertices": 59619,
+    "polygons": 58450,
+    "triangles": 116598,
+    "dimensionsBlenderZUp": [0.9910948873, 0.9831665754, 0.7239497304],
+    "materials": ["tripo_mat_4566ecd8"],
+    "embeddedImages": [
+      {"name": "Color", "width": 8192, "height": 8192, "packed": true},
+      {"name": "Roughness", "width": 4096, "height": 4096, "packed": true},
+      {"name": "Metallic", "width": 4096, "height": 4096, "packed": true},
+      {"name": "Normal", "width": 4096, "height": 4096, "packed": true}
+    ],
+    "visualFeatures": [
+      "full square canopy",
+      "tied corner curtains",
+      "sculpted timber posts",
+      "cream daybed and lounge seating",
+      "single merged mesh with one source material"
+    ],
+    "referencePreview": "asset-sources/cabanas/source-preview.png"
+  },
+  "derivative": {
+    "path": "public/assets/cabana-tripo.glb",
+    "blendPath": "asset-sources/cabanas/cabana-tripo.blend",
+    "bytes": 3279056,
+    "sha256": "ab0c0bc8b1a111e7b4f95573861047106b650e6cb5980ac361d7a1c1da9fd257",
+    "meshes": 1,
+    "vertices": 43021,
+    "triangles": 34974,
+    "dimensionsWorldYUp": {"width": 4.7981243134, "height": 3.5495915413, "depth": 2.7991504669},
+    "dimensionsBlenderZUp": [4.7981243134, 2.7991504669, 3.5495915413],
+    "decimation": {"sourceTriangles": 116598, "runtimeTriangles": 34974, "ratioRequested": 0.3},
+    "textures": {"baseColor": "2048x2048", "normal": "1024x1024", "roughnessMetallic": "1024x1024", "embedded": true},
+    "orientation": "opening faces GLB and scene +Z toward the plaza",
+    "fabricOverride": "CabanaWhiteCanopy assigned to 29811 canopy polygons",
+    "preview": "asset-sources/cabanas/derivative-preview.png",
+    "orientationChecks": [
+      "asset-sources/cabanas/orientation-blender-minus-y.png",
+      "asset-sources/cabanas/orientation-blender-plus-y.png"
+    ]
+  },
+  "localInventory": {
+    "selectedCabanaGlb": "asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbx",
+    "runtimeCabanaGlb": "public/assets/cabana-tripo.glb",
+    "generatedArtifacts": [
+      {
+        "path": "asset-sources/cabanas/cabana-tripo.blend",
+        "classification": "normalized Blender working copy used to export the runtime derivative"
+      },
+      {
+        "path": "asset-sources/cabanas/cabana-tripo.blend1",
+        "classification": "Blender automatic backup of the normalized working copy, retained as a recoverable local artifact"
+      },
+      {
+        "path": "asset-sources/cabanas/source-preview.png",
+        "classification": "offline source inspection render"
+      },
+      {
+        "path": "asset-sources/cabanas/derivative-preview.png",
+        "classification": "offline optimized derivative inspection render"
+      },
+      {
+        "path": "asset-sources/cabanas/orientation-blender-minus-y.png",
+        "classification": "offline opening-facing orientation check"
+      },
+      {
+        "path": "asset-sources/cabanas/orientation-blender-plus-y.png",
+        "classification": "offline privacy-wall orientation check"
+      }
+    ],
+    "beforeSnapshots": [
+      {
+        "path": "asset-sources/cabanas/before/assets.ts.txt",
+        "classification": "parent-preserved pre-stage-5 asset registry snapshot"
+      },
+      {
+        "path": "asset-sources/cabanas/before/world.ts.txt",
+        "classification": "parent-preserved pre-stage-5 scene snapshot"
+      }
+    ],
+    "relatedButNotSelected": [
+      {
+        "path": "public/assets/hotel-roof-detail.glb",
+        "sha256": "9533cd05210673f405411c76e0cd5ec924e70fd103fbf1e9201f121f73b62838",
+        "classification": "existing hotel roof asset with small procedural pergola fragments, not a waterfront cabana source"
+      },
+      {
+        "path": "asset-sources/architecture/create_assets.py",
+        "sha256": "872ef01f407ffd39e33f2bbdfad8bc5e74080fd362b60024fc67adebac954beb",
+        "classification": "original architecture generator containing compact roof cabana details, not used as a substitute"
+      }
+    ],
+    "hiddenArtifacts": [
+      "asset-sources/.DS_Store",
+      "asset-sources/aircraft/.DS_Store",
+      "docs/.DS_Store",
+      "docs/reference-images/.DS_Store"
+    ],
+    "hiddenArtifactClassification": "system metadata, inspected and preserved, excluded from cabana content"
+  },
+  "derivativePolicy": {
+    "targetMaxTrianglesPerInstance": 80000,
+    "targetMaxTotalTriangles": 480000,
+    "preserve": ["source GLB", "source link", "source materials before adjustment", "component names when present"],
+    "runtimeRule": "Place six copies only from the supplied textured derivative after metrics, orientation and visual preview checks."
+  }
+}

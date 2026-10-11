@@ -7,9 +7,15 @@ export const ASSETS = {
   hotelBase: "/assets/hotel-base-detail.glb",
   hotelLevel: "/assets/hotel-level-detail.glb",
   hotelRoof: "/assets/hotel-roof-detail.glb",
-  forum: "/assets/forum.glb",
+  forum: "/assets/forum-fountain.glb",
   palm: "/assets/palm-tripo.glb",
   planter: "/assets/planter.glb",
+  cabana: "/assets/cabana-tripo.glb",
+  tropicalFoliage: "/assets/tropical-foliage-tripo.glb",
+  accentPlanter: "/assets/accent-planter-tripo.glb",
+  floweringTree: "/assets/flowering-tree-tripo.glb",
+  outdoorBench: "/assets/outdoor-bench-tripo.glb",
+  patioSeating: "/assets/patio-seating-tripo.glb",
   ship: "/assets/cruise-ship-tripo.glb",
   belt: "/assets/baggage-belt.glb",
   united: "/assets/airline-united-fleet.glb",
@@ -119,6 +125,11 @@ export class AssetPool {
                   if (greens[material.name]) {
                     material.color.set(greens[material.name]);
                     material.roughness = 0.86;
+                  }
+                  if (material.name.startsWith("tripo_mat_eb306993")) {
+                    material.color.set("#8ca979");
+                    material.roughness = 0.78;
+                    material.metalness = 0;
                   }
                 }
                 // Architectural glazing reflects the environment without an expensive full-scene transmission pass.

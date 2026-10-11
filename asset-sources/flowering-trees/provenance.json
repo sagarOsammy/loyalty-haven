@@ -1,0 +1,87 @@
+{
+  "stage": 7,
+  "family": "flowering-trees",
+  "status": "derivative-prepared-pending-parent-integration",
+  "selectedOption": "A",
+  "sourceUrl": "https://studio.tripo3d.ai/3d-model/flowering-tree-with-white-blossoms-realistic-branches-and-trunk-d07a87b2-1421-4f1b-92e9-779226e76b3c",
+  "sourceFiles": [
+    "asset-sources/flowering-trees/source/flower.glb"
+  ],
+  "derivativeFiles": [
+    "public/assets/flowering-tree-tripo.glb"
+  ],
+  "pageObservedAt": "2026-10-11T15:50:49Z",
+  "pageSourceStats": {
+    "triangleFaces": 195138,
+    "vertices": 111752,
+    "observedVia": "Tripo model page",
+    "exportFlow": "sign-in required"
+  },
+  "target": {
+    "instances": 6,
+    "heightMeters": "3.5-4.5",
+    "maxTriangles": 80000,
+    "maxVertices": 100000,
+    "materials": "preserve selected white blossoms and natural branches",
+    "treeBase": {
+      "diameter": 1.7,
+      "soilDepth": 0.15,
+      "copingHeight": 0.18,
+      "geometry": "six shared instanced wells, separate from source GLB"
+    }
+  },
+  "layoutModule": "lib/scene/flowering-tree-layout.ts",
+  "adapterModule": "lib/scene/flowering-trees.ts",
+  "verification": {
+    "sourceMetrics": "recorded from supplied local GLB and Tripo page",
+    "exportMetrics": "recorded from optimized runtime GLB",
+    "materialTexture": "one embedded 2048px color map retained",
+    "preview": "source and derivative rendered in Blender",
+    "browserReview": "pending parent integration",
+    "publication": "not requested"
+  },
+  "sourceFileBytes": 2231444,
+  "sourceSha256": "94f7b0539437fee36f3836fed0a3997a8515b9a472c0f30c5601631a8e38f86e",
+  "runtimeFileBytes": 1350564,
+  "runtimeSha256": "5e1f6bc8dec6ddc830f6f5055a0e80976bdf7a2b06e1d2ee54b20549af883313",
+  "sourceExportMetrics": {
+    "vertices": 111752,
+    "triangles": 195138,
+    "polygons": 195138
+  },
+  "runtimeExportMetrics": {
+    "vertices": 25165,
+    "triangles": 30246,
+    "polygons": 30246,
+    "dimensionsBlender": [
+      5.061677932739258,
+      4.765939235687256,
+      4.201729774475098
+    ]
+  },
+  "normalization": {
+    "sourceDimensionsBefore": [
+      1.0,
+      0.9417724609375,
+      0.8306884765625
+    ],
+    "sourceVerticalAxisBlender": "X",
+    "targetHeight": 4.2,
+    "uniformScale": 5.056047024246878,
+    "grounding": "minimum Blender Z moved to 0, GLB exporter writes Y-up",
+    "normalizedDimensions": [
+      5.056046962738037,
+      4.761645793914795,
+      4.199999809265137
+    ]
+  },
+  "decimation": {
+    "beforeTriangles": 195138,
+    "afterTriangles": 30246,
+    "ratioRequested": 0.155
+  },
+  "previews": {
+    "source": "asset-sources/flowering-trees/source-preview.png",
+    "derivative": "asset-sources/flowering-trees/derivative-preview.png"
+  }
+}

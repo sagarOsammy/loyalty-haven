@@ -17,8 +17,22 @@ import { approachProgress, arrivalPose, hangarDoorProgress, smootherStep } from 
 import { BAGGAGE_LAYOUT, baggageFrame, baggageTransform, seatLuggage } from "./baggage";
 import { DEFAULT_BAGGAGE_ADJUSTMENTS, type BaggageAdjustments } from "../baggage-settings";
 import { HangarDoors, HANGAR_BAY_CENTERS } from "./hangar";
-import { PALM_PLACEMENTS, PLANTER_PLACEMENTS } from "./landscape";
+import { LEAF_BEDS, PALM_PLACEMENTS, PLANTER_PLACEMENTS } from "./landscape";
 import { FORUM_LAYOUT } from "./forum";
+import { ForumFountains, FOUNTAIN_LAYOUT } from "./fountains";
+import { ResortLighting, PATH_LAMP_PLACEMENTS } from "./lighting";
+import { WaterfrontBoardwalk } from "./boardwalk";
+import { BOARDWALK_LAYOUT } from "./boardwalk-layout";
+import { WaterfrontCabanas } from "./cabanas";
+import { auditCabanaLayout } from "./cabana-layout";
+import { LayeredPlanting } from "./layered-planting";
+import { StaticInstances } from "./static-instances";
+import { FloweringTrees } from "./flowering-trees";
+import { OutdoorBenches } from "./outdoor-benches";
+import { ParasolSeating } from "./parasol-seating";
+import { auditBenchLayout, benchKeepouts } from "./bench-layout";
+import { auditFloweringTreeLayout, floweringTreeFootprint, FLOWERING_TREE_PLACEMENTS } from "./flowering-tree-layout";
+import { auditParasolLayout, parasolFootprints } from "./parasol-layout";
 import { LabelPass } from "./labels";
 import { SunsetAtmosphere, SUNSET_SKY } from "./sunset";
 import { CruiseClock, CruiseRoute, CRUISE_START, CRUISE_BOW_TURN, CRUISE_WAKE_LIFETIME, CRUISE_WAKE_SCALE } from "./cruise";
@@ -93,6 +107,15 @@ export class HavenWorld {
   private hangarDoors = new HangarDoors();
   private bagRoot = new THREE.Group();
   private forumRoot = new THREE.Group();
+  private fountains = new ForumFountains();
+  private resortLighting = new ResortLighting();
+  private boardwalk = new WaterfrontBoardwalk();
+  private cabanas = new WaterfrontCabanas();
+  private layeredPlanting = new LayeredPlanting();
+  private floweringTrees = new FloweringTrees();
+  private outdoorBenches = new OutdoorBenches();
+  private parasolSeating = new ParasolSeating();
+  private furnishingInstances = new StaticInstances();
   private siteFrame: THREE.Group;
   private hotelBase?: THREE.Group;
   private hotelRoof?: THREE.Group;
@@ -114,6 +137,7 @@ export class HavenWorld {
   private measurementStart = 0;
   private framesMeasured = 0;
   private observer: ResizeObserver;
+  private resizeFrame = 0;
   private pointer = new THREE.Vector2();
   private raycaster = new THREE.Raycaster();
   private pointerStart: { x: number; y: number; id: number } | null = null;
@@ -187,6 +211,16 @@ export class HavenWorld {
       this.bagRoot,
     );
     this.staticRoot.add(createSiteGround());
+    this.staticRoot.add(this.fountains.root);
+    this.staticRoot.add(this.resortLighting.root);
+    this.staticRoot.add(this.boardwalk.root);
+    this.staticRoot.add(this.cabanas.root, this.layeredPlanting.root);
+    this.staticRoot.add(this.floweringTrees.root, this.outdoorBenches.root, this.parasolSeating.root);
+    this.canvas.dataset.boardwalkPlanks = String(this.boardwalk.plankCount);
+    this.canvas.dataset.boardwalkBounds = [BOARDWALK_LAYOUT.leftX, BOARDWALK_LAYOUT.rightX,
+      BOARDWALK_LAYOUT.rearZ, BOARDWALK_LAYOUT.frontZ].join(",");
+    this.canvas.dataset.pathLampCount = String(PATH_LAMP_PLACEMENTS.length);
+    this.canvas.dataset.palmUplightCount = String(PALM_PLACEMENTS.length);
     this.siteFrame = constructionFrame();
     place(this.siteFrame, this.staticRoot, 17, 0, -2);
     const waterNormal = new THREE.TextureLoader().load(
@@ -257,7 +291,13 @@ export class HavenWorld {
         message: failed ? `Could not load ${key}` : undefined,
       });
     });
-    this.observer = new ResizeObserver(this.resize);
+    this.observer = new ResizeObserver(() => {
+      // Resize rendering targets after observer delivery, avoiding layout feedback in the same cycle.
+      if (!this.resizeFrame) this.resizeFrame = requestAnimationFrame(() => {
+        this.resizeFrame = 0;
+        this.resize();
+      });
+    });
     this.observer.observe(canvas.parentElement!);
     canvas.addEventListener("pointerdown", this.onPointerDown);
     canvas.addEventListener("pointerup", this.onPointerUp);
@@ -336,6 +376,7 @@ export class HavenWorld {
     if (!this.mounted) return undefined;
     object.scale.setScalar(scale);
     object.rotation.y = heading;
+    object.userData.assetKey = key;
     place(object, parent, ...position);
     return object;
   }
@@ -344,6 +385,8 @@ export class HavenWorld {
     place(this.forumRoot, this.staticRoot, FORUM_LAYOUT.x, FORUM_LAYOUT.y, FORUM_LAYOUT.z);
     this.forumRoot.scale.setScalar(FORUM_LAYOUT.scale);
     this.canvas.dataset.forumScale = String(this.forumRoot.scale.x);
+    this.canvas.dataset.forumAsset = ASSETS.forum;
+    this.canvas.dataset.fountainJets = String(FOUNTAIN_LAYOUT.perimeterJets + FOUNTAIN_LAYOUT.centralJets + FOUNTAIN_LAYOUT.crownJets);
     const settled = await Promise.allSettled([
       this.asset("hangar", this.staticRoot, [-18, 0, -4]).then((hangar) => {
         if (hangar) this.hangarDoors.bind(hangar);
@@ -375,12 +418,28 @@ export class HavenWorld {
           this.fitBaggage();
         })),
       this.makePalms(),
+      this.makeFurnishings(),
       this.makeLuggage(),
       ...(["united", "avianca", "airCanada", "hotelLevel"] as AssetKey[]).map(
         (key) => this.assets.get(key),
       ),
     ]);
     if (!this.mounted) return;
+    this.staticRoot.updateMatrixWorld(true);
+    const existingPlanters = this.staticRoot.children
+      .filter(object => object.userData.assetKey === "planter")
+      .map(object => {
+        const bounds = new THREE.Box3().setFromObject(object);
+        return {left: bounds.min.x, right: bounds.max.x, rear: bounds.min.z, front: bounds.max.z};
+      });
+    const cabanaIssues = auditCabanaLayout({
+      existingPlanters,
+      palmWells: PALM_PLACEMENTS.map(([x, z, scale]) => ({x, z, radius: scale * 1.05 + 0.15})),
+      leafBeds: LEAF_BEDS.map(([x, z, width, depth]) => ({x, z, width: width + 0.26, depth: depth + 0.26})),
+      pathLamps: PATH_LAMP_PLACEMENTS,
+    });
+    this.canvas.dataset.cabanaLayoutIssues = String(cabanaIssues.length);
+    if (cabanaIssues.length) this.assets.failures.add("cabana layout");
     if (
       settled.some((result) => result.status === "rejected") &&
       !this.assets.failures.size
@@ -401,6 +460,7 @@ export class HavenWorld {
       4.6,
       4.42,
     );
+    this.resortLighting.lightStaticSurfaces(this.staticRoot);
     this.ready = true;
     this.canvas.dataset.sceneReady = "true";
     this.canvas.dataset.assetFailures = [...this.assets.failures].join(",");
@@ -421,13 +481,103 @@ export class HavenWorld {
         scale,
         heading,
       );
-      if (palm) this.palms.push(palm);
+      if (palm) {
+        this.resortLighting.uplightPalm(palm, x, z);
+        this.palms.push(palm);
+      }
     }
     this.canvas.dataset.palmAsset = ASSETS.palm;
     this.canvas.dataset.palmCount = String(this.palms.length);
     await this.assets.get("planter");
     for (const [x, z] of PLANTER_PLACEMENTS) {
       await this.asset("planter", this.staticRoot, [x, 0, z], 0.55);
+    }
+  }
+
+  private async makeFurnishings() {
+    const captureBounds = (root: THREE.Group) => {
+      root.updateMatrixWorld(true);
+      return root.children.filter(child => child.name.includes("anchor") || child.name.startsWith("Parasol group ")).map(child => {
+        const bounds = new THREE.Box3().setFromObject(child);
+        return {name: child.name, min: bounds.min.toArray(), max: bounds.max.toArray()};
+      });
+    };
+    const furnishingBounds: Record<string, ReturnType<typeof captureBounds>> = {};
+    const stages = ["cabanas", "layered planting", "flowering trees", "outdoor benches", "patio seating"];
+    const settled = await Promise.allSettled([
+      this.cabanas.load(() => this.assets.get("cabana"), {
+        sourceId: "tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbx",
+      }).then((result) => {
+        if (!this.mounted) return;
+        this.canvas.dataset.cabanaCount = String(result.placed);
+        this.canvas.dataset.cabanaVertices = String(result.vertices);
+        this.canvas.dataset.cabanaTriangles = String(result.triangles);
+      }),
+      this.layeredPlanting.populate({
+        createPlanter: () => this.assets.instance("accentPlanter"),
+        createFoliage: () => this.assets.instance("tropicalFoliage"),
+      }).then((result) => {
+        if (!this.mounted) return;
+        this.canvas.dataset.accentPlanterCount = String(result.plantersAttached);
+        this.canvas.dataset.bedAccentCount = String(result.foliageAttached);
+        if (result.failures.length) this.assets.failures.add("layered planting");
+        this.furnishingInstances.batch(this.layeredPlanting.root);
+      }),
+      this.floweringTrees.load(() => this.assets.get("floweringTree"), {sourceId: "flower.glb"}).then(result => {
+        if (!this.mounted) return;
+        this.canvas.dataset.floweringTreeCount = String(result.placed);
+        this.canvas.dataset.floweringTreeVertices = String(result.vertices);
+        this.canvas.dataset.floweringTreeTriangles = String(result.triangles);
+        furnishingBounds.trees = captureBounds(this.floweringTrees.root);
+        this.canvas.dataset.floweringTreeBatches = String(this.furnishingInstances.batch(this.floweringTrees.root));
+        this.resortLighting.lightFloweringTrees(this.floweringTrees.root, this.floweringTrees.placements);
+        this.canvas.dataset.floweringTreeUplightCount = String(this.floweringTrees.placements.length);
+      }),
+      this.outdoorBenches.load(() => this.assets.get("outdoorBench"), {sourceId: "bench.glb"}).then(result => {
+        if (!this.mounted) return;
+        this.canvas.dataset.outdoorBenchCount = String(result.placed);
+        this.canvas.dataset.outdoorBenchVertices = String(result.vertices);
+        this.canvas.dataset.outdoorBenchTriangles = String(result.triangles);
+        furnishingBounds.benches = captureBounds(this.outdoorBenches.root);
+        this.canvas.dataset.outdoorBenchBatches = String(this.furnishingInstances.batch(this.outdoorBenches.root));
+      }),
+      this.parasolSeating.loadCombined(() => this.assets.get("patioSeating"), {sourceId: "patio.glb"}).then(result => {
+        if (!this.mounted) return;
+        this.canvas.dataset.patioGroupCount = String(result.groupsComplete);
+        this.canvas.dataset.patioChairCount = String(result.totalChairCount);
+        this.canvas.dataset.patioChairsPerGroup = String(result.chairsPerGroup);
+        this.canvas.dataset.patioVertices = String(result.vertices);
+        this.canvas.dataset.patioTriangles = String(result.triangles);
+        furnishingBounds.patios = captureBounds(this.parasolSeating.root);
+        this.canvas.dataset.patioBatches = String(this.furnishingInstances.batch(this.parasolSeating.root));
+      }),
+    ]);
+    if (!this.mounted) return;
+    settled.forEach((result, index) => {
+      if (result.status === "rejected") this.assets.failures.add(stages[index]);
+    });
+    this.canvas.dataset.furnishingBounds = JSON.stringify(furnishingBounds);
+    const patioKeepouts = parasolFootprints();
+    const treeKeepouts = FLOWERING_TREE_PLACEMENTS.map(tree => floweringTreeFootprint(tree, 0.55));
+    const asBenchRect = ({x, z, width, depth}: {x: number; z: number; width: number; depth: number}) => ({
+      left: x - width / 2, right: x + width / 2, rear: z - depth / 2, front: z + depth / 2,
+    });
+    const audits = {
+      floweringTreeLayoutIssues: auditFloweringTreeLayout({seatingKeepouts: [
+        ...patioKeepouts,
+        ...benchKeepouts().map(({id, footprint}) => ({id,
+          x: (footprint.left + footprint.right) / 2, z: (footprint.rear + footprint.front) / 2,
+          width: footprint.right - footprint.left, depth: footprint.front - footprint.rear,
+        })),
+      ]}).length,
+      outdoorBenchLayoutIssues: auditBenchLayout({reservedZones: [
+        ...treeKeepouts, ...patioKeepouts,
+      ].map((rect, index) => ({id: rect.id ?? `furnishing-${index}`, footprint: asBenchRect(rect)}))}).length,
+      patioLayoutIssues: auditParasolLayout().length,
+    };
+    for (const [key, count] of Object.entries(audits)) {
+      this.canvas.dataset[key] = String(count);
+      if (count) this.assets.failures.add(key);
     }
   }
 
@@ -856,6 +1006,8 @@ export class HavenWorld {
       this.canvas.dataset.shipShadowDirection = this.atmosphere.lightDirection.toArray().map(v => v.toFixed(4)).join(",");
     }
     this.sea.material.uniforms["time"].value = this.phase * 0.18;
+    this.fountains.update(this.phase,this.height*this.renderer.getPixelRatio());
+    this.canvas.dataset.fountainPhase = this.phase.toFixed(3);
     this.assets.animate(this.phase);
     if (this.shadowDirty || changing || (motion && time - this.shadowUpdatedAt >= 50)) {
       this.renderer.shadowMap.needsUpdate = true;
@@ -985,6 +1137,7 @@ export class HavenWorld {
     cancelAnimationFrame(this.frame);
     clearTimeout(this.statusTimer);
     this.observer.disconnect();
+    cancelAnimationFrame(this.resizeFrame);
     this.canvas.removeEventListener("pointerdown", this.onPointerDown);
     this.canvas.removeEventListener("pointerup", this.onPointerUp);
     this.canvas.removeEventListener("pointermove", this.onPointerMove);
@@ -996,7 +1149,16 @@ export class HavenWorld {
     );
     document.removeEventListener("visibilitychange", this.onVisibility);
     this.wake.dispose();
+    this.fountains.dispose();
+    this.resortLighting.dispose();
+    this.boardwalk.dispose();
     this.assets.dispose([this.scene]);
+    this.furnishingInstances.dispose();
+    this.cabanas.dispose();
+    this.layeredPlanting.dispose();
+    this.floweringTrees.dispose();
+    this.outdoorBenches.dispose();
+    this.parasolSeating.dispose();
     this.hdr?.dispose();
     this.atmosphere.dispose();
     this.pmrem?.dispose();

@@ -37,6 +37,10 @@ for (const name of (await readdir(folder)).sort()) {
       primitives: primitives.length,
       materials: gltf.materials?.length ?? 0,
       embeddedImages: gltf.images?.length ?? 0,
+      vertices: primitives.reduce(
+        (sum, primitive) => sum + gltf.accessors[primitive.attributes.POSITION].count,
+        0,
+      ),
       triangles: primitives.reduce(
         (sum, p) =>
           sum +

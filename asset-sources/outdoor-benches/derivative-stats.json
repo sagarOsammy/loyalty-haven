@@ -1,0 +1,171 @@
+{
+  "path": "public/assets/outdoor-bench-tripo.glb",
+  "bytes": 1295480,
+  "sha256": "7c1864810f629a81532f400f85d8e39e238badee000e7b868e2b3901cf7e3791",
+  "stats": {
+    "meshObjects": 1,
+    "vertices": 33544,
+    "polygons": 19999,
+    "triangles": 19999,
+    "boundsYUp": {
+      "min": [
+        -1.525044,
+        0.000136,
+        -0.423957
+      ],
+      "max": [
+        1.525337,
+        0.988069,
+        0.423563
+      ],
+      "dimensions": [
+        3.050381,
+        0.987933,
+        0.84752
+      ]
+    },
+    "materials": [
+      "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+    ],
+    "meshes": [
+      {
+        "name": "OutdoorBenchTripoOptimized",
+        "vertices": 33544,
+        "polygons": 19999,
+        "triangles": 19999,
+        "dimensions": [
+          3.050381,
+          0.987933,
+          0.84752
+        ],
+        "materials": [
+          "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+        ]
+      }
+    ],
+    "coordinateSystem": "final glTF Y-up"
+  },
+  "images": [
+    {
+      "name": "Color_afac9f19-a820-4476-bd10-b646a69cd023_runtime",
+      "width": 1024,
+      "height": 1024,
+      "packed": true,
+      "filepath": ""
+    }
+  ],
+  "sourceStats": {
+    "meshObjects": 1,
+    "vertices": 306371,
+    "polygons": 594374,
+    "triangles": 594374,
+    "boundsYUp": {
+      "min": [
+        -0.139114,
+        -0.5,
+        -0.162704
+      ],
+      "max": [
+        0.138672,
+        0.5,
+        0.16124
+      ],
+      "dimensions": [
+        0.277786,
+        1.0,
+        0.323944
+      ]
+    },
+    "materials": [
+      "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+    ],
+    "meshes": [
+      {
+        "name": "tripo_node_afac9f19-a820-4476-bd10-b646a69cd023",
+        "vertices": 306371,
+        "polygons": 594374,
+        "triangles": 594374,
+        "dimensions": [
+          0.277786,
+          1.0,
+          0.323944
+        ],
+        "materials": [
+          "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+        ]
+      }
+    ]
+  },
+  "normalizedStats": {
+    "meshObjects": 1,
+    "vertices": 306371,
+    "polygons": 594374,
+    "triangles": 594374,
+    "boundsYUp": {
+      "min": [
+        -1.525,
+        -0.423624,
+        0.0
+      ],
+      "max": [
+        1.525,
+        0.423624,
+        0.988029
+      ],
+      "dimensions": [
+        3.05,
+        0.847248,
+        0.988029
+      ]
+    },
+    "materials": [
+      "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+    ],
+    "meshes": [
+      {
+        "name": "OutdoorBenchTripoOptimized",
+        "vertices": 306371,
+        "polygons": 594374,
+        "triangles": 594374,
+        "dimensions": [
+          3.05,
+          0.847248,
+          0.988029
+        ],
+        "materials": [
+          "tripo_material_afac9f19-a820-4476-bd10-b646a69cd023"
+        ]
+      }
+    ]
+  },
+  "transform": {
+    "sourceDimensionsYUpBeforeScale": [
+      1.0,
+      0.323944,
+      0.277786
+    ],
+    "uniformScale": 3.05,
+    "targetEnvelope": [
+      3.05,
+      1.25,
+      1.12
+    ],
+    "blenderExportMapping": "Blender X=source Y, Blender Y=-source X, Blender Z=source Z",
+    "finalGltfMapping": "glTF X=source Y, glTF Y=source Z, glTF Z=source X",
+    "frontDirection": "final glTF +Z",
+    "grounding": "minimum mapped Blender Z moved to 0, exported glTF Y remains grounded"
+  },
+  "reduction": {
+    "beforeTriangles": 594374,
+    "afterTriangles": 19999,
+    "ratioRequested": 0.033648847358733726
+  },
+  "export": {
+    "coordinateSystem": "final glTF Y-up",
+    "imageFormat": "JPEG",
+    "imageQuality": 90,
+    "reimportedVertices": 33544,
+    "reimportedTriangles": 19999
+  },
+  "preview": "asset-sources/outdoor-benches/derivative-preview.png"
+}

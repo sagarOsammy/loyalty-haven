@@ -1,0 +1,43 @@
+{
+  "source": "Original deterministic teak texture authoring, guided by Sammy's reference",
+  "seed": 20261011,
+  "size": [
+    1024,
+    2048
+  ],
+  "maps": [
+    {
+      "path": "public/assets/boardwalk-teak-color.jpg",
+      "bytes": 291239,
+      "sha256": "6d3cc59e49584c9b41cdb2951d9fd07793faa06c80e1d824ce947415bd302589"
+    },
+    {
+      "path": "public/assets/boardwalk-teak-normal.jpg",
+      "bytes": 153612,
+      "sha256": "6e263b62c4f280ade6a50ba61431ff5d774c9f7539287e07089523d4e6dab1c3"
+    },
+    {
+      "path": "public/assets/boardwalk-teak-roughness.jpg",
+      "bytes": 215791,
+      "sha256": "b51feac8f04801d3a5ec9317bed29cb8f366fe3608d350060f0ee8d269d0d03e"
+    }
+  ],
+  "preserved_stage_3_sources": [
+    {
+      "path": "asset-sources/boardwalk/before/geometry.ts.txt",
+      "sha256": "2aef4da99259cff15c8c9585ca3df9759ec4a058c1f08e0aab88804ebec0f2c9"
+    },
+    {
+      "path": "asset-sources/boardwalk/before/landscape.ts.txt",
+      "sha256": "e61c264c3b5aa606a1513bc81fe5c494b467d8cdf61a20172a07ec68a3bb5224"
+    },
+    {
+      "path": "asset-sources/boardwalk/before/lighting.ts.txt",
+      "sha256": "30cd8d733a12749b278e642217ae977fbffa8bf14fd851bfd8d43e1dcb08a3e5"
+    },
+    {
+      "path": "asset-sources/boardwalk/before/world.ts.txt",
+      "sha256": "c1583bd3c6d9b8f57f318e13689cae303196f5dcdd49b1989bed7f439b6d5ef8"
+    }
+  ]
+}

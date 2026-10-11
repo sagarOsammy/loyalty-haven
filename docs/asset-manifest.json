@@ -1,6 +1,18 @@
 {
   "assets": [
     {
+      "path": "public/assets/accent-planter-tripo.glb",
+      "bytes": 1498352,
+      "sha256": "4f3299712cfe5b5fa115adb41130cee35a0d7e94a16b5e919bfc5453eec2a4e2",
+      "nodes": 6,
+      "meshes": 6,
+      "primitives": 6,
+      "materials": 4,
+      "embeddedImages": 3,
+      "vertices": 18315,
+      "triangles": 15554
+    },
+    {
       "path": "public/assets/airline-air-canada-fleet.glb",
       "bytes": 2792948,
       "sha256": "6483d99a6cf6217856d4592c2994c6c41bc0b4a33e1e5d7bad36f09f955bcdd4",
@@ -9,6 +21,7 @@
       "primitives": 18,
       "materials": 18,
       "embeddedImages": 0,
+      "vertices": 75575,
       "triangles": 59056
     },
     {
@@ -20,6 +33,7 @@
       "primitives": 17,
       "materials": 17,
       "embeddedImages": 0,
+      "vertices": 76200,
       "triangles": 59432
     },
     {
@@ -31,6 +45,7 @@
       "primitives": 20,
       "materials": 20,
       "embeddedImages": 0,
+      "vertices": 75841,
       "triangles": 58886
     },
     {
@@ -42,6 +57,7 @@
       "primitives": 20,
       "materials": 20,
       "embeddedImages": 0,
+      "vertices": 74567,
       "triangles": 57558
     },
     {
@@ -53,6 +69,7 @@
       "primitives": 20,
       "materials": 20,
       "embeddedImages": 0,
+      "vertices": 75227,
       "triangles": 58254
     },
     {
@@ -64,6 +81,7 @@
       "primitives": 18,
       "materials": 18,
       "embeddedImages": 0,
+      "vertices": 80114,
       "triangles": 66932
     },
     {
@@ -75,6 +93,7 @@
       "primitives": 20,
       "materials": 20,
       "embeddedImages": 0,
+      "vertices": 76808,
       "triangles": 59986
     },
     {
@@ -86,6 +105,7 @@
       "primitives": 20,
       "materials": 20,
       "embeddedImages": 0,
+      "vertices": 77530,
       "triangles": 60460
     },
     {
@@ -97,12 +117,40 @@
       "primitives": 7,
       "materials": 7,
       "embeddedImages": 0,
+      "vertices": 108412,
       "triangles": 84120
     },
     {
       "path": "public/assets/belfast-sunset-2k.hdr",
       "bytes": 4563204,
       "sha256": "273003109ca1cfb798ce6b96e09ac8440f763d0ef0c376bbe77492613540b4a3"
+    },
+    {
+      "path": "public/assets/boardwalk-teak-color.jpg",
+      "bytes": 291239,
+      "sha256": "6d3cc59e49584c9b41cdb2951d9fd07793faa06c80e1d824ce947415bd302589"
+    },
+    {
+      "path": "public/assets/boardwalk-teak-normal.jpg",
+      "bytes": 153612,
+      "sha256": "6e263b62c4f280ade6a50ba61431ff5d774c9f7539287e07089523d4e6dab1c3"
+    },
+    {
+      "path": "public/assets/boardwalk-teak-roughness.jpg",
+      "bytes": 215791,
+      "sha256": "b51feac8f04801d3a5ec9317bed29cb8f366fe3608d350060f0ee8d269d0d03e"
+    },
+    {
+      "path": "public/assets/cabana-tripo.glb",
+      "bytes": 3279056,
+      "sha256": "ab0c0bc8b1a111e7b4f95573861047106b650e6cb5980ac361d7a1c1da9fd257",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 2,
+      "materials": 2,
+      "embeddedImages": 3,
+      "vertices": 43021,
+      "triangles": 34974
     },
     {
       "path": "public/assets/concrete_pavement_02_diff.jpg",
@@ -128,7 +176,32 @@
       "primitives": 1,
       "materials": 1,
       "embeddedImages": 3,
+      "vertices": 42354,
       "triangles": 52138
+    },
+    {
+      "path": "public/assets/flowering-tree-tripo.glb",
+      "bytes": 1350564,
+      "sha256": "5e1f6bc8dec6ddc830f6f5055a0e80976bdf7a2b06e1d2ee54b20549af883313",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "materials": 1,
+      "embeddedImages": 1,
+      "vertices": 25165,
+      "triangles": 30246
+    },
+    {
+      "path": "public/assets/forum-fountain.glb",
+      "bytes": 1401420,
+      "sha256": "44fd53fd075dc15af2fc6b7413ebd807ca6e100e5bfcb1a06953a5cb0ab0f50e",
+      "nodes": 3,
+      "meshes": 3,
+      "primitives": 3,
+      "materials": 3,
+      "embeddedImages": 1,
+      "vertices": 37181,
+      "triangles": 23316
     },
     {
       "path": "public/assets/forum.glb",
@@ -139,6 +212,7 @@
       "primitives": 7,
       "materials": 7,
       "embeddedImages": 2,
+      "vertices": 62939,
       "triangles": 37312
     },
     {
@@ -150,6 +224,7 @@
       "primitives": 9,
       "materials": 6,
       "embeddedImages": 2,
+      "vertices": 46686,
       "triangles": 22180
     },
     {
@@ -161,6 +236,7 @@
       "primitives": 11,
       "materials": 11,
       "embeddedImages": 33,
+      "vertices": 35013,
       "triangles": 16424
     },
     {
@@ -172,6 +248,7 @@
       "primitives": 10,
       "materials": 10,
       "embeddedImages": 30,
+      "vertices": 32595,
       "triangles": 15296
     },
     {
@@ -183,6 +260,7 @@
       "primitives": 7,
       "materials": 7,
       "embeddedImages": 21,
+      "vertices": 20595,
       "triangles": 10932
     },
     {
@@ -194,6 +272,7 @@
       "primitives": 1,
       "materials": 1,
       "embeddedImages": 3,
+      "vertices": 36145,
       "triangles": 33810
     },
     {
@@ -205,6 +284,7 @@
       "primitives": 3,
       "materials": 3,
       "embeddedImages": 0,
+      "vertices": 7520,
       "triangles": 6180
     },
     {
@@ -216,6 +296,7 @@
       "primitives": 6,
       "materials": 6,
       "embeddedImages": 0,
+      "vertices": 20578,
       "triangles": 11764
     },
     {
@@ -227,7 +308,38 @@
       "primitives": 1,
       "materials": 1,
       "embeddedImages": 3,
+      "vertices": 6550,
       "triangles": 8237
+    },
+    {
+      "path": "public/assets/marble-resort-color.jpg",
+      "bytes": 394969,
+      "sha256": "ab0a046904b1d3ab2f29a61505dcda287d3c13240811377db073335eaa94f44a"
+    },
+    {
+      "path": "public/assets/marble-resort-normal.jpg",
+      "bytes": 190232,
+      "sha256": "eea9285a73e626f613c0a1341b1a7838a761873751e598b7834899e3ff7b2842"
+    },
+    {
+      "path": "public/assets/marble-resort-roughness.jpg",
+      "bytes": 290754,
+      "sha256": "b4513cf662c927e9fe5567f06b4391e5891df2c4a2f448a56961d6d8b63a0c77"
+    },
+    {
+      "path": "public/assets/marble-resort-warm-color.jpg",
+      "bytes": 545333,
+      "sha256": "f9e8be751485fd1c9dd206a9bc4656cf309e763e9313e00839ed2e1632fa509b"
+    },
+    {
+      "path": "public/assets/marble-resort-warm-normal.jpg",
+      "bytes": 385728,
+      "sha256": "4981773277b58b1ce311b47b83281ff58ba918d1dd7c7b443357a9b3f55d0d27"
+    },
+    {
+      "path": "public/assets/marble-resort-warm-roughness.jpg",
+      "bytes": 351457,
+      "sha256": "6561d6270dfcd1d0e6afa5050fa24cbc7119feaf807951f1e1d5ee28d5ab17e6"
     },
     {
       "path": "public/assets/mountains-tripo.glb",
@@ -238,7 +350,20 @@
       "primitives": 1,
       "materials": 1,
       "embeddedImages": 3,
+      "vertices": 427968,
       "triangles": 839716
+    },
+    {
+      "path": "public/assets/outdoor-bench-tripo.glb",
+      "bytes": 1295480,
+      "sha256": "7c1864810f629a81532f400f85d8e39e238badee000e7b868e2b3901cf7e3791",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "materials": 1,
+      "embeddedImages": 1,
+      "vertices": 33544,
+      "triangles": 19999
     },
     {
       "path": "public/assets/palm-tripo.glb",
@@ -249,7 +374,20 @@
       "primitives": 1,
       "materials": 1,
       "embeddedImages": 0,
+      "vertices": 24520,
       "triangles": 49031
+    },
+    {
+      "path": "public/assets/patio-seating-tripo.glb",
+      "bytes": 5856340,
+      "sha256": "7afe44999db65056229875a10fd4cca816a157b566332a2532b862a23928cdc2",
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "materials": 1,
+      "embeddedImages": 3,
+      "vertices": 51346,
+      "triangles": 50000
     },
     {
       "path": "public/assets/planter.glb",
@@ -260,6 +398,7 @@
       "primitives": 7,
       "materials": 7,
       "embeddedImages": 0,
+      "vertices": 15852,
       "triangles": 31400
     },
     {
@@ -268,10 +407,22 @@
       "sha256": "dc0eca08ac56a79ac12394574bc1d83e505f89d3f330fb406e778a97dec0beaa"
     },
     {
+      "path": "public/assets/tropical-foliage-tripo.glb",
+      "bytes": 1426488,
+      "sha256": "5281ebb0b1a502df2c15fac856b2c7200d6831ae78e4e8b6634764af17bc2f31",
+      "nodes": 2,
+      "meshes": 2,
+      "primitives": 2,
+      "materials": 1,
+      "embeddedImages": 3,
+      "vertices": 16432,
+      "triangles": 11796
+    },
+    {
       "path": "public/assets/water-normal.jpg",
       "bytes": 248813,
       "sha256": "add9912b158a4fe9c12421745babe68c44c8af75631ac4837236cb2a03bc373f"
     }
   ],
-  "totalBytes": 56827700
+  "totalBytes": 75754515
 }

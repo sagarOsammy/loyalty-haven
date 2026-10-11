@@ -1,0 +1,186 @@
+import * as THREE from "three";
+import { FORUM_LAYOUT } from "./forum";
+
+export const FOUNTAIN_LAYOUT = {
+  outerRadius: 7.15,
+  outerWaterRadius: 6.82,
+  walkwayRadius: 5.25,
+  centralRadius: 2.25,
+  waterY: 0.22,
+  centralWaterY: 0.32,
+  perimeterJets: 40,
+  centralJets: 12,
+};
+
+function annulus(inner: number, outer: number, y: number, mat: THREE.Material) {
+  const mesh = new THREE.Mesh(new THREE.RingGeometry(inner, outer, 128).rotateX(-Math.PI / 2), mat);
+  mesh.position.y = y;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function coping(inner: number, outer: number, top: number, mat: THREE.Material) {
+  const profile = [[inner, -0.02], [outer, -0.02], [outer, top - 0.05],
+    [outer - 0.04, top], [inner + 0.04, top], [inner, top - 0.05], [inner, -0.02]];
+  const mesh = new THREE.Mesh(new THREE.LatheGeometry(profile.map(([r,y]) => new THREE.Vector2(r,y)), 128), mat);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  return mesh;
+}
+
+function stream(height: number, drift: number) {
+  const points = Array.from({length: 25}, (_,i) => {
+    const t = i / 24;
+    return new THREE.Vector3(drift * t, height * 4 * t * (1 - t), 0);
+  });
+  return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 32, 0.022, 5, false);
+}
+
+/** A shallow outer basin and separate central fountain, driven by the world's pauseable phase. */
+export class ForumFountains {
+  readonly root = new THREE.Group();
+  private jets: {mesh: THREE.InstancedMesh; radius: number; y: number; offset: number}[] = [];
+  private ripples: THREE.InstancedMesh;
+  private droplets: THREE.Points;
+  private waterNormals: THREE.Texture;
+  private transform = new THREE.Object3D();
+  private phaseUniform = {value: 0};
+
+  constructor() {
+    this.root.name = "Forum shallow basins and fountains";
+    this.root.position.set(FORUM_LAYOUT.x, 0, FORUM_LAYOUT.z);
+    const stone = new THREE.MeshStandardMaterial({color: "#e5d3b7", roughness: 0.55});
+    stone.name = "Fountain pale limestone coping";
+    const tile = new THREE.MeshStandardMaterial({color: "#365c58", roughness: 0.66});
+    this.waterNormals = new THREE.TextureLoader().load("/assets/water-normal.jpg");
+    this.waterNormals.wrapS = this.waterNormals.wrapT = THREE.RepeatWrapping;
+    this.waterNormals.repeat.set(7,7);
+    const water = new THREE.MeshPhysicalMaterial({
+      color: "#4c7972", roughness: 0.2, metalness: 0.18,
+      normalMap: this.waterNormals, normalScale: new THREE.Vector2(0.16,0.16),
+      clearcoat: 0.65, clearcoatRoughness: 0.2,
+      emissive: "#a8762a", emissiveIntensity: 0.12, envMapIntensity: 0.9,
+      transparent: true, opacity: 0.92, depthWrite: false,
+    });
+    water.name = "Fountain shallow reflective water";
+    const f = FOUNTAIN_LAYOUT;
+    this.root.add(
+      annulus(f.walkwayRadius, f.outerWaterRadius, 0.01, tile),
+      annulus(f.walkwayRadius, f.outerWaterRadius, f.waterY, water),
+      coping(f.outerWaterRadius, f.outerRadius, 0.39, stone),
+      coping(f.walkwayRadius - 0.14, f.walkwayRadius, 0.27, stone),
+      annulus(0, 2, 0.1, tile),
+      annulus(0, 2, f.centralWaterY, water),
+      coping(2, f.centralRadius, 0.46, stone),
+    );
+    const glow = new THREE.MeshBasicMaterial({color: "#ffcb76", toneMapped: false});
+    for (const [radius,y] of [[f.outerWaterRadius - 0.03,0.18],[1.97,0.28]]) {
+      const rim = new THREE.Mesh(new THREE.TorusGeometry(radius,0.025,5,128).rotateX(Math.PI/2),glow);
+      rim.position.y = y;
+      rim.name = "Warm underwater rim illumination";
+      this.root.add(rim);
+    }
+    // Four shared lights reach the water, coping and column bases without shadow passes.
+    for (let i=0;i<4;i++) {
+      const angle = (i + 0.5) * Math.PI / 2;
+      const light = new THREE.PointLight("#ffb957", 24, 7, 2);
+      light.position.set(Math.cos(angle)*5.75,0.14,Math.sin(angle)*5.75);
+      this.root.add(light);
+    }
+    const jetMaterial = new THREE.MeshBasicMaterial({
+      color: "#fff3d4", transparent: true, opacity: 0.58, depthWrite: false,
+    });
+    const addJets = (count: number, radius: number, y: number, height: number, drift: number, offset: number) => {
+      const mesh = new THREE.InstancedMesh(stream(height,drift),jetMaterial,count);
+      mesh.name = radius > 3 ? "Perimeter fountain jets" : "Central fountain jets";
+      mesh.frustumCulled = false;
+      mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+      this.jets.push({mesh,radius,y,offset});
+      this.root.add(mesh);
+    };
+    addJets(f.perimeterJets,6.18,f.waterY,1.15,0.36,0);
+    addJets(f.centralJets,1.25,f.centralWaterY,1.75,0.72,0.35);
+    addJets(1,0,f.centralWaterY,2.3,0.2,0);
+    const jetCount = f.perimeterJets + f.centralJets + 1;
+    this.ripples = new THREE.InstancedMesh(
+      new THREE.RingGeometry(0.08,0.11,24).rotateX(-Math.PI/2),
+      new THREE.MeshBasicMaterial({color:"#fff0c5",transparent:true,opacity:0.35,depthWrite:false}),
+      jetCount,
+    );
+    this.ripples.name = "Fountain landing ripples";
+    this.ripples.frustumCulled = false;
+    this.root.add(this.ripples);
+    // Water droplets follow ballistic arcs. All motion uses one phase uniform.
+    const positions: number[] = [], seeds: number[] = [];
+    this.jets.forEach(({mesh,radius,y,offset},group) => {
+      for(let i=0;i<mesh.count;i++) {
+        const angle = i * Math.PI * 2 / mesh.count + offset;
+        for(let j=0;j<16;j++) {
+          positions.push(Math.cos(angle)*radius,y,Math.sin(angle)*radius);
+          seeds.push(j/16+i*0.071,angle,group===0?1.15:group===1?1.75:2.3,group===0?0.36:group===1?0.72:0.2);
+        }
+      }
+    });
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));
+    geometry.setAttribute("flight",new THREE.Float32BufferAttribute(seeds,4));
+    const spray = new THREE.ShaderMaterial({
+      transparent:true,depthWrite:false,
+      uniforms:{phase:this.phaseUniform},
+      vertexShader:`attribute vec4 flight;
+        uniform float phase;
+        void main() {
+          float t = fract(phase * 0.72 + flight.x);
+          vec3 p = position;
+          p.xz -= vec2(cos(flight.y),sin(flight.y)) * flight.w * t;
+          p.y += flight.z * 4.0 * t * (1.0-t);
+          vec4 view = modelViewMatrix * vec4(p,1.0);
+          gl_Position = projectionMatrix * view;
+          gl_PointSize = clamp(150.0 / -view.z,1.0,3.8);
+        }`,
+      fragmentShader:`void main() {
+        float d = length(gl_PointCoord-0.5);
+        if(d>0.5) discard;
+        gl_FragColor = vec4(1.0,0.91,0.7,(1.0-smoothstep(0.1,0.5,d))*0.72);
+        #include <tonemapping_fragment>
+        #include <colorspace_fragment>
+      }`,
+    });
+    this.droplets = new THREE.Points(geometry,spray);
+    this.droplets.frustumCulled = false;
+    this.droplets.name = "Animated fountain droplets";
+    this.root.add(this.droplets);
+    this.update(0);
+  }
+
+  update(phase: number) {
+    this.phaseUniform.value = phase;
+    this.waterNormals.offset.set(phase*0.012,phase*0.009);
+    let rippleIndex = 0;
+    this.jets.forEach(({mesh,radius,y,offset}) => {
+      for(let i=0;i<mesh.count;i++) {
+        const angle = i * Math.PI * 2 / mesh.count + offset;
+        this.transform.position.set(Math.cos(angle)*radius,y,Math.sin(angle)*radius);
+        this.transform.rotation.set(0,Math.PI-angle,0);
+        this.transform.scale.set(1,1+Math.sin(phase*2.2+i*1.7)*0.045,1);
+        this.transform.updateMatrix();
+        mesh.setMatrixAt(i,this.transform.matrix);
+        const drift = radius>3?0.36:radius>0?0.72:0.2;
+        this.transform.position.set(Math.cos(angle)*(radius-drift),y+0.006,Math.sin(angle)*(radius-drift));
+        this.transform.rotation.set(0,0,0);
+        this.transform.scale.setScalar(1+((phase*0.7+i*0.21)%1)*3);
+        this.transform.updateMatrix();
+        this.ripples.setMatrixAt(rippleIndex++,this.transform.matrix);
+      }
+      mesh.instanceMatrix.needsUpdate = true;
+    });
+    this.ripples.instanceMatrix.needsUpdate = true;
+  }
+
+  dispose() {
+    this.jets.forEach(({mesh}) => mesh.dispose());
+    this.ripples.dispose();
+    this.droplets.geometry.dispose();
+    (this.droplets.material as THREE.ShaderMaterial).dispose();
+  }
+}

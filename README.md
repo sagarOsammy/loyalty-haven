@@ -9,6 +9,7 @@ The active application is this repository. The former project is not part of thi
 For local review, start the preview and open http://localhost:5173.
 
 - The supplied cruise ship follows a timed crossing, with a fading foamy wake and dynamic sunset lighting.
+- The accepted resort ambience includes warm veined marble, animated forum fountains, 24 path lamps, a teak boardwalk, six cabanas, layered tropical planting, six flowering trees, four benches and four complete patio sets.
 - Supplied palm and distant mountain models, the retained cloud sky, and corner planting match the approved scene edits.
 - Baggage controls provide precise rotation and position, guides, save and copy. Published offsets are left 0 percent forward, right 75 percent forward. Both rotations and across offsets are zero.
 - Superseded runtime assets are recoverable under `asset-sources/retired-runtime/`, with hashes and updated authoring inputs.
@@ -20,6 +21,8 @@ For local review, start the preview and open http://localhost:5173.
 - SkyTeam selects Virgin Atlantic and Vietnam Airlines. oneworld selects Finnair, Qatar Airways and British Airways.
 - Private account details open from Scene settings after owner-authorized ChatGPT sign-in.
 - The supplied telescope has an optimized runtime copy beside the forum. Its original GLB remains in the repository root.
+
+The 11 October ambience release retains the camera and architecture positions. Selected Tripo originals remain in `asset-sources/`, with separate optimized derivatives and recorded vertex and triangle counts. See [finishing-step validation](docs/finishing-steps-20261011.md).
 
 The public snapshot is dated 10 September 2026. Sammy selected manual refresh on explicit request, with no scheduled synchronization. Unknown redeemed values remain null. The construction fixture never changes the saved balance total.
 

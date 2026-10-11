@@ -1,0 +1,88 @@
+{
+  "schema": "loyalty-haven-cabana-fbx-inspection-1",
+  "source": "asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbx",
+  "sourceBytes": 11401276,
+  "sourceSha256": "ec2105a8841c322cb8c11f8b11406a06a2142621e3f5cdd8cf47480391d64456",
+  "sourceObjects": 1,
+  "sourceVertices": 59619,
+  "sourcePolygons": 58450,
+  "sourceTriangles": 116598,
+  "sourceBoundsBlender": {
+    "min": [
+      -0.49287283420562744,
+      -0.49248406291007996,
+      -0.36208575963974
+    ],
+    "max": [
+      0.4982220530509949,
+      0.4906825125217438,
+      0.36186397075653076
+    ]
+  },
+  "sourceDimensionsBlender": [
+    0.9910948872566223,
+    0.9831665754318237,
+    0.7239497303962708
+  ],
+  "meshes": [
+    {
+      "name": "tripo_node_4566ecd8",
+      "vertices": 59619,
+      "polygons": 58450,
+      "triangles": 116598,
+      "dimensions": [
+        0.9910948872566223,
+        0.983166515827179,
+        0.723949670791626
+      ],
+      "materials": [
+        "tripo_mat_4566ecd8"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "tripo_mat_4566ecd8",
+      "useNodes": true,
+      "images": [
+        "tripo_image_4566ecd8_0",
+        "tripo_image_4566ecd8_3",
+        "tripo_image_4566ecd8_1",
+        "tripo_image_4566ecd8_2"
+      ],
+      "blendMethod": "DITHERED"
+    }
+  ],
+  "images": [
+    {
+      "name": "tripo_image_4566ecd8_0",
+      "width": 8192,
+      "height": 8192,
+      "packed": true,
+      "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Color.jpg"
+    },
+    {
+      "name": "tripo_image_4566ecd8_1",
+      "width": 4096,
+      "height": 4096,
+      "packed": true,
+      "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Roughness.jpg"
+    },
+    {
+      "name": "tripo_image_4566ecd8_2",
+      "width": 4096,
+      "height": 4096,
+      "packed": true,
+      "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Metallic.jpg"
+    },
+    {
+      "name": "tripo_image_4566ecd8_3",
+      "width": 4096,
+      "height": 4096,
+      "packed": true,
+      "filepath": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/cabanas/source/tripo_pbr_model_4566ecd8-8750-4ee0-867c-b3a537a87952.fbm/Normal.jpg"
+    }
+  ],
+  "preview": "asset-sources/cabanas/source-preview.png",
+  "coordinateSystem": "Imported FBX statistics use Blender's Z-up coordinates before normalization."
+}

@@ -1,0 +1,150 @@
+{
+  "stage": 6,
+  "date": "2026-10-11",
+  "status": "selected_foliage_glb_prepared",
+  "reference": "/var/folders/7t/0_hkzn095vqbj1pj6m0vqs5w0000gn/T/codex-clipboard-3b0c0bc6-9a68-445f-bf19-2b880641ed7f.png",
+  "sources": [
+    {
+      "path": "public/assets/planter.glb",
+      "role": "provisional imported container cluster",
+      "sha256": "ac8ed73f0f77d27876d13e96529c50c97e5e976fb651bd9318c04e5ea4ff86ab",
+      "bytes": 564984,
+      "mesh_objects": 7,
+      "triangles": 31400,
+      "bounds_m": {
+        "min": [-2.7267, 0.0, -1.8274],
+        "max": [3.1286, 4.8653, 2.0246],
+        "dimensions": [5.8553, 4.8653, 3.8520]
+      },
+      "transformation": "Fresh clone, per-placement scale envelope, Y ground alignment and world X/Z recentering"
+    },
+    {
+      "path": "asset-sources/environment/build_assets.py",
+      "role": "original procedural authoring source for the planter cluster",
+      "sha256": "704f3ad228bdc82c443581c60e81c25452bf9d01b70523b1435e9ea5504aca0b",
+      "transformation": "Read-only inspection, no source edit"
+    },
+    {
+      "path": "asset-sources/environment/loyalty_v2_assets.blend",
+      "role": "original Blender source bundle",
+      "transformation": "Preserved, not imported directly by the adapter"
+    },
+    {
+      "path": "asset-sources/environment/provenance.json",
+      "role": "original bounds and generation record",
+      "sha256": "be01a9b7e774c9ceb38b46bb0c313f4f824c11186a921a546676ac42026e329b",
+      "transformation": "Read-only inspection"
+    },
+    {
+      "path": "public/assets/palm-tripo.glb",
+      "role": "retained tree reference for collision review",
+      "transformation": "Placement coordinates reviewed, file unchanged"
+    },
+    {
+      "path": "lib/scene/landscape.ts",
+      "role": "retained bed and planter coordinates",
+      "transformation": "Imported as read-only layout input"
+    },
+    {
+      "path": "lib/scene/boardwalk-layout.ts",
+      "role": "retained deck envelope",
+      "transformation": "Imported as read-only collision input"
+    },
+    {
+      "path": "asset-sources/layered-planting/before/landscape.ts.txt",
+      "role": "pre-stage-6 source backup",
+      "transformation": "Preserved before planting integration"
+    },
+    {
+      "path": "asset-sources/layered-planting/before/geometry.ts.txt",
+      "role": "pre-stage-6 source backup",
+      "transformation": "Preserved before planting integration"
+    },
+    {
+      "path": "asset-sources/layered-planting/before/lighting.ts.txt",
+      "role": "pre-stage-6 source backup",
+      "transformation": "Preserved before parent-side TypeScript import-path preparation"
+    },
+    {
+      "path": "asset-sources/layered-planting/source/tripo_pbr_model_eb306993-5625-4ea7-9c99-72459090b411.fbx",
+      "role": "user-provided selected Tripo foliage export",
+      "sha256": "27176d4c380652c0732a5017439a7f16835c8bc484ba303ee32a83e189cd0b51",
+      "bytes": 3215532,
+      "mesh_objects": 1,
+      "vertices": 13668,
+      "polygons": 13344,
+      "triangles": 26483,
+      "imported_bounds_m": {
+        "min": [-0.129344, -0.497576, -0.235457],
+        "max": [0.129335, 0.498677, 0.237163],
+        "dimensions": [0.258679, 0.996253, 0.47262]
+      },
+      "embedded_source_maps": ["Color.jpg", "Roughness.jpg", "Metallic.jpg", "Normal.jpg"],
+      "transformation": "Source copied byte-for-byte, major monstera and fern components partitioned, detached pieces assigned by nearest component, foliage decimated to the recorded runtime triangle budget, and original maps retained in source"
+    }
+  ],
+  "tripo_candidates": [
+    {
+      "url": "https://studio.tripo3d.ai/3d-model/monstera-and-fern-plants-with-large-split-leaf-foliage-and-arching-fro-2f57234c-c77d-485d-9d76-6b42cfb01b53",
+      "role": "provisional foliage candidate",
+      "observed_stats": "Two rooted components, monstera and fern, about 13,344 quad faces, 13,668 vertices, 4K PBR H3.1",
+      "runtime_status": "reference candidate, superseded by the user-provided local FBX export"
+    },
+    {
+      "url": "https://studio.tripo3d.ai/3d-model/fern-plant-with-dense-feathery-fronds-in-bright-green-3b799a6c-f3d0-4256-b814-0837fc9e9fb3",
+      "role": "comparison foliage candidate",
+      "observed_stats": "About 54,308 quad faces and 56,061 vertices, silhouette less consistent with the supplied reference",
+      "runtime_status": "reference candidate, not selected for runtime"
+    }
+  ],
+  "outputs": {
+    "layout_module": "lib/scene/planting-layout.ts",
+    "import_adapter": "lib/scene/layered-planting.ts",
+    "asset_builder": "asset-sources/layered-planting/build_selected_assets.py",
+    "selected_source_inspection": "asset-sources/layered-planting/inspect_selected_fbx.py",
+    "selected_source_preview": "asset-sources/layered-planting/previews/selected-foliage-source.png",
+    "runtime_derivative_stats": "asset-sources/layered-planting/selected-asset-stats.json",
+    "runtime_assets": {
+      "foliage": {
+        "path": "public/assets/tropical-foliage-tripo.glb",
+        "sha256": "5281ebb0b1a502df2c15fac856b2c7200d6831ae78e4e8b6634764af17bc2f31",
+        "bytes": 1426488,
+        "nodes": 2,
+        "meshes": 2,
+        "triangles": 11796,
+        "materials": 1,
+        "embedded_images": 3,
+        "normalized_height_m": 2.0,
+        "bounds_blender_z_up_m": [1.632907, 1.777039, 2.0],
+        "preview": "asset-sources/layered-planting/previews/tropical-foliage-derivative.png"
+      },
+      "accent_planter": {
+        "path": "public/assets/accent-planter-tripo.glb",
+        "sha256": "4f3299712cfe5b5fa115adb41130cee35a0d7e94a16b5e919bfc5453eec2a4e2",
+        "bytes": 1498352,
+        "nodes": 6,
+        "meshes": 6,
+        "triangles": 15554,
+        "materials": 4,
+        "embedded_images": 3,
+        "normalized_height_m": 2.00959,
+        "container_source": "public/assets/planter.glb, largest ivory pot, matching soil and low brass rims only",
+        "original_foliage_excluded": true,
+        "preview": "asset-sources/layered-planting/previews/accent-planter-derivative.png"
+      }
+    },
+    "layout_validation": {
+      "accent_planters": 12,
+      "bed_accents": 10,
+      "avenue_width_m": 6,
+      "boardwalk_overlap": false,
+      "building_overlap": false,
+      "baggage_overlap": false,
+      "path_lamp_overlap": false,
+      "palm_root_well_overlap": false,
+      "cabana_keepout_overlap": false,
+      "existing_bed_overlap": false,
+      "existing_planter_overlap": false
+    }
+  }
+}

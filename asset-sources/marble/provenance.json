@@ -1,0 +1,24 @@
+{
+  "source": "Original procedural output, visual direction from user reference supplied 11 October 2026",
+  "seed": 20261011,
+  "resolution": 2048,
+  "atlas": "8 by 8 slabs, 1.5 metres per slab, 12 metre repeat",
+  "transformation": "Cream marble color, fine veins, shallow joints, roughness and tangent-space normals",
+  "outputs": [
+    {
+      "path": "public/assets/marble-resort-color.jpg",
+      "bytes": 394969,
+      "sha256": "ab0a046904b1d3ab2f29a61505dcda287d3c13240811377db073335eaa94f44a"
+    },
+    {
+      "path": "public/assets/marble-resort-roughness.jpg",
+      "bytes": 290754,
+      "sha256": "b4513cf662c927e9fe5567f06b4391e5891df2c4a2f448a56961d6d8b63a0c77"
+    },
+    {
+      "path": "public/assets/marble-resort-normal.jpg",
+      "bytes": 190232,
+      "sha256": "eea9285a73e626f613c0a1341b1a7838a761873751e598b7834899e3ff7b2842"
+    }
+  ]
+}

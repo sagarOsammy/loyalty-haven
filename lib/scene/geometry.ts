@@ -1,5 +1,8 @@
-import { SIDE_GARDEN_CENTERS, LEAF_BEDS } from "./landscape";
+import { SIDE_GARDEN_CENTERS, LEAF_BEDS, LEAF_COUNTS } from "./landscape";
+import { boardwalkGardenDepth } from "./boardwalk-layout";
 import { FORUM_LAYOUT, AVENUE_LAYOUT } from "./forum";
+import { FOUNTAIN_LAYOUT } from "./fountains";
+import { alignPavingUV, marbleMaterials, marblePlane, marbleInlays } from "./paving";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
@@ -107,37 +110,18 @@ export function plaque(
 
 export function createSiteGround() {
   const group = new THREE.Group();
-  const textures = new THREE.TextureLoader();
-  const paving = textures.load("/assets/concrete_pavement_02_diff.jpg");
-  paving.colorSpace = THREE.SRGBColorSpace;
-  paving.wrapS = paving.wrapT = THREE.RepeatWrapping;
-  paving.repeat.set(32, 18);
-  paving.anisotropy = 8;
-  const normal = textures.load("/assets/concrete_pavement_02_nor_gl.jpg");
-  normal.wrapS = normal.wrapT = THREE.RepeatWrapping;
-  normal.repeat.copy(paving.repeat);
-  const rough = textures.load("/assets/concrete_pavement_02_rough.jpg");
-  rough.wrapS = rough.wrapT = THREE.RepeatWrapping;
-  rough.repeat.copy(paving.repeat);
-  const stone = new THREE.MeshStandardMaterial({
-    color: "#d9c6a8",
-    map: paving,
-    normalMap: normal,
-    roughnessMap: rough,
-    roughness: 0.72,
-    normalScale: new THREE.Vector2(0.3, 0.3),
-  });
+  const { marble, inlay } = marbleMaterials();
   place(box(160, 1.5, 86, material("#c3aa89"), 0.5), group, 0, -0.85, 22.5);
-  const ground = new THREE.Mesh(new THREE.PlaneGeometry(159.4, 85.4), stone);
-  ground.rotation.x = -Math.PI / 2;
-  ground.receiveShadow = true;
+  const ground = marblePlane(159.4, 85.4, 0, 22.5, marble);
+  ground.name = "Cream marble plaza";
   place(ground, group, 0, -0.07, 22.5);
+  group.add(marbleInlays(inlay));
   // Stop the avenue at the circular forecourt, with no rectangular tail beyond it.
   const avenueLength = AVENUE_LAYOUT.frontZ - AVENUE_LAYOUT.rearZ;
   const avenueZ = (AVENUE_LAYOUT.frontZ + AVENUE_LAYOUT.rearZ) / 2;
   place(
-    box(AVENUE_LAYOUT.width, 0.06, avenueLength, material("#cdbb9d", 0.5)),
-    group, AVENUE_LAYOUT.x, -0.025, avenueZ,
+    marblePlane(AVENUE_LAYOUT.width, avenueLength, AVENUE_LAYOUT.x, avenueZ, marble),
+    group, AVENUE_LAYOUT.x, 0.005, avenueZ,
   );
   const brass = material(palette.brass, 0.4, 0.65);
   for (const side of [-1, 1]) {
@@ -147,31 +131,23 @@ export function createSiteGround() {
   // Seawall and the circular forum forecourt.
   place(box(160, 0.8, 0.45, material("#bfa887"), 0.12), group, 0, 0.3, -20.1);
   place(box(160, 0.1, 0.65, material("#ece0ca")), group, 0, 0.75, -20.1);
-  const court = new THREE.Mesh(
-    new THREE.CylinderGeometry(
-      FORUM_LAYOUT.courtRadius, FORUM_LAYOUT.courtRadius + 0.1, 0.13, 96,
-    ),
-    material("#e2d3ba", 0.65),
-  );
-  place(court, group, FORUM_LAYOUT.x, 0.03, FORUM_LAYOUT.z);
+  const court = new THREE.Mesh(alignPavingUV(new THREE.RingGeometry(
+    FOUNTAIN_LAYOUT.centralRadius, FOUNTAIN_LAYOUT.walkwayRadius - 0.14, 128,
+  ).rotateX(-Math.PI / 2), FORUM_LAYOUT.x, FORUM_LAYOUT.z), marble);
+  court.name = "Dry marble walkway around central fountain";
+  place(court, group, FORUM_LAYOUT.x, 0.095, FORUM_LAYOUT.z);
   court.receiveShadow = true;
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(FORUM_LAYOUT.courtRadius - 0.4, 0.035, 5, 128),
-    brass,
-  );
-  ring.rotation.x = Math.PI / 2;
-  place(ring, group, FORUM_LAYOUT.x, 0.12, FORUM_LAYOUT.z);
   const garden = material("#35402a", 0.92);
+  const gardenBase = boardwalkGardenDepth(16);
   for (const x of SIDE_GARDEN_CENTERS) {
-    place(box(2.8, 0.35, 32, material("#c7b395"), 0.16), group, x, 0.07, 0);
-    place(box(2.45, 0.05, 31.6, garden), group, x, 0.26, 0);
+    place(box(2.8, 0.35, gardenBase.depth, material("#c7b395"), 0.16), group, x, 0.07, gardenBase.z);
+    place(box(2.45, 0.05, gardenBase.depth - 0.4, garden), group, x, 0.26, gardenBase.z);
   }
   // Repeated small leaf clusters give the planting beds depth at a single draw call.
-  const leavesPerBed = 290;
   const leaves = new THREE.InstancedMesh(
     new THREE.IcosahedronGeometry(0.22, 1),
     material("#526638", 0.92),
-    LEAF_BEDS.length * leavesPerBed,
+    LEAF_COUNTS.reduce((sum, count) => sum + count, 0),
   );
   const transform = new THREE.Object3D();
   const tint = new THREE.Color();
@@ -189,9 +165,9 @@ export function createSiteGround() {
       z,
     );
     place(box(width, 0.05, depth, garden), group, x, 0.23, z);
-    const count = leavesPerBed;
+    const count = LEAF_COUNTS[bedIndex];
     for (let i = 0; i < count; i++) {
-      const seed = i + bedIndex * count;
+      const seed = i + bedIndex * 290;
       transform.position.set(
         x + (random(seed) - 0.5) * width,
         0.35 + random(seed + 1900) * 0.65,

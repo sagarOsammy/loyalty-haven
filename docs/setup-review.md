@@ -4,7 +4,7 @@ Updated 11 October 2026. This is the single current status document for the proj
 
 ## Release status
 
-The October scene changes are approved for publication to the existing Site and GitHub repository. Sites access was verified as owner-private on 11 October, with the owner as the sole allowed viewer. Version 12 was the last deployed version before this release preparation. Publication history is available through Sites and GitHub main.
+The October scene changes, including all nine ambience steps, are approved for publication to the existing Site and GitHub repository. Sites access was verified as owner-private on 11 October, with the owner as the sole allowed viewer. Version 13 was the last deployed version before the ambience release preparation. Publication history is available through Sites and GitHub main.
 
 - Supplied cruise ship, timed crossing, larger fading foamy wake and a 10-degree bow turn toward the viewer.
 - Supplied palms and enlarged right-side mountains, retained cloud sky, sunset horizon, water and directional sunlight.
@@ -12,13 +12,16 @@ The October scene changes are approved for publication to the existing Site and 
 - Grounded baggage with hangar-aligned axes, 15 percent enlargement, precise adjustment controls and approved additional offsets left 0 percent, right 75 percent.
 - Recoverable runtime-asset cleanup and personal GitHub author/committer identity `sagarOsammy`.
 
+The accepted ambience adds warm veined marble and inlays, animated foam and grander forum fountains, 24 path lamps, a continuous teak boardwalk, six supplied cabanas, twelve accent planters and fuller planting beds, six flowering trees, four cream-cushioned benches and four combined patio sets. Each supplied patio includes one umbrella, a table and four chairs. Original exports remain preserved alongside separate lightweight derivatives. Camera, building positions, ship placement and forum scale are retained.
+
 Membership IDs and expiry notes remain server-only. The saved public balances and personal source data retain their existing values. The September publication was version 8. Historical validation below remains dated to that release.
 
 ## October release validation
 
-Type checking and all 19 scene/data tests pass. The runtime asset audit validates 28 files and 22 self-contained GLBs. The archived 28 files reconcile byte counts and unchanged SHA-256 hashes. Local inbuilt-browser verification covers baggage controls, saved preferences, scene readiness and asset loading. Production packaging and publication are performed from the same pushed Site source commit, with the existing owner-private audience preserved.
+Type checking and all 19 scene/data tests pass. The final runtime asset audit validates 44 files and 29 self-contained GLBs. The 41 assets present before the finishing steps retain unchanged SHA-256 hashes, and the supplied tree, bench and patio originals match their preserved copies byte-for-byte. Local inbuilt-browser verification covers desktop and phone layouts, all alliance selections, Accor construction, replay, fountain pause/resume and both quality modes. The final matching desktop view recorded 60 to 62 fps. Production packaging and publication use the same pushed Site source commit, with the existing owner-private audience preserved.
 
 See [cleanup and release preparation](release-20261011.md) for the inventory classifications and author-correction mechanism.
+See [finishing-step validation](finishing-steps-20261011.md) for geometry counts, control checks, rendering measurements and preserved sources.
 
 ## What remains
 

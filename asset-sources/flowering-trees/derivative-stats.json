@@ -1,0 +1,205 @@
+{
+  "schema": "loyalty-haven-flowering-tree-derivative-1",
+  "source": {
+    "path": "asset-sources/flowering-trees/source/flower.glb",
+    "bytes": 2231444,
+    "sha256": "94f7b0539437fee36f3836fed0a3997a8515b9a472c0f30c5601631a8e38f86e",
+    "stats": {
+      "objects": 1,
+      "vertices": 111752,
+      "polygons": 195138,
+      "triangles": 195138,
+      "boundsBlender": {
+        "min": [
+          -0.5,
+          -0.47088623046875,
+          -0.41534423828125
+        ],
+        "max": [
+          0.5,
+          0.47088623046875,
+          0.41534423828125
+        ]
+      },
+      "dimensionsBlender": [
+        1.0,
+        0.9417724609375,
+        0.8306884765625
+      ],
+      "meshes": [
+        {
+          "name": "tripo_node_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+          "vertices": 111752,
+          "polygons": 195138,
+          "triangles": 195138,
+          "dimensions": [
+            1.0,
+            0.9417724609375,
+            0.8306884765625
+          ],
+          "materials": [
+            "tripo_material_a7c558be-b604-45e3-8e01-db3e10dcdd70"
+          ]
+        }
+      ]
+    },
+    "images": [
+      {
+        "name": "Color_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+        "width": 4096,
+        "height": 4096,
+        "packed": true,
+        "filepath": ""
+      }
+    ]
+  },
+  "transform": {
+    "sourceDimensionsBefore": [
+      1.0,
+      0.9417724609375,
+      0.8306884765625
+    ],
+    "sourceVerticalAxisBlender": "X",
+    "targetHeight": 4.2,
+    "uniformScale": 5.056047024246878,
+    "grounding": "minimum Blender Z moved to 0, GLB exporter writes Y-up",
+    "normalizedDimensions": [
+      5.056046962738037,
+      4.761645793914795,
+      4.199999809265137
+    ]
+  },
+  "imagesBeforeResize": [
+    {
+      "name": "Color_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+      "width": 4096,
+      "height": 4096,
+      "packed": true,
+      "filepath": ""
+    },
+    {
+      "name": "Render Result",
+      "width": 0,
+      "height": 0,
+      "packed": false,
+      "filepath": ""
+    }
+  ],
+  "imagesAfterResize": [
+    {
+      "name": "Color_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+      "width": 2048,
+      "height": 2048,
+      "packed": true,
+      "filepath": ""
+    },
+    {
+      "name": "Render Result",
+      "width": 0,
+      "height": 0,
+      "packed": false,
+      "filepath": ""
+    }
+  ],
+  "decimation": {
+    "beforeTriangles": 195138,
+    "afterTriangles": 30246,
+    "ratioRequested": 0.155
+  },
+  "runtimeBeforeExport": {
+    "objects": 1,
+    "vertices": 24983,
+    "polygons": 30246,
+    "triangles": 30246,
+    "boundsBlender": {
+      "min": [
+        -2.529980421066284,
+        -2.38277268409729,
+        -0.0010879039764404297
+      ],
+      "max": [
+        2.5316975116729736,
+        2.383166551589966,
+        4.200642108917236
+      ]
+    },
+    "dimensionsBlender": [
+      5.061677932739258,
+      4.765939235687256,
+      4.201729774475098
+    ],
+    "meshes": [
+      {
+        "name": "tripo_node_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+        "vertices": 24983,
+        "polygons": 30246,
+        "triangles": 30246,
+        "dimensions": [
+          5.0616774559021,
+          4.765939235687256,
+          4.201729774475098
+        ],
+        "materials": [
+          "tripo_material_a7c558be-b604-45e3-8e01-db3e10dcdd70"
+        ]
+      }
+    ]
+  },
+  "runtime": {
+    "path": "public/assets/flowering-tree-tripo.glb",
+    "bytes": 1350564,
+    "sha256": "5e1f6bc8dec6ddc830f6f5055a0e80976bdf7a2b06e1d2ee54b20549af883313",
+    "stats": {
+      "objects": 1,
+      "vertices": 25165,
+      "polygons": 30246,
+      "triangles": 30246,
+      "boundsBlender": {
+        "min": [
+          -2.529980421066284,
+          -2.38277268409729,
+          -0.0010879039764404297
+        ],
+        "max": [
+          2.5316975116729736,
+          2.383166551589966,
+          4.200642108917236
+        ]
+      },
+      "dimensionsBlender": [
+        5.061677932739258,
+        4.765939235687256,
+        4.201729774475098
+      ],
+      "meshes": [
+        {
+          "name": "tripo_node_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+          "vertices": 25165,
+          "polygons": 30246,
+          "triangles": 30246,
+          "dimensions": [
+            5.0616774559021,
+            4.765939235687256,
+            4.201729774475098
+          ],
+          "materials": [
+            "tripo_material_a7c558be-b604-45e3-8e01-db3e10dcdd70"
+          ]
+        }
+      ]
+    },
+    "images": [
+      {
+        "name": "Color_a7c558be-b604-45e3-8e01-db3e10dcdd70",
+        "width": 2048,
+        "height": 2048,
+        "packed": true,
+        "filepath": ""
+      }
+    ]
+  },
+  "preview": {
+    "source": "asset-sources/flowering-trees/source-preview.png",
+    "derivative": "asset-sources/flowering-trees/derivative-preview.png"
+  }
+}
