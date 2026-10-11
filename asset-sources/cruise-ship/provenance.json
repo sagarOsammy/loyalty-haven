@@ -1,0 +1,84 @@
+{
+  "source": "asset-sources/cruise-ship/source/tripo_pbr_model_9f2828ec-aab5-4b3b-b9e7-6b65e54efc37.fbx",
+  "sourceSha256": "ffb7aa58b3144e91fdd3d0596f9376cdd14caeb66ded43eb61eb34f469f2b666",
+  "sourceBytes": 5732124,
+  "reference": "public/assets/cruise-ship.glb",
+  "referenceSha256": "182d0757910d7e68a67b9dcb56c2329072a2e588aa0a4ec00e445d3f348d1959",
+  "runtime": "public/assets/cruise-ship-tripo.glb",
+  "runtimeSha256": "4294eed97c8d1e53cf5b0ae47ee1076c882e4aecb400b0f34f4b0d7656dc89ce",
+  "runtimeBytes": 3002240,
+  "generator": "asset-sources/cruise-ship/prepare_cruise_ship.py",
+  "generatorSha256": "71ed9b07aab194a908c5b06cfc028997d999d153aca1475a5645f3ab2111acfc",
+  "sourceTriangles": 52138,
+  "runtimeTriangles": 52138,
+  "sourceBoundsBlender": {
+    "min": [
+      -0.08635944873094559,
+      -0.4926456809043884,
+      -0.11199524253606796
+    ],
+    "max": [
+      0.08655880391597748,
+      0.4917941391468048,
+      0.11148218810558319
+    ]
+  },
+  "runtimeBoundsBlender": {
+    "min": [
+      -1.9541221857070923,
+      -11.125,
+      -0.924710214138031
+    ],
+    "max": [
+      1.9541221857070923,
+      11.125,
+      4.126255512237549
+    ]
+  },
+  "referenceLength": 22.25,
+  "referenceDraftFraction": 0.18307609843583209,
+  "scale": 22.601685621839458,
+  "sourceWaterlineZ": -0.07108186780975342,
+  "sourceImages": [
+    {
+      "name": "tripo_image_9f2828ec_0",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "embedded": true
+    },
+    {
+      "name": "tripo_image_9f2828ec_1",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "embedded": true
+    },
+    {
+      "name": "tripo_image_9f2828ec_2",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "embedded": true
+    },
+    {
+      "name": "tripo_image_9f2828ec_3",
+      "dimensions": [
+        4096,
+        4096
+      ],
+      "embedded": true
+    }
+  ],
+  "transformations": [
+    "Retain all mesh polygons, UVs and four supplied PBR maps",
+    "Uniformly match original ship length and proportional draft, center horizontally",
+    "Bake FBX transform, turn 180 degrees to match reference bow direction, export GLB with Y up",
+    "Reduce 4096px textures to 2048px and embed, JPEG quality 92"
+  ],
+  "scope": "Local replacement and review, public deployment was not requested",
+  "origin": "User-supplied Tripo FBX, licensing not supplied with the file"
+}

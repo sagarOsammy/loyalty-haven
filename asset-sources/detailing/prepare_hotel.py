@@ -19,7 +19,7 @@ from mathutils import Matrix, Vector
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SOURCE_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
-SOURCE_DIR = os.path.join(SOURCE_ROOT, "public", "assets")
+SOURCE_DIR = os.path.join(SOURCE_ROOT, "asset-sources", "retired-runtime", "assets")
 ASSETS = ("hotel-base.glb", "hotel-level.glb", "hotel-roof.glb")
 OUT_DIR = os.environ.get("LOYALTY_HOTEL_DETAIL_OUT", "/private/tmp/loyalty-hotel-detail-final-20260914")
 PREVIEW_NAME = "hotel-material-detail-preview.png"
@@ -578,7 +578,7 @@ def main():
         "schema": "loyalty-v2-hotel-material-detail-1",
         "created_by": "create_hotel_detail.py",
         "source_root": SOURCE_ROOT,
-        "source_assets": "public/assets/hotel-*.glb",
+        "source_assets": "asset-sources/retired-runtime/assets/hotel-*.glb",
         "outputs": records,
         "preview": PREVIEW_NAME,
         "material_method": {

@@ -44,6 +44,8 @@ import {
   type Selection,
 } from "../lib/selection";
 import type { HavenWorld, WorldEvent, WorldOptions } from "../lib/scene/world";
+import BaggageEditor from "../components/baggage-editor";
+import { BAGGAGE_STORAGE_KEY, DEFAULT_BAGGAGE_ADJUSTMENTS, validBaggageAdjustments, type BaggageAdjustments } from "../lib/baggage-settings";
 
 const alliances: {
   id: AirlineAlliance;
@@ -96,6 +98,8 @@ export default function Haven() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const worldRef = useRef<HavenWorld | null>(null);
   const [selection, setSelection] = useState<Selection>(EMPTY_SELECTION);
+  const [baggage, setBaggage] = useState<BaggageAdjustments>(DEFAULT_BAGGAGE_ADJUSTMENTS);
+  const [baggageOpen, setBaggageOpen] = useState(false);
   const [motion, setMotion] = useState(true);
   const [quality, setQuality] = useState<WorldOptions["quality"]>("cinematic");
   const [status, setStatus] = useState<"loading" | "ready" | "error">(
@@ -112,7 +116,7 @@ export default function Haven() {
     "idle" | "loading" | "ready" | "anonymous" | "forbidden" | "unconfigured" | "error"
   >("idle");
   const [privateData, setPrivateData] = useState<PrivateResponse | null>(null);
-  const stateRef = useRef({ selection, motion, quality, fixture });
+  const stateRef = useRef({ selection, motion, quality, fixture, baggage });
   const snapshot = useMemo(
     () => (fixture ? constructionFixture(publicSnapshot) : publicSnapshot),
     [fixture],
@@ -127,8 +131,20 @@ export default function Haven() {
   const activeAlliance = alliances.find((a) => a.id === selection.alliance);
 
   useEffect(() => {
-    stateRef.current = { selection, motion, quality, fixture };
-  }, [selection, motion, quality, fixture]);
+    stateRef.current = { selection, motion, quality, fixture, baggage };
+  }, [selection, motion, quality, fixture, baggage]);
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(BAGGAGE_STORAGE_KEY);
+      if (stored) {
+        const value: unknown = JSON.parse(stored);
+        if (validBaggageAdjustments(value)) setBaggage(value);
+      }
+    } catch { /* Keep the hangar-aligned default when storage is unavailable. */ }
+  }, []);
+  useEffect(() => {
+    worldRef.current?.setBaggageAdjustments(baggage);
+  }, [baggage, status]);
   useEffect(() => {
     let cancelled = false;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -177,6 +193,7 @@ export default function Haven() {
           );
           worldRef.current = world;
           world.setSelection(current.selection);
+          world.setBaggageAdjustments(current.baggage);
         } catch {
           setStatus("error");
           setNotice(
@@ -285,6 +302,9 @@ export default function Haven() {
           aria-label="3D resort with an airline hangar, a hotel, alliance forum and moving luggage. Use the controls below or select an object to inspect its points."
         />
         <div className="scene-vignette" />
+        {baggageOpen && status === "ready" && worldRef.current && <BaggageEditor
+          world={worldRef.current} adjustments={baggage} onChange={setBaggage} onClose={() => setBaggageOpen(false)}
+        />}
       </div>
       <header className="masthead">
         <Link href="/" className="brand-seal" aria-label="My Loyalty Haven home">
@@ -639,6 +659,9 @@ export default function Haven() {
                   </SelectContent>
                 </Select>
               </div>
+              <button className="review-button" disabled={status !== "ready"} onClick={() => { setPanel(null); setBaggageOpen(true); }}>
+                Adjust baggage belts <SlidersHorizontal size={16} />
+              </button>
               <button className="review-button" onClick={reviewConstruction}>
                 Preview three terrace construction <ArrowUpRight size={16} />
               </button>

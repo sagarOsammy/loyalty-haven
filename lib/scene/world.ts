@@ -13,7 +13,16 @@ import {
   ownMaterials,
   type AssetKey,
 } from "./assets";
-import { approachProgress, beltPose, smootherStep } from "./animation";
+import { approachProgress, arrivalPose, hangarDoorProgress, smootherStep } from "./animation";
+import { BAGGAGE_LAYOUT, baggageFrame, baggageTransform, seatLuggage } from "./baggage";
+import { DEFAULT_BAGGAGE_ADJUSTMENTS, type BaggageAdjustments } from "../baggage-settings";
+import { HangarDoors, HANGAR_BAY_CENTERS } from "./hangar";
+import { PALM_PLACEMENTS, PLANTER_PLACEMENTS } from "./landscape";
+import { FORUM_LAYOUT } from "./forum";
+import { LabelPass } from "./labels";
+import { SunsetAtmosphere, SUNSET_SKY } from "./sunset";
+import { CruiseClock, CruiseRoute, CRUISE_START, CRUISE_BOW_TURN, CRUISE_WAKE_LIFETIME, CRUISE_WAKE_SCALE } from "./cruise";
+import { PropellerWake } from "./wake";
 import {
   box,
   constructionFrame,
@@ -25,6 +34,11 @@ import {
 } from "./geometry";
 import { visibleAircraft, visibleHotels, type Selection } from "../selection";
 import type { PublicHotel, PublicPartner, PublicSnapshot } from "../snapshot";
+
+// Center the ship on the annotated desktop spot (291, 171), on the sea surface.
+const SHIP_POSITION = CRUISE_START.toArray() as [number,number,number];
+// Compensate for the greater distance to preserve the approved visible ship size.
+const SHIP_SCALE = 3.082244;
 
 export type WorldOptions = {
   motion: boolean;
@@ -69,17 +83,27 @@ export class HavenWorld {
   private aircraft: Aircraft[] = [];
   private floors: Floor[] = [];
   private bags: Bag[] = [];
+  private belts: (THREE.Group | undefined)[] = [];
+  private baggageAdjustments = DEFAULT_BAGGAGE_ADJUSTMENTS;
+  private baggageFrames = [new THREE.Matrix4(),new THREE.Matrix4()];
   private palms: THREE.Group[] = [];
   private staticRoot = new THREE.Group();
   private hotelRoot = new THREE.Group();
   private aircraftRoot = new THREE.Group();
+  private hangarDoors = new HangarDoors();
   private bagRoot = new THREE.Group();
-  private forumSpinner = new THREE.Group();
+  private forumRoot = new THREE.Group();
   private siteFrame: THREE.Group;
   private hotelBase?: THREE.Group;
   private hotelRoof?: THREE.Group;
   private ship?: THREE.Group;
+  private cruise!: CruiseRoute;
+  private cruiseClock: CruiseClock;
+  private shipShadow: THREE.DirectionalLight;
+  private wake = new PropellerWake();
+  private shadowUpdatedAt = 0;
   private sea: Water;
+  private atmosphere: SunsetAtmosphere;
   private sun: THREE.DirectionalLight;
   private hdr?: THREE.DataTexture;
   private pmrem?: THREE.WebGLRenderTarget;
@@ -108,6 +132,7 @@ export class HavenWorld {
   ) {
     this.snapshot = snapshot;
     this.options = options;
+    this.cruiseClock = new CruiseClock(options.motion);
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
@@ -116,34 +141,43 @@ export class HavenWorld {
     });
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 0.82;
+    this.renderer.toneMappingExposure = 0.9;
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
     this.renderer.localClippingEnabled = true;
     this.scene.background = new THREE.Color("#c4c0af");
-    this.scene.fog = new THREE.FogExp2("#b4bfb8", 0.0024);
+    this.scene.fog = new THREE.FogExp2("#c9aaa0", 0.00045);
     this.camera.position.set(23, 33, 68);
     this.camera.lookAt(0, 3, 0);
-    this.scene.add(new THREE.HemisphereLight("#cfddde", "#947556", 0.35));
-    this.sun = new THREE.DirectionalLight("#ffe0b2", 2.8);
-    this.sun.position.set(-32, 30, -15);
+    this.scene.add(new THREE.HemisphereLight("#d2dced", "#92704c", 0.75));
+    this.sun = new THREE.DirectionalLight("#ffc078", 4.2);
+    this.sun.position.set(55, 40, -90);
     this.sun.target.position.set(0, 0, 0);
     this.sun.castShadow = true;
     this.sun.shadow.mapSize.set(2048, 2048);
     Object.assign(this.sun.shadow.camera, {
-      left: -45,
-      right: 45,
-      top: 42,
-      bottom: -40,
+      left: -70,
+      right: 70,
+      top: 65,
+      bottom: -65,
       near: 1,
-      far: 150,
+      far: 220,
     });
     this.sun.shadow.normalBias = 0.025;
     this.sun.shadow.bias = -0.00018;
     this.sun.shadow.radius = 3;
     this.scene.add(this.sun, this.sun.target);
-    const fill = new THREE.DirectionalLight("#b8d4e1", 0.3);
+    // A shadow-only solar map follows the offshore ship without adding illumination.
+    this.shipShadow = new THREE.DirectionalLight("#ffc078",0);
+    this.shipShadow.name = "MovingShipSunShadow";
+    this.shipShadow.castShadow = true;
+    this.shipShadow.shadow.mapSize.set(1024,1024);
+    Object.assign(this.shipShadow.shadow.camera,{left:-75,right:75,top:75,bottom:-75,near:20,far:220});
+    this.shipShadow.shadow.normalBias = 0.04;
+    this.shipShadow.shadow.bias = -0.00015;
+    this.scene.add(this.shipShadow,this.shipShadow.target);
+    const fill = new THREE.DirectionalLight("#b8c9e1", 0.4);
     fill.position.set(18, 14, 30);
     this.scene.add(fill);
     this.scene.add(
@@ -162,22 +196,45 @@ export class HavenWorld {
         this.invalidate();
       },
     );
-    this.sea = new Water(new THREE.PlaneGeometry(1800, 1800), {
+    this.atmosphere = new SunsetAtmosphere();
+    this.scene.add(this.atmosphere.root);
+    this.sea = new Water(new THREE.PlaneGeometry(1, 1), {
       textureWidth: 512,
       textureHeight: 512,
       waterNormals: waterNormal,
       sunDirection: this.sun.position.clone().normalize(),
-      sunColor: 0xffdd9d,
-      waterColor: 0x128b99,
-      distortionScale: 0.4,
+      sunColor: 0xffbe68,
+      waterColor: 0x294e65,
+      alpha: 0.92,
+      distortionScale: 3.0,
       fog: true,
     });
     this.sea.rotation.x = -Math.PI / 2;
     this.sea.position.set(0, -1.12, -550);
-    this.scene.add(this.sea);
+    this.scene.add(this.sea,this.wake.root);
+    this.sea.material.transparent = true;
+    this.sea.receiveShadow = true;
+    this.sea.material.uniforms.size.value = 14;
+    this.sea.material.fragmentShader = this.sea.material.fragmentShader.replace(
+      "gl_FragColor = vec4( outgoingLight, alpha );",
+      "gl_FragColor = vec4( outgoingLight, mix(alpha, 0.995, smoothstep(50.0, 220.0, distance)) );",
+    ).replace(
+      "vec3 scatter = max( 0.0, dot( surfaceNormal, eyeDirection ) ) * waterColor;",
+      "vec3 scatter = (0.38 + 0.5 * max(0.0, dot(surfaceNormal, eyeDirection))) * waterColor;",
+    ).replace(
+      "sunColor * diffuseLight * 0.3 + scatter",
+      "sunColor * diffuseLight * 0.06 + scatter",
+    ).replace(
+      "reflectionSample + specularLight, reflectance",
+      "reflectionSample + specularLight * 4.0, reflectance * 0.5",
+    );
     const reflectWater = this.sea.onBeforeRender.bind(this.sea);
     this.sea.onBeforeRender = (...args) => {
-      if (!args[1].overrideMaterial) reflectWater(...args);
+      if (!args[1].overrideMaterial) {
+        const visible = this.wake.root.visible;
+        this.wake.root.visible = false;
+        try { reflectWater(...args); } finally { this.wake.root.visible = visible; }
+      }
     };
     this.composer = new EffectComposer(this.renderer);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
@@ -187,6 +244,7 @@ export class HavenWorld {
       maxblur: 0.004,
     });
     this.composer.addPass(this.dof);
+    this.composer.addPass(new LabelPass(this.scene, this.camera));
     this.composer.addPass(new SMAAPass());
     this.composer.addPass(new OutputPass());
     this.assets = new AssetPool((key, failed) => {
@@ -216,6 +274,18 @@ export class HavenWorld {
 
   private async loadLighting() {
     try {
+      const [mountains] = await Promise.all([this.assets.instance("mountains"), this.atmosphere.load()]);
+      if (!this.mounted) {
+        this.assets.releaseInstance(mountains);
+        return;
+      }
+      this.atmosphere.useMountain(mountains);
+      this.atmosphere.fit(this.camera, this.sea, this.height);
+      this.canvas.dataset.mountainAsset = ASSETS.mountains;
+      delete this.canvas.dataset.cloudAsset;
+      this.canvas.dataset.cloudCount = "0";
+      if (!this.mounted) return;
+      this.canvas.dataset.sunsetSky = SUNSET_SKY;
       const hdr = await new HDRLoader().loadAsync(
         "/assets/belfast-sunset-2k.hdr",
       );
@@ -229,12 +299,8 @@ export class HavenWorld {
       this.pmrem = generator.fromEquirectangular(hdr);
       generator.dispose();
       this.scene.environment = this.pmrem.texture;
-      this.scene.environmentIntensity = 0.6;
-      this.scene.background = hdr;
-      this.scene.backgroundIntensity = 0.55;
-      this.scene.backgroundBlurriness = 0.04;
-      this.scene.backgroundRotation.y = 1.15;
-      this.scene.environmentRotation.y = 1.15;
+      this.scene.environmentIntensity = 0.4;
+      this.scene.environmentRotation.y = -0.6;
       this.invalidate();
     } catch {
       if (!this.mounted) return;
@@ -275,9 +341,18 @@ export class HavenWorld {
   }
 
   private async populate() {
+    place(this.forumRoot, this.staticRoot, FORUM_LAYOUT.x, FORUM_LAYOUT.y, FORUM_LAYOUT.z);
+    this.forumRoot.scale.setScalar(FORUM_LAYOUT.scale);
+    this.canvas.dataset.forumScale = String(this.forumRoot.scale.x);
     const settled = await Promise.allSettled([
-      this.asset("hangar", this.staticRoot, [-18, 0, -4]),
-      this.asset("forum", this.staticRoot, [0, 0.08, 13]),
+      this.asset("hangar", this.staticRoot, [-18, 0, -4]).then((hangar) => {
+        if (hangar) this.hangarDoors.bind(hangar);
+      }),
+      this.asset("forum", this.forumRoot, [0, 0, 0]).then((forum) => {
+        // The authored blank plaque duplicates the named entrance sign.
+        const blank = forum?.getObjectByName("ForumRuntimePlaque");
+        if (blank) blank.visible = false;
+      }),
       this.asset("telescope", this.staticRoot, [9, 0.02, 21], 2.6, -0.65),
       this.asset("hotelBase", this.hotelRoot, [17, 0, -2]).then((o) => {
         this.hotelBase = o;
@@ -287,11 +362,18 @@ export class HavenWorld {
         this.hotelRoof = o;
         if (o) o.visible = false;
       }),
-      this.asset("ship", this.scene, [-35, -1.12, -85], 1.4, 1.1).then((o) => {
+      this.asset("ship", this.scene, SHIP_POSITION, SHIP_SCALE, 1.1).then((o) => {
         this.ship = o;
+        if (o) {
+          this.canvas.dataset.shipAsset = ASSETS.ship;
+          this.canvas.dataset.shipScale = String(o.scale.x);
+        }
       }),
-      this.asset("belt", this.staticRoot, [-19, 0, 17], 1.15, -0.12),
-      this.asset("belt", this.staticRoot, [20, 0, 16], 1.15, 0.12),
+      ...BAGGAGE_LAYOUT.centers.map(({x,z},side) =>
+        this.asset("belt",this.staticRoot,[x,0,z],BAGGAGE_LAYOUT.scale,BAGGAGE_LAYOUT.heading).then(belt => {
+          this.belts[side] = belt;
+          this.fitBaggage();
+        })),
       this.makePalms(),
       this.makeLuggage(),
       ...(["united", "avianca", "airCanada", "hotelLevel"] as AssetKey[]).map(
@@ -313,13 +395,12 @@ export class HavenWorld {
       3.7,
     );
     place(
-      plaque("ALLIANCE FORUM", "YOUR CONNECTIONS, WORLDWIDE", 8.0, 1.3),
-      this.staticRoot,
+      plaque("ALLIANCE FORUM", "YOUR CONNECTIONS, WORLDWIDE", 8.0, 0.85),
+      this.forumRoot,
       0,
-      4.5,
-      17.2,
+      4.6,
+      4.42,
     );
-    this.makeForum();
     this.ready = true;
     this.canvas.dataset.sceneReady = "true";
     this.canvas.dataset.assetFailures = [...this.assets.failures].join(",");
@@ -330,22 +411,9 @@ export class HavenWorld {
   }
 
   private async makePalms() {
-    const positions: [number, number, number, number][] = [
-      [-32, -14, 1.2, 1],
-      [-31, -4, 0.9, 2],
-      [-32, 8, 1.05, 0],
-      [-30, 21, 1.15, 3],
-      [31, -14, 1.1, 0.4],
-      [31, -4, 0.92, 2.1],
-      [32, 6, 1.05, 3.4],
-      [30, 19, 1.2, 1.3],
-      [-5, -16, 0.9, 1.1],
-      [4, -16, 0.8, 3.6],
-      [29, -16, 1.1, 0],
-      [-32, -18, 1.05, 2.7],
-    ];
+    // Move the entire western tree group and its planters six metres left.
     await this.assets.get("palm");
-    for (const [x, z, scale, heading] of positions) {
+    for (const [x, z, scale, heading] of PALM_PLACEMENTS) {
       const palm = await this.asset(
         "palm",
         this.staticRoot,
@@ -355,16 +423,10 @@ export class HavenWorld {
       );
       if (palm) this.palms.push(palm);
     }
+    this.canvas.dataset.palmAsset = ASSETS.palm;
+    this.canvas.dataset.palmCount = String(this.palms.length);
     await this.assets.get("planter");
-    for (const [x, z] of [
-      [-8, 8],
-      [8, 8],
-      [-29, 10],
-      [29, 10],
-      [8, -15],
-      [-29, -15],
-      [27, -10],
-    ]) {
+    for (const [x, z] of PLANTER_PLACEMENTS) {
       await this.asset("planter", this.staticRoot, [x, 0, z], 0.55);
     }
   }
@@ -388,8 +450,7 @@ export class HavenWorld {
         const type = available[(i + side) % available.length];
         const model = await this.assets.instance(type);
         model.scale.setScalar(type === "duffel" ? 1.0 : 1.08);
-        const bounds = new THREE.Box3().setFromObject(model);
-        model.position.y -= bounds.min.y;
+        seatLuggage(model);
         root.add(model);
         const record = records[(i + side * 4) % records.length];
         root.userData.detailId = record.id;
@@ -409,37 +470,6 @@ export class HavenWorld {
         });
       }
     }
-  }
-
-  private makeForum() {
-    place(this.forumSpinner, this.staticRoot, 0, 1.1, 13);
-    const alliances = this.snapshot.alliances.filter(
-      (a) => a.category === "airline",
-    );
-    alliances.forEach((alliance, index) => {
-      const angle = (index / 3) * Math.PI * 2;
-      const column = box(
-        2.6,
-        2.6,
-        0.18,
-        material(palette.bronze, 0.32, 0.45),
-        0.1,
-      );
-      const board = plaque(
-        alliance.name.toUpperCase(),
-        `${alliance.totalPoints.toLocaleString("en-US")} POINTS`,
-        2.55,
-        2.25,
-      );
-      const panel = new THREE.Group();
-      panel.add(column);
-      board.position.z = 0.13;
-      panel.add(board);
-      panel.position.set(Math.sin(angle) * 2.4, 1.4, Math.cos(angle) * 2.4);
-      panel.rotation.y = angle;
-      panel.userData.alliance = alliance.id;
-      this.forumSpinner.add(panel);
-    });
   }
 
   setSelection(selection: Selection, snapshot = this.snapshot) {
@@ -474,9 +504,11 @@ export class HavenWorld {
               if (!key) return null;
               const model = await this.assets.instance(key);
               const root = new THREE.Group();
-              model.scale.setScalar(0.66);
+              // Keep detailed wings inside the fixed rear portals.
+              const size = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
+              model.scale.setScalar(Math.min(0.6, 6.95 / size.x, 7.3 / size.z));
               const bounds = new THREE.Box3().setFromObject(model);
-              model.position.y -= bounds.min.y;
+              model.position.y += 0.35 - bounds.min.y;
               root.add(model);
               root.userData.detailId = partner.id;
               return {
@@ -484,7 +516,7 @@ export class HavenWorld {
                 partner,
                 index,
                 destination: new THREE.Vector3(
-                  -26.3 + index * 8.3,
+                  HANGAR_BAY_CENTERS[index],
                   0.08,
                   -3.1 + index * 0.35,
                 ),
@@ -511,6 +543,7 @@ export class HavenWorld {
       });
       return;
     }
+    this.canvas.dataset.forumAlliance = selection.alliance ?? "none";
     if (aircraftChanged) {
       this.aircraft.forEach(({ root }) => this.remove(root));
       this.aircraft = planeResults.flatMap((result) =>
@@ -628,10 +661,44 @@ export class HavenWorld {
   }
 
   setOptions(options: WorldOptions) {
+    this.cruiseClock.setRunning(options.motion,performance.now());
     this.options = options;
     this.lastTime = 0;
     this.resize();
     this.invalidate();
+  }
+
+  setBaggageAdjustments(adjustments: BaggageAdjustments) {
+    this.baggageAdjustments = adjustments.map(belt => ({ ...belt })) as BaggageAdjustments;
+    this.fitBaggage();
+    this.shadowDirty = true;
+    this.invalidate();
+  }
+
+  getBaggageGuides() {
+    const project = (point: THREE.Vector3) => {
+      const p = point.project(this.camera);
+      return [(p.x+1)*this.width/2,(1-p.y)*this.height/2] as [number,number];
+    };
+    return {
+      width: this.width, height: this.height,
+      hangar: [project(new THREE.Vector3(-30.5,0.28,3.371116824448109)),project(new THREE.Vector3(-5.5,0.28,3.371116824448109))],
+      belts: this.baggageFrames.map(frame => [-3.15,3.15].map(x =>
+        project(new THREE.Vector3(x*BAGGAGE_LAYOUT.scale,0.08,2.35*BAGGAGE_LAYOUT.scale).applyMatrix4(frame)),
+      )),
+    };
+  }
+
+  private fitBaggage() {
+    this.baggageFrames = BAGGAGE_LAYOUT.centers.map((_,side) => baggageFrame(side,this.baggageAdjustments[side]));
+    this.belts.forEach((belt,side) => {
+      if (!belt) return;
+      belt.matrixAutoUpdate = false;
+      belt.matrix.copy(this.baggageFrames[side]).scale(new THREE.Vector3().setScalar(BAGGAGE_LAYOUT.scale));
+      belt.matrixWorldNeedsUpdate = true;
+    });
+    this.canvas.dataset.baggagePerspective = "hangar-ground-axis";
+    this.canvas.dataset.baggageAdjustments = JSON.stringify(this.baggageAdjustments);
   }
 
   private resize = () => {
@@ -645,22 +712,58 @@ export class HavenWorld {
     const target = new THREE.Vector3(0, 3, 3);
     const viewDirection = new THREE.Vector3(8, 22, 62);
     // Fit the whole resort in portrait panels as well as wide windows.
-    const distance = Math.max(
+    let distance = Math.max(
       viewDirection.length(),
       82 /
         (2 *
           Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2)) *
           this.camera.aspect),
     );
-    this.camera.position
-      .copy(target)
-      .addScaledVector(viewDirection.normalize(), distance);
-    this.camera.lookAt(target);
-    this.dof.materialBokeh.uniforms.focus.value = distance + 7;
+    viewDirection.normalize();
     this.camera.updateProjectionMatrix();
+    const controls = this.canvas.closest(".haven")
+      ?.querySelector<HTMLElement>(".resort-controls");
+    const bottom = controls
+      ? Math.min(this.height, controls.getBoundingClientRect().top - rect.top - 24)
+      : this.height - 24;
+    const safeBottom = 1 - 2 * bottom / this.height;
+    // Keep the enlarged forecourt above the controls in short, wide windows.
+    for (let attempt = 0; attempt < 40; attempt++) {
+      this.camera.position.copy(target).addScaledVector(viewDirection, distance);
+      this.camera.lookAt(target);
+      this.camera.updateMatrixWorld(true);
+      let lowest = 1;
+      for (let point = 0; point < 32; point++) {
+        const angle = point * Math.PI / 16;
+        const edge = new THREE.Vector3(
+          FORUM_LAYOUT.x + Math.cos(angle) * (FORUM_LAYOUT.framingRadius + 0.1),
+          0,
+          FORUM_LAYOUT.z + Math.sin(angle) * (FORUM_LAYOUT.framingRadius + 0.1),
+        ).project(this.camera);
+        lowest = Math.min(lowest, edge.y);
+      }
+      if (lowest >= safeBottom) break;
+      distance *= 1.025;
+    }
+    this.fitBaggage();
+    this.dof.materialBokeh.uniforms.focus.value = distance + 7;
+    this.atmosphere.fit(this.camera, this.sea, this.height);
+    this.sun.position.copy(this.atmosphere.lightDirection).multiplyScalar(115);
+    this.sun.shadow.camera.updateProjectionMatrix();
+    this.cruise = new CruiseRoute(this.camera,this.atmosphere.horizonFraction);
+    this.canvas.dataset.shipTarget = this.cruise.target.toArray().map(v => v.toFixed(4)).join(",");
+    this.canvas.dataset.shipArrivalSeconds = "150";
+    this.sea.material.uniforms.sunDirection.value.copy(this.atmosphere.lightDirection);
+    this.canvas.dataset.horizonFraction = this.atmosphere.horizonFraction.toFixed(4);
+    const sunScreen = this.atmosphere.sunPosition.clone().project(this.camera);
+    this.canvas.dataset.sunScreen = [(sunScreen.x + 1) * this.width / 2, (1 - sunScreen.y) * this.height / 2].map(v => v.toFixed(1)).join(",");
+    this.canvas.dataset.sunDirection = this.atmosphere.lightDirection.toArray().map(v => v.toFixed(4)).join(",");
+    this.canvas.dataset.waterAlpha = String(this.sea.material.uniforms.alpha.value);
+    this.shadowDirty = true;
     const dpr = Math.min(
       window.devicePixelRatio || 1,
-      this.options.quality === "cinematic" && !narrow ? 1.15 : 1.0,
+      this.options.quality === "cinematic" && !narrow ? 1.5 : 1.25,
+      Math.sqrt(4_000_000 / (this.width * this.height)),
     );
     this.renderer.setPixelRatio(dpr);
     this.renderer.setSize(this.width, this.height, false);
@@ -681,22 +784,31 @@ export class HavenWorld {
     const motion = this.options.motion;
     if (motion) this.phase += dt;
     let changing = false;
+    const openings = [0, 0, 0];
     for (const plane of this.aircraft) {
       const progress = approachProgress(this.phase, plane.started, plane.index);
-      const remaining = 1 - progress;
+      const pose = arrivalPose(progress);
+      const opening = hangarDoorProgress(this.phase, plane.started, plane.index);
+      openings[plane.index] = opening;
       plane.root.visible = progress > 0;
       plane.root.position.set(
-        plane.destination.x + remaining * 22,
-        plane.destination.y + remaining * remaining * 22,
-        plane.destination.z - remaining * 83,
+        plane.destination.x + pose.xOffset,
+        plane.destination.y + pose.height,
+        plane.destination.z + pose.zOffset,
       );
       plane.root.rotation.set(
-        -0.07 * Math.sin(progress * Math.PI),
-        0.2 * remaining,
-        -0.13 * Math.sin(progress * Math.PI),
+        pose.pitch,
+        pose.heading,
+        pose.roll,
       );
       if (progress < 1 && motion) changing = true;
+      if (opening > 0 && motion) changing = true;
     }
+    // Keep the rear shutters clear until the last aircraft has entered.
+    const opening = Math.max(...openings);
+    this.hangarDoors.setOpening(opening);
+    this.canvas.dataset.hangarDoors = [opening, opening, opening].map((p) => p.toFixed(3)).join(",");
+    this.canvas.dataset.arrivalDirection = "cruise-ship-to-rear-hangar";
     for (const floor of this.floors) {
       const progress = smootherStep((this.phase - floor.started) / 3.6);
       const base = 3 + floor.index * 3.5;
@@ -711,31 +823,44 @@ export class HavenWorld {
       this.hotelRoof.position.y =
         3 + this.floors.length * 3.5 + (1 - progress) * 4;
     }
-    this.forumSpinner.rotation.y = this.phase * 0.07;
-    const bagAngle = [-0.12, 0.12];
     this.bags.forEach((bag) => {
-      const pose = beltPose(bag.distance + this.phase * 0.42);
-      const angle = bagAngle[bag.side];
-      const x = pose.x * 1.15,
-        z = pose.z * 1.15;
-      bag.root.position.set(
-        (bag.side ? 20 : -19) + x * Math.cos(angle) + z * Math.sin(angle),
-        1.265,
-        (bag.side ? 16 : 17) - x * Math.sin(angle) + z * Math.cos(angle),
-      );
-      bag.root.rotation.y = pose.heading + angle;
+      bag.root.matrixAutoUpdate = false;
+      bag.root.matrix.copy(baggageTransform(this.baggageFrames[bag.side],bag.distance + this.phase * 0.42));
+      bag.root.matrixWorldNeedsUpdate = true;
     });
+    this.canvas.dataset.baggageScale = String(BAGGAGE_LAYOUT.scale);
+    this.canvas.dataset.baggageSurfaceY = String(BAGGAGE_LAYOUT.surfaceY);
+    this.canvas.dataset.baggageCenters = BAGGAGE_LAYOUT.centers.map(({x,z}) => `${x.toFixed(3)},${z.toFixed(3)}`).join("|");
     this.palms.forEach((palm, index) => {
       palm.rotation.z = Math.sin(this.phase * 0.55 + index * 1.3) * 0.009;
     });
     if (this.ship) {
-      this.ship.position.x = -35 + Math.sin(this.phase * 0.009) * 10;
-      this.ship.rotation.z = Math.sin(this.phase * 0.42) * 0.006;
+      const elapsed = this.cruiseClock.read(time);
+      const pose = this.cruise.pose(elapsed);
+      this.ship.position.copy(pose.position);
+      this.ship.rotation.set(0,pose.heading,pose.roll);
+      this.wake.update(this.cruise,elapsed,this.height);
+      this.canvas.dataset.shipBowTurnDegrees = String(THREE.MathUtils.radToDeg(CRUISE_BOW_TURN));
+      this.canvas.dataset.wakeLifetime = String(CRUISE_WAKE_LIFETIME);
+      this.canvas.dataset.wakeScale = String(CRUISE_WAKE_SCALE);
+      this.canvas.dataset.wakeSprayCount = String(this.wake.spray.geometry.getAttribute("position").count);
+      this.canvas.dataset.wakeActive = String(this.wake.mesh.visible);
+      this.shipShadow.target.position.copy(pose.position);
+      this.shipShadow.position.copy(pose.position).addScaledVector(this.atmosphere.lightDirection,130);
+      this.canvas.dataset.shipPosition = pose.position.toArray().map(value => value.toFixed(4)).join(",");
+      this.canvas.dataset.shipRoll = pose.roll.toFixed(6);
+      this.canvas.dataset.shipElapsed = elapsed.toFixed(3);
+      this.canvas.dataset.shipRouteTime = pose.routeTime.toFixed(3);
+      const screen = pose.position.clone().project(this.camera);
+      this.canvas.dataset.shipScreen = [(screen.x + 1) * this.width / 2,(1 - screen.y) * this.height / 2].map(v => v.toFixed(1)).join(",");
+      this.canvas.dataset.shipShadowDirection = this.atmosphere.lightDirection.toArray().map(v => v.toFixed(4)).join(",");
     }
     this.sea.material.uniforms["time"].value = this.phase * 0.18;
     this.assets.animate(this.phase);
-    if (this.shadowDirty || changing) {
+    if (this.shadowDirty || changing || (motion && time - this.shadowUpdatedAt >= 50)) {
       this.renderer.shadowMap.needsUpdate = true;
+      this.shadowUpdatedAt = time;
+      this.canvas.dataset.shadowUpdatedAt = time.toFixed(1);
       this.shadowDirty = false;
     }
     this.renderer.info.autoReset = false;
@@ -781,7 +906,7 @@ export class HavenWorld {
     );
     this.raycaster.setFromCamera(this.pointer, this.camera);
     const hits = this.raycaster.intersectObjects(
-      [this.aircraftRoot, this.hotelRoot, this.bagRoot, this.forumSpinner],
+      [this.aircraftRoot, this.hotelRoot, this.bagRoot],
       true,
     );
     for (const hit of hits) {
@@ -870,8 +995,10 @@ export class HavenWorld {
       this.onContextRestored,
     );
     document.removeEventListener("visibilitychange", this.onVisibility);
+    this.wake.dispose();
     this.assets.dispose([this.scene]);
     this.hdr?.dispose();
+    this.atmosphere.dispose();
     this.pmrem?.dispose();
     this.composer.passes.forEach((pass) => pass.dispose());
     this.composer.dispose();

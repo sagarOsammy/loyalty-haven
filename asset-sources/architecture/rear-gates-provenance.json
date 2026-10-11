@@ -1,0 +1,18 @@
+{
+  "source": "public/assets/hangar.glb",
+  "source_sha256": "9f47b7e3ce580be1455bd434895e9f5433c0317cf6b56200c779fe220ded8d2f",
+  "destination": "public/assets/hangar-rear-gates.glb",
+  "sha256": "b4b9bda8d9131f0c3f55912b27f7bdddbc0bf4a10b13bbc608e7f410b0202e90",
+  "transformation": "Preserve original hangar geometry and materials, articulate the three rear brown panels and their lower wall backings. Retain solid upper rear wall.",
+  "gate_nodes": [
+    "RearGate1",
+    "RearGate2",
+    "RearGate3"
+  ],
+  "gate_ceiling_y": 5.3,
+  "rear_wall_world_z": [
+    -11.341373920440674,
+    -11.063779830932617
+  ],
+  "license": "Derivative of the original locally authored hangar, no external assets."
+}

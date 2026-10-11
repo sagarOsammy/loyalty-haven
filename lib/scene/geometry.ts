@@ -1,3 +1,5 @@
+import { SIDE_GARDEN_CENTERS, LEAF_BEDS } from "./landscape";
+import { FORUM_LAYOUT, AVENUE_LAYOUT } from "./forum";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 
@@ -53,6 +55,7 @@ export function plaque(
   subtitle: string,
   width = 7.6,
   height = 1.3,
+  crisp = false,
 ) {
   const group = new THREE.Group();
   const rim = box(
@@ -71,13 +74,13 @@ export function plaque(
   );
   group.add(rim, face);
   const canvas = document.createElement("canvas");
-  canvas.width = 1536;
-  canvas.height = Math.round((1536 * height) / width);
+  canvas.width = width >= 7 ? 2048 : 1024;
+  canvas.height = Math.round((canvas.width * height) / width);
   const ctx = canvas.getContext("2d")!;
   ctx.fillStyle = palette.cream;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `500 ${Math.round(canvas.height * (subtitle ? 0.34 : 0.4))}px Cormorant Garamond, Georgia`;
+  ctx.font = `600 ${Math.round(canvas.height * (subtitle ? 0.29 : 0.36))}px Manrope, sans-serif`;
   ctx.fillText(title, canvas.width / 2, canvas.height * (subtitle ? 0.4 : 0.5));
   if (subtitle) {
     ctx.font = `500 ${Math.round(canvas.height * 0.13)}px Manrope, sans-serif`;
@@ -86,7 +89,7 @@ export function plaque(
   }
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
-  texture.anisotropy = 4;
+  texture.anisotropy = 8;
   const text = new THREE.Mesh(
     new THREE.PlaneGeometry(width - 0.1, height - 0.1),
     new THREE.MeshBasicMaterial({
@@ -96,6 +99,8 @@ export function plaque(
     }),
   );
   text.position.z = 0.09;
+  // Render lettering after depth of field, before antialiasing and tone mapping.
+  if (width >= 7 || crisp) text.layers.set(1);
   group.add(text);
   return group;
 }
@@ -127,44 +132,46 @@ export function createSiteGround() {
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   place(ground, group, 0, -0.07, 22.5);
-  // The central arrival avenue uses warm, inset limestone and brass edging.
-  place(box(10, 0.06, 39, material("#cdbb9d", 0.5)), group, -1, -0.025, 3);
-  const brass = material(palette.brass, 0.4, 0.65);
-  [-6.1, 4.1].forEach((x) =>
-    place(box(0.04, 0.03, 39, brass), group, x, 0.025, 3),
+  // Stop the avenue at the circular forecourt, with no rectangular tail beyond it.
+  const avenueLength = AVENUE_LAYOUT.frontZ - AVENUE_LAYOUT.rearZ;
+  const avenueZ = (AVENUE_LAYOUT.frontZ + AVENUE_LAYOUT.rearZ) / 2;
+  place(
+    box(AVENUE_LAYOUT.width, 0.06, avenueLength, material("#cdbb9d", 0.5)),
+    group, AVENUE_LAYOUT.x, -0.025, avenueZ,
   );
-  // Seawall, cap stones and the curved forum approach.
+  const brass = material(palette.brass, 0.4, 0.65);
+  for (const side of [-1, 1]) {
+    const x = AVENUE_LAYOUT.x + side * (AVENUE_LAYOUT.width / 2 + 0.02);
+    place(box(0.04, 0.03, avenueLength, brass), group, x, 0.025, avenueZ);
+  }
+  // Seawall and the circular forum forecourt.
   place(box(160, 0.8, 0.45, material("#bfa887"), 0.12), group, 0, 0.3, -20.1);
   place(box(160, 0.1, 0.65, material("#ece0ca")), group, 0, 0.75, -20.1);
   const court = new THREE.Mesh(
-    new THREE.CylinderGeometry(8.1, 8.2, 0.13, 96),
+    new THREE.CylinderGeometry(
+      FORUM_LAYOUT.courtRadius, FORUM_LAYOUT.courtRadius + 0.1, 0.13, 96,
+    ),
     material("#e2d3ba", 0.65),
   );
-  place(court, group, 0, 0.03, 13);
+  place(court, group, FORUM_LAYOUT.x, 0.03, FORUM_LAYOUT.z);
   court.receiveShadow = true;
   const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(7.5, 0.035, 5, 128),
+    new THREE.TorusGeometry(FORUM_LAYOUT.courtRadius - 0.4, 0.035, 5, 128),
     brass,
   );
   ring.rotation.x = Math.PI / 2;
-  place(ring, group, 0, 0.12, 13);
+  place(ring, group, FORUM_LAYOUT.x, 0.12, FORUM_LAYOUT.z);
   const garden = material("#35402a", 0.92);
-  for (const x of [-32, 31]) {
+  for (const x of SIDE_GARDEN_CENTERS) {
     place(box(2.8, 0.35, 32, material("#c7b395"), 0.16), group, x, 0.07, 0);
     place(box(2.45, 0.05, 31.6, garden), group, x, 0.26, 0);
   }
   // Repeated small leaf clusters give the planting beds depth at a single draw call.
-  const beds = [
-    [-34, 0, 3.5, 38],
-    [33, 0, 3.5, 38],
-    [-12, 7.4, 8, 2.3],
-    [20, 6.5, 16, 2.2],
-    [0, -17.8, 58, 2.1],
-  ];
+  const leavesPerBed = 290;
   const leaves = new THREE.InstancedMesh(
     new THREE.IcosahedronGeometry(0.22, 1),
     material("#526638", 0.92),
-    1450,
+    LEAF_BEDS.length * leavesPerBed,
   );
   const transform = new THREE.Object3D();
   const tint = new THREE.Color();
@@ -173,7 +180,7 @@ export function createSiteGround() {
     const value = Math.sin(seed * 91.71 + 31.9) * 43758.54;
     return value - Math.floor(value);
   };
-  beds.forEach(([x, z, width, depth], bedIndex) => {
+  LEAF_BEDS.forEach(([x, z, width, depth], bedIndex) => {
     place(
       box(width + 0.22, 0.24, depth + 0.22, material("#c7b395"), 0.1),
       group,
@@ -182,7 +189,7 @@ export function createSiteGround() {
       z,
     );
     place(box(width, 0.05, depth, garden), group, x, 0.23, z);
-    const count = 290;
+    const count = leavesPerBed;
     for (let i = 0; i < count; i++) {
       const seed = i + bedIndex * count;
       transform.position.set(

@@ -2,10 +2,16 @@
 
 The active application is this repository. The former project is not part of this working copy. Preserved visual references live under `docs/reference-images/`.
 
-## Current review
+## Published application
 
-Open http://localhost:5174 while the local preview is running. The existing Sites version 7 is public, with membership details restricted to the owner. The aircraft, alliance, hotel, telescope and dependency pass was approved for publication on 16 September 2026.
+[Open the published site](https://my-loyalty-haven.solar-rhea-5542.chatgpt.site), The Site is owner-private. Membership details also retain the server-side owner check. See [project status and remaining work](docs/setup-review.md) for the current release, backlog, deferred checks and validation summary.
 
+For local review, start the preview and open http://localhost:5173.
+
+- The supplied cruise ship follows a timed crossing, with a fading foamy wake and dynamic sunset lighting.
+- Supplied palm and distant mountain models, the retained cloud sky, and corner planting match the approved scene edits.
+- Baggage controls provide precise rotation and position, guides, save and copy. Published offsets are left 0 percent forward, right 75 percent forward. Both rotations and across offsets are zero.
+- Superseded runtime assets are recoverable under `asset-sources/retired-runtime/`, with hashes and updated authoring inputs.
 - Each alliance brings up to three positive balances into the hangar, ranked by saved points.
 - Accor builds the saved hotel terrace.
 - Scene settings include a clearly marked three-terrace construction fixture.
@@ -22,7 +28,7 @@ The public snapshot is dated 10 September 2026. Sammy selected manual refresh on
 Requires Node.js 22.13 or newer. Dependencies and lockfile are already present.
 
 ```sh
-npm run dev -- --port 5174
+npm run dev -- --port 5173
 npm run typecheck
 npm test
 npm run inventory
@@ -67,8 +73,4 @@ not certified aircraft replicas.
 
 The preserved visual references are source material only, not a second application. `npm run inventory` creates local source-coverage reports, which are excluded from source control alongside generated dependency/runtime folders.
 
-See `docs/setup-review.md` for the current findings and `docs/asset-provenance.md` for asset origins and limitations.
-
-## Deferred validation
-
-Phone performance, further responsive/device testing, and live signed-in owner/non-owner access checks are deferred as low priority at Sammy’s request on 16 September 2026. Resume these only when requested.
+See [project status and remaining work](docs/setup-review.md) for the authoritative status, and [asset provenance](docs/asset-provenance.md) for asset origins and limitations.

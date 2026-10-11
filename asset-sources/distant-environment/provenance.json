@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-10",
+  "models": [
+    {
+      "role": "cloud",
+      "origin": "/Users/sagaragarwal/Downloads/tripo_base_model_4f921f9e-4425-4e1e-a069-e0a0833c922c_meshopt.glb",
+      "source": "asset-sources/distant-environment/source/tripo_base_model_4f921f9e-4425-4e1e-a069-e0a0833c922c_meshopt.glb",
+      "destination": "public/assets/cloud-tripo.glb",
+      "bytes": 69832,
+      "sha256": "c45fca1acf467e02bfe037abd9a5d762a1df2e8100537b85568ede0752371991",
+      "sourcePreserved": true,
+      "byteIdentical": true,
+      "vertices": 6946,
+      "triangles": 13888,
+      "embeddedImages": 0,
+      "transformation": "Byte-identical GLB, decoded by Meshopt in runtime. Presentation transforms only. Warm soft translucent material, seven instances."
+    },
+    {
+      "role": "mountains",
+      "origin": "/Users/sagaragarwal/Downloads/tripo_pbr_model_ce2c5736-2ee3-42f7-8d20-2437071deedc_meshopt.glb",
+      "source": "asset-sources/distant-environment/source/tripo_pbr_model_ce2c5736-2ee3-42f7-8d20-2437071deedc_meshopt.glb",
+      "destination": "public/assets/mountains-tripo.glb",
+      "bytes": 4826824,
+      "sha256": "c386114c298a4c002763a2a270eed291507b437eeba1fc102e6778dcf5e316c1",
+      "sourcePreserved": true,
+      "byteIdentical": true,
+      "vertices": 427968,
+      "triangles": 839716,
+      "embeddedImages": 3,
+      "transformation": "Byte-identical GLB, decoded by Meshopt in runtime. Presentation transforms only. Embedded PBR maps retained, fitted to right distant horizon."
+    }
+  ],
+  "previousBackdrop": "public/assets/sunset-sky-20261010.png retained, replaced in visible scene by clear sunset gradient and supplied models"
+}

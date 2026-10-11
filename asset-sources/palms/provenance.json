@@ -1,0 +1,25 @@
+{
+  "source": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/asset-sources/palms/source/tripo_base_model_72143897-a7af-41ea-94ed-eb1d43943dec_meshopt.glb",
+  "sourceBytes": 274476,
+  "sourceSha256": "05e3e5c8960666bec15b86d30a469fc7e9da1a8f6a09894f1c966661127895b5",
+  "destination": "/Users/sagaragarwal/Documents/Codex/personal-loyalty/public/assets/palm-tripo.glb",
+  "bytes": 761396,
+  "sha256": "376bfc59d064bb4b1bd7a43f045123cef737e32209bc66059bc521209105b3eb",
+  "vertices": 24520,
+  "triangles": 49031,
+  "height": 6,
+  "normalizationScale": 6.128296243425592,
+  "bounds": {
+    "min": [
+      -1.7130166434996468,
+      0,
+      -1.7445764008824822
+    ],
+    "max": [
+      1.7130166434996468,
+      6,
+      1.7445764008824822
+    ]
+  },
+  "transformation": "Decode meshopt, ground and uniformly normalize, add approved natural vertex colors. All vertices and triangles retained."
+}

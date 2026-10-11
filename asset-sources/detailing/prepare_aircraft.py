@@ -50,7 +50,7 @@ ns['duplicate_aircraft_variant']('airline-air-canada', 'AIRCRAFT_AIR_CANADA', 'A
 records = []
 for name, objects in ns['ASSETS'].items():
     target = Path(ns['export_asset'](name+'-detail', objects))
-    original = ROOT / 'public/assets' / (name+'.glb')
+    original = ROOT / 'asset-sources/retired-runtime/assets' / (name+'.glb')
     records.append({'source':str(original.relative_to(ROOT)), 'sourceSha256':hashlib.sha256(original.read_bytes()).hexdigest(), 'runtime':'public/assets/'+target.name,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size})
 
 # Render the exported GLB, so the review includes serialization and materials.

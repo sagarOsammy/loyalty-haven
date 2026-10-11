@@ -1,0 +1,121 @@
+{
+  "generator": "asset-sources/aircraft-realism/prepare_fleet.py",
+  "generatorSha256": "487f1178a0368d122afc6d8b25c8f2f985fd51695bd36f59542330998a7c57d3",
+  "transformations": [
+    "Additive geometry detail",
+    "Distinct span and length proportions",
+    "Authored tail identity motifs",
+    "Wing inspection and spoiler panels",
+    "Wing-body and pylon fairings",
+    "Spinner spirals and nacelle access panels",
+    "Exit frames and handles, tyre grooves, cockpit probes and satellite radome",
+    "Batch static geometry by material"
+  ],
+  "limitations": "Detailed authored airliner models, approximate airline identity cues and proportions, not exact aircraft replicas or official liveries.",
+  "outputs": [
+    {
+      "source": "public/assets/airline-united-realism.glb",
+      "sourceSha256": "ededab2a301ddcb7f29753f4439a1566081b53571f5d5064c5aa7d52cc9e7e1a",
+      "runtime": "public/assets/airline-united-fleet.glb",
+      "sha256": "52e5d0955e4c300083e426366a247b6e952926dddb2fe16ae69b33db14680c59",
+      "bytes": 2985408,
+      "triangles": 59828,
+      "proportions": {
+        "span": 1.0,
+        "length": 1.0
+      },
+      "tailDetail": "globe"
+    },
+    {
+      "source": "public/assets/airline-avianca-realism.glb",
+      "sourceSha256": "ea51056e8a8d7018d33795e22163b87f0c285becadbda11649cd15ca7b072a60",
+      "runtime": "public/assets/airline-avianca-fleet.glb",
+      "sha256": "2a8738ea904312963559ebb4c514d9e58d55ddaee734825454eae83c2fa7a96c",
+      "bytes": 2814120,
+      "triangles": 60968,
+      "proportions": {
+        "span": 0.96,
+        "length": 0.98
+      },
+      "tailDetail": "feathers"
+    },
+    {
+      "source": "public/assets/airline-air-canada-realism.glb",
+      "sourceSha256": "0c54ae15b58f15b1486af62bbac663471a88a117135c838f735a0ca105e2c929",
+      "runtime": "public/assets/airline-air-canada-fleet.glb",
+      "sha256": "6483d99a6cf6217856d4592c2994c6c41bc0b4a33e1e5d7bad36f09f955bcdd4",
+      "bytes": 2792948,
+      "triangles": 60112,
+      "proportions": {
+        "span": 1.03,
+        "length": 1.06
+      },
+      "tailDetail": "maple"
+    },
+    {
+      "source": "public/assets/airline-virgin-atlantic-realism.glb",
+      "sourceSha256": "03fb467a8447dd9e2be13225d6895281a13f268841801a19b5f7bf0611f88647",
+      "runtime": "public/assets/airline-virgin-atlantic-fleet.glb",
+      "sha256": "36ed3bd1b027c512dbc910e68d03f1910277af337f4ef78728c694852ec94ee7",
+      "bytes": 2866112,
+      "triangles": 61180,
+      "proportions": {
+        "span": 1.07,
+        "length": 1.1
+      },
+      "tailDetail": "wordmark"
+    },
+    {
+      "source": "public/assets/airline-vietnam-airlines-realism.glb",
+      "sourceSha256": "9d34321b868a46fa25bc8eaac85613e5e25ac5d555fbfa5b73352e5d829cdd32",
+      "runtime": "public/assets/airline-vietnam-airlines-fleet.glb",
+      "sha256": "dba652f7f6ab13481a85b633e269382bd8375faf739e42d26fd63b7f544829de",
+      "bytes": 2840144,
+      "triangles": 61522,
+      "proportions": {
+        "span": 1.08,
+        "length": 1.09
+      },
+      "tailDetail": "lotus"
+    },
+    {
+      "source": "public/assets/airline-finnair-realism.glb",
+      "sourceSha256": "e2d475e00b1c5fc0e0fee9101be85d7881c59e2396f3849ec083e1495d6ab74b",
+      "runtime": "public/assets/airline-finnair-fleet.glb",
+      "sha256": "8eb63550e318334d75f6e07f53c870732faf177364fa7e3c799bf003177c1416",
+      "bytes": 2753816,
+      "triangles": 58278,
+      "proportions": {
+        "span": 1.05,
+        "length": 1.08
+      },
+      "tailDetail": "wordmark"
+    },
+    {
+      "source": "public/assets/airline-qatar-airways-realism.glb",
+      "sourceSha256": "dfccc5d7d525ed314180d7c2d5c0c23ff1edf77174b01460d66162d4326a5f19",
+      "runtime": "public/assets/airline-qatar-airways-fleet.glb",
+      "sha256": "a758426d92f9a91ddc427cd90cec6f3719ed424a12a3cbc2c81313168dc7c183",
+      "bytes": 2779164,
+      "triangles": 58974,
+      "proportions": {
+        "span": 1.09,
+        "length": 1.12
+      },
+      "tailDetail": "wordmark"
+    },
+    {
+      "source": "public/assets/airline-british-airways-realism.glb",
+      "sourceSha256": "e81818a7daf11f2e1f7b18a8154f8cbd10ffd3161bb11d29f64d9a878f121985",
+      "runtime": "public/assets/airline-british-airways-fleet.glb",
+      "sha256": "09ef74a28c8d9cc316de4b92126d9725092c26903206e346ae84c0a855fff543",
+      "bytes": 2802620,
+      "triangles": 60950,
+      "proportions": {
+        "span": 1.08,
+        "length": 1.11
+      },
+      "tailDetail": "ribbon"
+    }
+  ]
+}

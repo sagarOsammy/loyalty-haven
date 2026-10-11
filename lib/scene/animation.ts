@@ -36,3 +36,24 @@ export function beltPose(distance: number, halfStraight = 3, radius = 1.6) {
 export function approachProgress(now: number, started: number, index: number) {
   return smootherStep((now - started - index * 0.8) / 4.8);
 }
+
+/** Begin aligned with the rear bays and descend directly from over the sea. */
+export function arrivalPose(progress: number) {
+  const p = clamp01(progress);
+  const remaining = 1 - p;
+  return {
+    xOffset: 0,
+    zOffset: -remaining * 83,
+    height: remaining * remaining * 22,
+    pitch: -0.07 * Math.sin(p * Math.PI),
+    heading: 0,
+    roll: 0,
+  };
+}
+
+/** Rear gates clear before entry and remain open until the full aircraft passes. */
+export function hangarDoorProgress(now: number, started: number, index: number) {
+  const elapsed = now - started - index * 0.8;
+  return clamp01(smootherStep((elapsed - 0.8) / 1.2) *
+    (1 - smootherStep((elapsed - 5) / 1)));
+}

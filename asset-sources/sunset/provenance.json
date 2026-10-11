@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "mode": "built-in imagegen",
+  "files": [
+    {
+      "path": "asset-sources/sunset/reference-20261010.png",
+      "bytes": 2924225,
+      "sha256": "39143e86bce8cef3ead01394367f0f616758521257f4dc2a4467b87fa20d6795"
+    },
+    {
+      "path": "public/assets/sunset-sky-20261010.png",
+      "bytes": 1697000,
+      "sha256": "dc0eca08ac56a79ac12394574bc1d83e505f89d3f330fb406e778a97dec0beaa"
+    },
+    {
+      "path": "asset-sources/sunset/generation-prompt.md",
+      "bytes": 1508,
+      "sha256": "fffda3b3e8123d55c317b724c2e5cde1c07200468a2fc5a8aaf06a5fff46a4de"
+    }
+  ]
+}

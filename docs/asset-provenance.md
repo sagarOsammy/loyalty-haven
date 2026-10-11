@@ -8,13 +8,15 @@ All runtime models and textures are served locally. Original user references are
 | Hard shell case and cognac duffel | Original Blender geometry | Ribs, wheels, handles, seams and hardware, material batching | Offline renders and browser placement checked |
 | Vintage suitcase | [Poly Haven vintage suitcase](https://polyhaven.com/a/vintage_suitcase), [CC0](https://polyhaven.com/license) | One case isolated, centered, grounded, 1 m high, derived 1K maps, 570292 bytes | Final render inspected and Blender reimport passed |
 | Hangar, hotel modules, forum | Original Blender geometry guided by Gemini-4 | Runtime modules share dimensions, stone/teak microtextures packed into GLB, static parts batched | Revision-specific Blender render and browser check |
-| Palm, planter, baggage belt, yacht | Original Blender geometry | Pinnate palm fronds, modeled deck details and belt slats, material batching | Bounds and belt geometry reimport verified |
+| Planter, baggage belt, yacht, retained original palm | Original Blender geometry | Pinnate palm fronds, modeled deck details and belt slats, material batching | Bounds and belt geometry reimport verified |
+| Palm trees, local replacement on 10 October 2026 | User-supplied Tripo meshopt GLB, byte-identical source under `asset-sources/palms/source/` | Decode meshopt, uniformly fit six-metre base height, ground origin, add approved green foliage and brown trunk vertex colors. All 49,031 triangles retained. | All 12 placements render in the inbuilt browser, western crown clearance passes. See [local validation](palm-trees-20261010.md) |
 | Sunset environment | [Poly Haven Belfast sunset pure sky](https://polyhaven.com/a/belfast_sunset_puresky), CC0 | Local 2K HDR, environment reflection prefiltering | Loads locally |
 | Paving | [Poly Haven concrete pavement 02](https://polyhaven.com/a/concrete_pavement_02), CC0 | Local diffuse, normal and roughness maps | Applied in browser |
 | Sand texture source | [Poly Haven coast sand 01](https://polyhaven.com/a/coast_sand_01), CC0 | Local maps retained, currently unused by the scene | Not loaded by runtime |
 | Water normal | [Three.js examples](https://github.com/mrdoob/three.js/blob/dev/examples/textures/waternormals.jpg), Three.js MIT distribution | Local copy used by sea reflection and animated pool normals | Applied in browser |
-| Fonts | Manrope and Cormorant Garamond, Google Fonts distributions | Locally hosted TTF files | Font loading precedes 3D label generation |
+| Fonts | Manrope, Google Fonts distribution | Locally hosted TTF files, prior serif files retained as unused sources | Font loading precedes 3D label generation |
 | Telescope | User-supplied Tripo free text-to-3D export, original GLB retained at repository root | 12 percent mesh decimation, embedded textures reduced to 1K, 1,556,720-byte runtime copy | Blender render and browser placement inspected, original hash verified in adjacent provenance |
+| Cruise ship, local replacement on 10 October 2026 | User-supplied Tripo FBX, byte-identical copy under `asset-sources/cruise-ship/source/` | All 52,138 triangles retained, uniform reference-length fit, reference draft fraction, matching bow direction, 2048px embedded PBR maps | Inbuilt browser rendering, pause/resume and replay passed, source and prior model hashes verified. See [local validation](cruise-ship-20261010.md) |
 
 ## 14 September detailing derivatives
 
@@ -51,3 +53,7 @@ The Tripo experiment was text-to-3D. An image-to-3D trial remains unperformed. T
 Five new runtime models reuse the approved realism component geometry for Virgin Atlantic, Vietnam Airlines, Finnair, Qatar Airways and British Airways. Airline-specific paint and projected text distinguish each model. Simple tail initials are authored identifiers, not official logos. These remain generic airliner approximations. Previous models and original generators remain unchanged.
 
 `asset-sources/alliance-expansion/` retains the reproducible builder, editable Blender components, five reimported-model renders and source/output hashes. Broad identity references and approximation limits are linked in its README. Browser model click-throughs, arrivals, repeated alliance switching, saved totals and final asset loading were verified. The scene fetches new aircraft when their alliance is first selected.
+
+## Runtime cleanup, 11 October 2026
+
+28 superseded models, textures and fonts totaling 39,758,748 bytes were relocated from public into `asset-sources/retired-runtime/`. The [relocation manifest](../asset-sources/retired-runtime/manifest.json) records original labels, current paths, byte counts and unchanged SHA-256 hashes. All active application and test references were checked before relocation. The affected authoring scripts now read their archived inputs. Historical provenance paths below describe the original generation checkpoints. Current runtime assets are listed in the regenerated asset manifest, 28 files including 22 self-contained GLBs. User reference images, the supplied root telescope, editable source bundles and saved personal data are preserved.

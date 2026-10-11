@@ -1,28 +1,30 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 
 export const ASSETS = {
-  hangar: "/assets/hangar.glb",
+  hangar: "/assets/hangar-structure.glb",
   hotelBase: "/assets/hotel-base-detail.glb",
   hotelLevel: "/assets/hotel-level-detail.glb",
   hotelRoof: "/assets/hotel-roof-detail.glb",
   forum: "/assets/forum.glb",
-  palm: "/assets/palm.glb",
+  palm: "/assets/palm-tripo.glb",
   planter: "/assets/planter.glb",
-  ship: "/assets/cruise-ship.glb",
+  ship: "/assets/cruise-ship-tripo.glb",
   belt: "/assets/baggage-belt.glb",
-  united: "/assets/airline-united-realism.glb",
-  avianca: "/assets/airline-avianca-realism.glb",
-  airCanada: "/assets/airline-air-canada-realism.glb",
-  virginAtlantic: "/assets/airline-virgin-atlantic-realism.glb",
-  vietnamAirlines: "/assets/airline-vietnam-airlines-realism.glb",
-  finnair: "/assets/airline-finnair-realism.glb",
-  qatarAirways: "/assets/airline-qatar-airways-realism.glb",
-  britishAirways: "/assets/airline-british-airways-realism.glb",
+  united: "/assets/airline-united-fleet.glb",
+  avianca: "/assets/airline-avianca-fleet.glb",
+  airCanada: "/assets/airline-air-canada-fleet.glb",
+  virginAtlantic: "/assets/airline-virgin-atlantic-fleet.glb",
+  vietnamAirlines: "/assets/airline-vietnam-airlines-fleet.glb",
+  finnair: "/assets/airline-finnair-fleet.glb",
+  qatarAirways: "/assets/airline-qatar-airways-fleet.glb",
+  britishAirways: "/assets/airline-british-airways-fleet.glb",
   hardcase: "/assets/luggage-hardcase.glb",
   duffel: "/assets/luggage-duffel.glb",
   vintage: "/assets/luggage-vintage.glb",
   telescope: "/assets/loyalty-brass-telescope.glb",
+  mountains: "/assets/mountains-tripo.glb",
 } as const;
 
 export type AssetKey = keyof typeof ASSETS;
@@ -39,7 +41,7 @@ export const AIRCRAFT_ASSET: Record<string, AssetKey | undefined> = {
 
 /** All shared geometry, maps and original materials live until the pool is disposed. */
 export class AssetPool {
-  private loader = new GLTFLoader();
+  private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   private requests = new Map<AssetKey, Promise<THREE.Group>>();
   private originals: THREE.Group[] = [];
   private shared = new WeakSet<object>();

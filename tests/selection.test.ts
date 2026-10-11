@@ -10,7 +10,7 @@ import {
   EMPTY_SELECTION,
 } from "../lib/selection.ts";
 import { validateConfiguration } from "../lib/webmcp.ts";
-import { beltPose, approachProgress } from "../lib/scene/animation.ts";
+import { beltPose, approachProgress, arrivalPose, hangarDoorProgress } from "../lib/scene/animation.ts";
 
 test("saved ledger reconciles without interpreting blanks as redemptions", () => {
   assert.deepEqual(snapshotTotals(publicSnapshot), publicSnapshot.totals);
@@ -69,6 +69,35 @@ test("belt has continuous positions and correct direction around both corners", 
     halfway,
     "A frozen scene clock preserves arrival progress",
   );
+});
+
+test("arrivals start aligned over the sea and clear the rear shutters", () => {
+  assert.deepEqual(arrivalPose(0), {
+    xOffset: 0, zOffset: -83, height: 22, pitch: -0, heading: 0, roll: 0,
+  });
+  const halfway = arrivalPose(0.5);
+  assert.equal(halfway.xOffset, 0);
+  assert.equal(halfway.zOffset, -41.5);
+  assert.equal(halfway.height, 5.5);
+  assert.equal(halfway.pitch, -0.07);
+  assert.equal(halfway.roll, 0);
+  for (let now = 0; now <= 8; now += 0.01) {
+    const opening = Math.max(...[0, 1, 2].map((i) => hangarDoorProgress(now, 0, i)));
+    for (let index = 0; index < 3; index++) {
+      const pose = arrivalPose(approachProgress(now, 0, index));
+      const centerZ = -3.1 + index * 0.35 + pose.zOffset;
+      // Conservative length includes the detailed fleet, yaw and banking.
+      const nose = centerZ + 4;
+      const tail = centerZ - 4;
+      if (nose >= -11.35 && tail <= -10.7) {
+        assert.equal(opening, 1, "All rear shutters clear the full arrival");
+        assert.ok(0.43 + pose.height + 3 < 5.3, "Aircraft clears the rear header");
+      }
+    }
+  }
+  assert.equal(hangarDoorProgress(8, 0, 2), 0);
+  assert.equal(approachProgress(4.8, 0, 0), 1);
+  assert.equal(approachProgress(6.4, 0, 2), 1);
 });
 
 test("browser tools reject unsupported settings before changing visible state", () => {

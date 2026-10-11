@@ -229,7 +229,7 @@ for name,objects in ns['ASSETS'].items():
     for obj in objects:
         if obj.type=='MESH':obj.data.validate(verbose=False);obj.data.update()
     target=Path(ns['export_asset'](name+'-realism',objects))
-    records.append({'source':'public/assets/'+name+'-detail.glb','sourceSha256':hashlib.sha256((ROOT/'public/assets'/(name+'-detail.glb')).read_bytes()).hexdigest(),'runtime':'public/assets/'+target.name,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size})
+    records.append({'source':'asset-sources/retired-runtime/assets/'+name+'-detail.glb','sourceSha256':hashlib.sha256((ROOT/'asset-sources/retired-runtime/assets'/(name+'-detail.glb')).read_bytes()).hexdigest(),'runtime':'public/assets/'+target.name,'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size})
 # Reimport the serialized asset for studio verification.
 bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=str(OUT/'airline-united-realism.glb'))

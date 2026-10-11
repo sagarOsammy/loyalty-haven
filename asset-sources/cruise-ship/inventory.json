@@ -1,0 +1,37 @@
+[
+  {
+    "path": "asset-sources/cruise-ship/README.md",
+    "bytes": 1926,
+    "role": "conversion source or derivative"
+  },
+  {
+    "path": "asset-sources/cruise-ship/cruise-ship-tripo.blend",
+    "bytes": 12044094,
+    "role": "conversion source or derivative"
+  },
+  {
+    "path": "asset-sources/cruise-ship/cruise-ship-tripo.blend1",
+    "bytes": 12044081,
+    "role": "generated Blender backup"
+  },
+  {
+    "path": "asset-sources/cruise-ship/inventory.json",
+    "bytes": null,
+    "role": "inventory metadata"
+  },
+  {
+    "path": "asset-sources/cruise-ship/prepare_cruise_ship.py",
+    "bytes": 4460,
+    "role": "conversion source or derivative"
+  },
+  {
+    "path": "asset-sources/cruise-ship/provenance.json",
+    "bytes": 2385,
+    "role": "conversion source or derivative"
+  },
+  {
+    "path": "asset-sources/cruise-ship/source/tripo_pbr_model_9f2828ec-aab5-4b3b-b9e7-6b65e54efc37.fbx",
+    "bytes": 5732124,
+    "role": "preserved original"
+  }
+]

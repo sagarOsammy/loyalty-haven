@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-11",
+  "totalBytes": 39758748,
+  "files": [
+    {
+      "source": "public/assets/airline-qatar-airways-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-qatar-airways-realism.glb",
+      "bytes": 1950480,
+      "sha256": "dfccc5d7d525ed314180d7c2d5c0c23ff1edf77174b01460d66162d4326a5f19",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-united-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-united-realism.glb",
+      "bytes": 1932548,
+      "sha256": "ededab2a301ddcb7f29753f4439a1566081b53571f5d5064c5aa7d52cc9e7e1a",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/cloud-tripo.glb",
+      "destination": "asset-sources/retired-runtime/assets/cloud-tripo.glb",
+      "bytes": 69832,
+      "sha256": "c45fca1acf467e02bfe037abd9a5d762a1df2e8100537b85568ede0752371991",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/hotel-roof.glb",
+      "destination": "asset-sources/retired-runtime/assets/hotel-roof.glb",
+      "bytes": 826716,
+      "sha256": "9666736f7cb7b06e3007f7df6fcbd887e8fdc2fb54f2d9d08031bb2d9503955f",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-united-detail.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-united-detail.glb",
+      "bytes": 1196992,
+      "sha256": "f5c5b598842c47cb695aed2df7c81920b33866a1f4039655dfb20a1f359ecea6",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-finnair-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-finnair-realism.glb",
+      "bytes": 1933644,
+      "sha256": "e2d475e00b1c5fc0e0fee9101be85d7881c59e2396f3849ec083e1495d6ab74b",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-air-canada-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-air-canada-realism.glb",
+      "bytes": 1943080,
+      "sha256": "0c54ae15b58f15b1486af62bbac663471a88a117135c838f735a0ca105e2c929",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-vietnam-airlines-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-vietnam-airlines-realism.glb",
+      "bytes": 2000480,
+      "sha256": "9d34321b868a46fa25bc8eaac85613e5e25ac5d555fbfa5b73352e5d829cdd32",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/hotel-base.glb",
+      "destination": "asset-sources/retired-runtime/assets/hotel-base.glb",
+      "bytes": 1344088,
+      "sha256": "0f8385d149ed9272c762254bd94a4bca7fc4ef627864605eef90abd1be8af292",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/coast_sand_01_nor_gl.jpg",
+      "destination": "asset-sources/retired-runtime/assets/coast_sand_01_nor_gl.jpg",
+      "bytes": 1146826,
+      "sha256": "fe4d045aec99e71e80f682fcf0ad958d2dff1fe614b73178b304d1bac047b54a",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/coast_sand_01_diff.jpg",
+      "destination": "asset-sources/retired-runtime/assets/coast_sand_01_diff.jpg",
+      "bytes": 960614,
+      "sha256": "58af2e40100f7f405703a86d593af64379f822c4786850def23ecfc921450d54",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/cruise-ship.glb",
+      "destination": "asset-sources/retired-runtime/assets/cruise-ship.glb",
+      "bytes": 3797624,
+      "sha256": "182d0757910d7e68a67b9dcb56c2329072a2e588aa0a4ec00e445d3f348d1959",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-virgin-atlantic-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-virgin-atlantic-realism.glb",
+      "bytes": 2010124,
+      "sha256": "03fb467a8447dd9e2be13225d6895281a13f268841801a19b5f7bf0611f88647",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-air-canada-detail.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-air-canada-detail.glb",
+      "bytes": 1316184,
+      "sha256": "eb7ad90ff1ac8f31a0bd90873c7eaad7e2ab2e7df2f1ad5c328cc020f0afd119",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/hangar-rear-gates.glb",
+      "destination": "asset-sources/retired-runtime/assets/hangar-rear-gates.glb",
+      "bytes": 1636492,
+      "sha256": "b4b9bda8d9131f0c3f55912b27f7bdddbc0bf4a10b13bbc608e7f410b0202e90",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-avianca-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-avianca-realism.glb",
+      "bytes": 1974776,
+      "sha256": "ea51056e8a8d7018d33795e22163b87f0c285becadbda11649cd15ca7b072a60",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/hotel-level.glb",
+      "destination": "asset-sources/retired-runtime/assets/hotel-level.glb",
+      "bytes": 1195644,
+      "sha256": "30d21e1a19c00c26b84d8be0ecb92136c746f03f2f48bb196c8ba84a4167bbde",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/coast_sand_01_rough.jpg",
+      "destination": "asset-sources/retired-runtime/assets/coast_sand_01_rough.jpg",
+      "bytes": 383892,
+      "sha256": "cbc3e0bf2214e04318a643c9dc81f50f33cc5f7b935a20016c5d9efd9a6d1696",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/hangar.glb",
+      "destination": "asset-sources/retired-runtime/assets/hangar.glb",
+      "bytes": 1460228,
+      "sha256": "9f47b7e3ce580be1455bd434895e9f5433c0317cf6b56200c779fe220ded8d2f",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-united.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-united.glb",
+      "bytes": 1201268,
+      "sha256": "2f25d9a491d6e2081cec505ddec9c2cba4fc43c94a78262392c8f11abe359524",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-air-canada.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-air-canada.glb",
+      "bytes": 1320456,
+      "sha256": "b0bac9b13e41d0e0c00d0fc6daaa3bb7c4952fb5312fd0652447ab5ce0a59c73",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-british-airways-realism.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-british-airways-realism.glb",
+      "bytes": 1977616,
+      "sha256": "e81818a7daf11f2e1f7b18a8154f8cbd10ffd3161bb11d29f64d9a878f121985",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-avianca.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-avianca.glb",
+      "bytes": 1700996,
+      "sha256": "0cd069cf2e8b3a92cecd4d9c3b5524767fb3c3aed9cc11e6540bc528e5501cd8",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/airline-avianca-detail.glb",
+      "destination": "asset-sources/retired-runtime/assets/airline-avianca-detail.glb",
+      "bytes": 1696724,
+      "sha256": "63999104bab06a3b9e32a117eaf30a75cc1d1ad9331257fb99d100cab0f830cc",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/assets/palm.glb",
+      "destination": "asset-sources/retired-runtime/assets/palm.glb",
+      "bytes": 1910300,
+      "sha256": "2d1434bb338616ef4419861a5f3dd06619bdbbbc5fd9ca9151f461831fdae3d4",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/fonts/serif-2.ttf",
+      "destination": "asset-sources/retired-runtime/fonts/serif-2.ttf",
+      "bytes": 290392,
+      "sha256": "69e7ae35cba23d962227b86f99217c250e642e4c6f6104b4f3ec465039e4e2d8",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/fonts/serif-1.ttf",
+      "destination": "asset-sources/retired-runtime/fonts/serif-1.ttf",
+      "bytes": 290496,
+      "sha256": "1724047c8988ca5155bff667bc48fa52e97d57aabc6b42eebbf986f21a4be20b",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    },
+    {
+      "source": "public/fonts/serif-0.ttf",
+      "destination": "asset-sources/retired-runtime/fonts/serif-0.ttf",
+      "bytes": 290236,
+      "sha256": "6d37a86241a25d63f8fe6018b4c083449886b7165c1acb15edd0f574f690ecf7",
+      "reason": "Superseded runtime asset, no active application or test reference"
+    }
+  ]
+}

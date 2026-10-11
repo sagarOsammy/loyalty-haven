@@ -1,0 +1,28 @@
+{
+  "source": "public/assets/hangar.glb",
+  "source_sha256": "9f47b7e3ce580be1455bd434895e9f5433c0317cf6b56200c779fe220ded8d2f",
+  "destination": "public/assets/hangar-structure.glb",
+  "sha256": "a6e24eabbb567bbac7941b9ef0c5fd46810988576d9d55f32368e8bdf9d285a3",
+  "transformation": "Retain original roof, glazing, floors and materials. Replace detached front pillars with roof-connected pillars and tie beam. Retain fixed rear piers and jambs, animate only widened dark shutters. Remove two unused blank sign plates. Add roof rails and sign suspension mounts.",
+  "gate_nodes": [
+    "RearGate1",
+    "RearGate2",
+    "RearGate3"
+  ],
+  "gate_ceiling_y": 5.3,
+  "clear_opening_width": 7.23,
+  "gate_centers_x": [
+    -7.85,
+    0,
+    7.85
+  ],
+  "rear_wall_world_z": [
+    -11.341373920440674,
+    -11.063779830932617
+  ],
+  "removed_unused_sign_plates": 2,
+  "fixed_front_pillars": 4,
+  "fixed_rear_pillars": 4,
+  "fixed_rear_jambs": 6,
+  "license": "Derivative of the original locally authored hangar, no external assets."
+}
