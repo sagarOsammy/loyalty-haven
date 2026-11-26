@@ -18,11 +18,24 @@ type Props = {
 function FineNumber({ value, name, limits, onChange }: {
   value: number; name: string; limits: { min: number; max: number; step: number }; onChange: (value: number) => void;
 }) {
-  const [draft, setDraft] = useState(String(value));
-  useEffect(() => setDraft(String(value)), [value, name]);
-  return <input type="number" aria-label={name} {...limits} value={draft}
-    onChange={event => { setDraft(event.target.value); if (Number.isFinite(event.target.valueAsNumber)) onChange(event.target.valueAsNumber); }}
-    onBlur={() => setDraft(String(value))} />;
+  const [draft, setDraft] = useState({ name, value, text: String(value) });
+  if (draft.name !== name || draft.value !== value) {
+    setDraft({ name, value, text: String(value) });
+  }
+
+  return (
+    <input
+      type="number"
+      aria-label={name}
+      {...limits}
+      value={draft.text}
+      onChange={(event) => {
+        setDraft({ name, value, text: event.target.value });
+        if (Number.isFinite(event.target.valueAsNumber)) onChange(event.target.valueAsNumber);
+      }}
+      onBlur={() => setDraft({ name, value, text: String(value) })}
+    />
+  );
 }
 
 export default function BaggageEditor({ world, adjustments, onChange, onClose }: Props) {
